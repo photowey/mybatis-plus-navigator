@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>mybatis-plus-navigator-processor</artifactId>
-    <packaging>pom</packaging>
 
     <properties>
     </properties>

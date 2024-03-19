@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>mybatis-plus-navigator-annotation</artifactId>
-    <packaging>pom</packaging>
 
     <properties>
     </properties>
