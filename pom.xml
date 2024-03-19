@@ -20,8 +20,10 @@
 
     <modules>
         <module>mybatis-plus-navigator-annotation</module>
+        <module>mybatis-plus-navigator-assembler</module>
         <module>mybatis-plus-navigator-bom</module>
         <module>mybatis-plus-navigator-core</module>
+        <module>mybatis-plus-navigator-enum</module>
         <module>mybatis-plus-navigator-meta</module>
         <module>mybatis-plus-navigator-processor</module>
         <module>mybatis-plus-navigator-query</module>
