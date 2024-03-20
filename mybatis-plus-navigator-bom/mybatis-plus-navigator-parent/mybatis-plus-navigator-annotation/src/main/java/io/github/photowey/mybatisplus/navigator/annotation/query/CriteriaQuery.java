@@ -13,28 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.github.photowey.mybatisplus.navigator.annotation.query;
-
-import io.github.photowey.mybatisplus.navigator.core.enums.NamingEnum;
 
 import java.lang.annotation.*;
 
 /**
- * {@code Lt}
- * |- <
+ * {@code CriteriaQuery}
+ * |- Mark {@code Criteria} Query annotation.
  *
  * @author photowey
  * @date 2024/03/20
  * @since 1.0.0
  */
+@Inherited
 @Documented
-@CriteriaQuery
-@Target({ElementType.FIELD})
+@Target({ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Lt {
-
-    String alias() default "";
-
-    NamingEnum naming() default NamingEnum.SNAKE_CASE;
+public @interface CriteriaQuery {
 }

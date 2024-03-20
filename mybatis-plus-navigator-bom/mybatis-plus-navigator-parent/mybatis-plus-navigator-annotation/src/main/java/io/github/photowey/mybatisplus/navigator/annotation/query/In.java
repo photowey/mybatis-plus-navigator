@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.github.photowey.mybatisplus.navigator.annotation.query;
 
 import io.github.photowey.mybatisplus.navigator.core.enums.NamingEnum;
@@ -21,8 +20,8 @@ import io.github.photowey.mybatisplus.navigator.core.enums.NamingEnum;
 import java.lang.annotation.*;
 
 /**
- * {@code Ge}
- * |- >=
+ * {@code In}
+ * |- IN (A,B,...,Z)
  *
  * @author photowey
  * @date 2024/03/20
@@ -32,7 +31,7 @@ import java.lang.annotation.*;
 @CriteriaQuery
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Ge {
+public @interface In {
 
     String alias() default "";
 

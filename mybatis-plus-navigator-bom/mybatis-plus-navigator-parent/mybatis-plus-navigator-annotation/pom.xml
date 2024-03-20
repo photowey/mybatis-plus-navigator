@@ -20,6 +20,11 @@
             <groupId>io.github.photowey</groupId>
             <artifactId>mybatis-plus-navigator-enum</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-core</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
