@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      MAVEN_REPO_PATH: "$HOME/.m2/repository"
+      MAVEN_REPO_PATH: "/home/runner/m2/repository"
       
     steps:
     - uses: actions/checkout@v3
@@ -34,6 +34,15 @@ jobs:
     - name: Set up Maven environment
       run: echo "MAVEN_REPO=${MAVEN_REPO_PATH}" >> $GITHUB_ENV
       
+    - name: Configure Maven
+      run: |
+        mkdir -p /home/runner/m2/repository
+        echo "<settings xmlns=\"http://maven.apache.org/SETTINGS/1.0.0\"
+          xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
+          xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd\">
+          <localRepository>/home/runner/m2/repository</localRepository>
+        </settings>" > /home/runner/m2/settings.xml
+        
     - name: Deploy with Maven
       run: mvn clean -DskipTests source:jar deploy
       
