@@ -18,7 +18,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    
+    env:
+      MAVEN_REPO: "~/.m2/repository"
+      
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 8
@@ -27,6 +30,10 @@ jobs:
         java-version: '8'
         distribution: 'temurin'
         cache: maven
+        
+    - name: Deploy with Maven
+      run: mvn clean -DskipTests source:jar deploy
+      
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
