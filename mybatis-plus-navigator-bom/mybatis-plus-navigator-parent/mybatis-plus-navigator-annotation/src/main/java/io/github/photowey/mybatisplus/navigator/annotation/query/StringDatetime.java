@@ -15,29 +15,31 @@
  */
 package io.github.photowey.mybatisplus.navigator.annotation.query;
 
+import io.github.photowey.mybatisplus.navigator.core.constant.DatetimeConstants;
 import io.github.photowey.mybatisplus.navigator.core.enums.NamingEnum;
+import io.github.photowey.mybatisplus.navigator.core.enums.OperatorEnum;
 
 import java.lang.annotation.*;
+import java.time.LocalDateTime;
 
 /**
- * {@code Eq}
- * |- ==
+ * {@code StringDatetime}
  * <p>
  * # Examples:
  * <pre>
  * public class HelloQuery implements Serializable {
  *
- *     // id = #{id}
- *    {@literal @}Eq
- *     private Long id;
+ *     // created_at >= ${createdAt}
+ *    {@literal @}StringDatetime(alias = "created_at", compare = OperatorEnum.GE, clazz = LocalDateTime.class)
+ *     private String createdAt;
  *
- *     // create_time = #{createdAt}
- *    {@literal @}Eq(alias = "create_time")
- *     private Long createdAt;
+ *     // update_time <= ${updateTime}
+ *    {@literal @}StringDatetime(compare = OperatorEnum.LE, clazz = LocalDateTime.class, naming = NamingEnum.SNAKE_CASE)
+ *     private String updateTime;
  *
- *     // updated_at = ${updatedAt}
- *    {@literal @}Eq(naming = NamingEnum.SNAKE_CASE)
- *     private Long updatedAt;
+ *     // refresh_date > ${refreshDate}
+ *    {@literal @}StringDatetime(pattern = DatetimeConstants.yyyy_MM_dd, compare = OperatorEnum.GT, clazz = LocalDate.class, naming = NamingEnum.SNAKE_CASE)
+ *     private String refreshDate;
  * }
  * </pre>
  *
@@ -49,18 +51,15 @@ import java.lang.annotation.*;
 @CriteriaQuery
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Eq {
+public @interface StringDatetime {
 
-    /**
-     * The alias of the field modified by {@code @Eq} annotation in the database.
-     * <p>
-     * If present, we will automatically ignore the {@link Eq#naming()} value.
-     * <p>
-     * If not, we will automatically infer it through the field name and {@link Eq#naming()} strategy.
-     *
-     * @return the alias of the field in the database
-     */
     String alias() default "";
+
+    String pattern() default DatetimeConstants.yyyy_MM_dd_HH_mm_ss;
+
+    OperatorEnum compare() default OperatorEnum.EQ;
+
+    Class<?> clazz() default LocalDateTime.class;
 
     NamingEnum naming() default NamingEnum.SNAKE_CASE;
 }

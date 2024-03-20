@@ -18,6 +18,10 @@
     <dependencies>
         <dependency>
             <groupId>io.github.photowey</groupId>
+            <artifactId>mybatis-plus-navigator-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.photowey</groupId>
             <artifactId>mybatis-plus-navigator-enum</artifactId>
         </dependency>
 

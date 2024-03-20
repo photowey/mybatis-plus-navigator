@@ -16,28 +16,24 @@
 package io.github.photowey.mybatisplus.navigator.annotation.query;
 
 import io.github.photowey.mybatisplus.navigator.core.enums.NamingEnum;
+import io.github.photowey.mybatisplus.navigator.core.enums.OperatorEnum;
 
 import java.lang.annotation.*;
+import java.time.LocalDateTime;
 
 /**
- * {@code Eq}
- * |- ==
- * <p>
- * # Examples:
+ * {@code Timestamp}
+ *
  * <pre>
  * public class HelloQuery implements Serializable {
  *
- *     // id = #{id}
- *    {@literal @}Eq
- *     private Long id;
- *
- *     // create_time = #{createdAt}
- *    {@literal @}Eq(alias = "create_time")
+ *     // created_at >= ${createdAt}
+ *    {@literal @}Timestamp(alias = "created_at", compare = OperatorEnum.GE, clazz = LocalDateTime.class)
  *     private Long createdAt;
  *
- *     // updated_at = ${updatedAt}
- *    {@literal @}Eq(naming = NamingEnum.SNAKE_CASE)
- *     private Long updatedAt;
+ *     // update_time <= ${updateTime}
+ *    {@literal @}Timestamp(compare = OperatorEnum.LE, clazz = LocalDateTime.class, naming = NamingEnum.SNAKE_CASE)
+ *     private Long updateTime;
  * }
  * </pre>
  *
@@ -49,18 +45,13 @@ import java.lang.annotation.*;
 @CriteriaQuery
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Eq {
+public @interface Timestamp {
 
-    /**
-     * The alias of the field modified by {@code @Eq} annotation in the database.
-     * <p>
-     * If present, we will automatically ignore the {@link Eq#naming()} value.
-     * <p>
-     * If not, we will automatically infer it through the field name and {@link Eq#naming()} strategy.
-     *
-     * @return the alias of the field in the database
-     */
     String alias() default "";
+
+    OperatorEnum compare() default OperatorEnum.EQ;
+
+    Class<?> clazz() default LocalDateTime.class;
 
     NamingEnum naming() default NamingEnum.SNAKE_CASE;
 }
