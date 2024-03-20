@@ -20,7 +20,7 @@
 
     <modules>
         <module>mybatis-plus-navigator-bom</module>
-        <module>mybatis-plus-navigator-parent</module>
+        <module>mybatis-plus-navigator-dependencies</module>
     </modules>
 
     <!-- @formatter:off -->
@@ -41,8 +41,6 @@
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-license-plugin.version>3.0</maven-license-plugin.version>
         <maven-git-commit-id-plugin.version>4.9.10</maven-git-commit-id-plugin.version>
-
-        <mybatis-plus.version>3.5.5</mybatis-plus.version>
     </properties>
 
     <dependencies>
