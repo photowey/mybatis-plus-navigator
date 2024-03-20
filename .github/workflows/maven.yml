@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      MAVEN_REPO: "~/.m2/repository"
+      MAVEN_REPO: "/github/home/.m2/repository"
       
     steps:
     - uses: actions/checkout@v3
