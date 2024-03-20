@@ -13,6 +13,10 @@
     <artifactId>mybatis-plus-navigator-bom</artifactId>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>mybatis-plus-navigator-parent</module>
+    </modules>
+
     <properties>
     </properties>
 
@@ -29,6 +33,11 @@
             <dependency>
                 <groupId>io.github.photowey</groupId>
                 <artifactId>mybatis-plus-navigator-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.photowey</groupId>
+                <artifactId>mybatis-plus-navigator-enum</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -55,6 +64,12 @@
                 <groupId>io.github.photowey</groupId>
                 <artifactId>mybatis-plus-navigator-service</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.photowey</groupId>
+                <artifactId>mybatis-plus-navigator-dependencies</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>io.github.photowey</groupId>

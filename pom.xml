@@ -19,18 +19,8 @@
     <inceptionYear>2024</inceptionYear>
 
     <modules>
-        <module>mybatis-plus-navigator-annotation</module>
-        <module>mybatis-plus-navigator-assembler</module>
         <module>mybatis-plus-navigator-bom</module>
-        <module>mybatis-plus-navigator-core</module>
-        <module>mybatis-plus-navigator-enum</module>
-        <module>mybatis-plus-navigator-meta</module>
-        <module>mybatis-plus-navigator-processor</module>
-        <module>mybatis-plus-navigator-query</module>
-        <module>mybatis-plus-navigator-repository</module>
-        <module>mybatis-plus-navigator-service</module>
-        <module>mybatis-plus-navigator-spring-boot3-starter</module>
-        <module>mybatis-plus-navigator-spring-boot-starter</module>
+        <module>mybatis-plus-navigator-dependencies</module>
     </modules>
 
     <!-- @formatter:off -->
@@ -51,8 +41,6 @@
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-license-plugin.version>3.0</maven-license-plugin.version>
         <maven-git-commit-id-plugin.version>4.9.10</maven-git-commit-id-plugin.version>
-
-        <mybatis-plus.version>3.5.5</mybatis-plus.version>
     </properties>
 
     <dependencies>
