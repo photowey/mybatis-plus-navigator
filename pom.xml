@@ -19,18 +19,8 @@
     <inceptionYear>2024</inceptionYear>
 
     <modules>
-        <module>mybatis-plus-navigator-annotation</module>
-        <module>mybatis-plus-navigator-assembler</module>
         <module>mybatis-plus-navigator-bom</module>
-        <module>mybatis-plus-navigator-core</module>
-        <module>mybatis-plus-navigator-enum</module>
-        <module>mybatis-plus-navigator-meta</module>
-        <module>mybatis-plus-navigator-processor</module>
-        <module>mybatis-plus-navigator-query</module>
-        <module>mybatis-plus-navigator-repository</module>
-        <module>mybatis-plus-navigator-service</module>
-        <module>mybatis-plus-navigator-spring-boot3-starter</module>
-        <module>mybatis-plus-navigator-spring-boot-starter</module>
+        <module>mybatis-plus-navigator-parent</module>
     </modules>
 
     <!-- @formatter:off -->
