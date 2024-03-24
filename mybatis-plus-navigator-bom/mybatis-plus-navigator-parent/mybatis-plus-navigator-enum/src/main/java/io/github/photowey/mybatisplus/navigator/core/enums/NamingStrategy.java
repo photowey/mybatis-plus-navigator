@@ -16,16 +16,30 @@
 package io.github.photowey.mybatisplus.navigator.core.enums;
 
 /**
- * {@code OrderByMechanismEnum}
+ * {@code NamingStrategy}
  *
  * @author photowey
  * @date 2024/03/19
  * @since 1.0.0
  */
-public enum OrderMechanismEnum {
+public enum NamingStrategy {
 
-    STATIC,
-    DYNAMIC,
+    /**
+     * helloWorld
+     */
+    CAMEL_CASE,
+    /**
+     * hello_world
+     */
+    SNAKE_CASE,
+    /**
+     * HelloWorld
+     */
+    PASCAL_CASE,
+    /**
+     * HELLO_WORLD
+     */
+    UPPER_SNAKE_CASE,
 
     ;
 }

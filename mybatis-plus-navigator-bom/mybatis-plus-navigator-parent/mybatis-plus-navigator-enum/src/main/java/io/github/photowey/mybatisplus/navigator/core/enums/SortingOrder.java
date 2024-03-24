@@ -16,22 +16,16 @@
 package io.github.photowey.mybatisplus.navigator.core.enums;
 
 /**
- * {@code OperatorEnum}
+ * {@code SortingOrder}
  *
  * @author photowey
  * @date 2024/03/19
  * @since 1.0.0
  */
-public enum OperatorEnum {
+public enum SortingOrder {
 
-    EQ,
-    NE,
-
-    GE,
-    GT,
-
-    LE,
-    LT,
+    ASC,
+    DESC,
 
     ;
 }

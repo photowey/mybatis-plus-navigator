@@ -16,16 +16,16 @@
 package io.github.photowey.mybatisplus.navigator.core.enums;
 
 /**
- * {@code OrderEnum}
+ * {@code OrderMechanism}
  *
  * @author photowey
  * @date 2024/03/19
  * @since 1.0.0
  */
-public enum OrderEnum {
+public enum OrderMechanism {
 
-    ASC,
-    DESC,
+    STATIC,
+    DYNAMIC,
 
     ;
 }

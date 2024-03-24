@@ -15,8 +15,8 @@
  */
 package io.github.photowey.mybatisplus.navigator.annotation.query;
 
-import io.github.photowey.mybatisplus.navigator.core.enums.NamingEnum;
-import io.github.photowey.mybatisplus.navigator.core.enums.OperatorEnum;
+import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
+import io.github.photowey.mybatisplus.navigator.core.enums.Operator;
 
 import java.lang.annotation.*;
 import java.time.LocalDateTime;
@@ -50,9 +50,9 @@ public @interface Datetime {
 
     String alias() default "";
 
-    OperatorEnum compare() default OperatorEnum.EQ;
+    Operator compare() default Operator.EQ;
 
     Class<?> clazz() default LocalDateTime.class;
 
-    NamingEnum naming() default NamingEnum.SNAKE_CASE;
+    NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }

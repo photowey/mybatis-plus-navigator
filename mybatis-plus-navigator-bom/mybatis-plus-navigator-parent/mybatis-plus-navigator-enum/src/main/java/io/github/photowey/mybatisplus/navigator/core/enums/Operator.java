@@ -16,30 +16,22 @@
 package io.github.photowey.mybatisplus.navigator.core.enums;
 
 /**
- * {@code NamingEnum}
+ * {@code OperatorEnum}
  *
  * @author photowey
  * @date 2024/03/19
  * @since 1.0.0
  */
-public enum NamingEnum {
+public enum Operator {
 
-    /**
-     * helloWorld
-     */
-    CAMEL_CASE,
-    /**
-     * hello_world
-     */
-    SNAKE_CASE,
-    /**
-     * HelloWorld
-     */
-    PASCAL_CASE,
-    /**
-     * HELLO_WORLD
-     */
-    UPPER_SNAKE_CASE,
+    EQ,
+    NE,
+
+    GE,
+    GT,
+
+    LE,
+    LT,
 
     ;
 }

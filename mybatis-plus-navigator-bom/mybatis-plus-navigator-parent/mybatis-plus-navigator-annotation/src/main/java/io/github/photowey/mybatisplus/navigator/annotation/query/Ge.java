@@ -15,7 +15,7 @@
  */
 package io.github.photowey.mybatisplus.navigator.annotation.query;
 
-import io.github.photowey.mybatisplus.navigator.core.enums.NamingEnum;
+import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
 
 import java.lang.annotation.*;
 
@@ -35,5 +35,5 @@ public @interface Ge {
 
     String alias() default "";
 
-    NamingEnum naming() default NamingEnum.SNAKE_CASE;
+    NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }
