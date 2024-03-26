@@ -13,19 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.core.enums;
+package io.github.photowey.mybatisplus.navigator.annotation.query;
+
+import java.lang.annotation.*;
 
 /**
- * {@code OrderMechanism}
+ * {@code Select}
  *
  * @author photowey
- * @date 2024/03/19
+ * @date 2024/03/26
  * @since 1.0.0
  */
-public enum OrderMechanism {
+@Documented
+@CriteriaQuery
+@Target({ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Select {
 
-    STATIC,
-    DYNAMIC,
-
-    ;
+    String[] value() default {};
 }
