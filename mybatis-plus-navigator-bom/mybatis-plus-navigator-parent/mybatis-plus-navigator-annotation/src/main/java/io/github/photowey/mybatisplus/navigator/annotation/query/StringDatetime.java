@@ -15,7 +15,6 @@
  */
 package io.github.photowey.mybatisplus.navigator.annotation.query;
 
-import io.github.photowey.mybatisplus.navigator.core.constant.DatetimeConstants;
 import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
 import io.github.photowey.mybatisplus.navigator.core.enums.Operator;
 
@@ -55,7 +54,7 @@ public @interface StringDatetime {
 
     String alias() default "";
 
-    String pattern() default DatetimeConstants.yyyy_MM_dd_HH_mm_ss;
+    String pattern() default "yyyy-MM-dd HH:mm:ss";
 
     Operator compare() default Operator.EQ;
 
