@@ -50,6 +50,11 @@ public class CriteriaFieldParser implements FieldParser {
     private CriteriaFieldParser() {}
 
     @Override
+    public void clean() {
+        CLASS_FIELD_REF_CACHE.clear();
+    }
+
+    @Override
     public <QUERY extends AbstractQuery<?>> void traversalQuery(QUERY query, FieldCallback callback) {
         if (ObjectUtils.isEmpty(query)) {
             return;

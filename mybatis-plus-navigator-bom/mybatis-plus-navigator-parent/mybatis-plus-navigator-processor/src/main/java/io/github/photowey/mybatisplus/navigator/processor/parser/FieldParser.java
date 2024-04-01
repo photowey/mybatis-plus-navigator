@@ -30,6 +30,8 @@ import java.util.List;
  */
 public interface FieldParser {
 
+    void clean();
+
     <QUERY extends AbstractQuery<?>> void traversalQuery(final QUERY query, final FieldCallback callback);
 
     void traversalClass(final Class<?> clazz, final FieldCallback callback);
