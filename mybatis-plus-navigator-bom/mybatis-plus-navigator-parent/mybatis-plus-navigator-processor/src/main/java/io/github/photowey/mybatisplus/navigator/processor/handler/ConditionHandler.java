@@ -13,26 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.processor.annotation.component.processor;
+package io.github.photowey.mybatisplus.navigator.processor.handler;
 
-import org.springframework.stereotype.Component;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 
-import java.lang.annotation.*;
-import java.time.LocalDateTime;
+import java.lang.reflect.Field;
 
 /**
- * {@code DatetimeProcessor}
+ * {@code ConditionHandler}
  *
  * @author photowey
- * @date 2024/03/31
+ * @date 2024/04/02
  * @since 1.0.0
  */
-@Inherited
-@Documented
-@Component
-@Target({ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface DatetimeProcessor {
+public interface ConditionHandler {
 
-    Class<?> dateType() default LocalDateTime.class;
+    default <T> void handleAnd(QueryWrapper<T> queryWrapper, AbstractQuery<T> query, Field field) {
+
+    }
+
+    default <T> void handleOr(QueryWrapper<T> queryWrapper, AbstractQuery<?> query, Field field) {
+
+    }
 }

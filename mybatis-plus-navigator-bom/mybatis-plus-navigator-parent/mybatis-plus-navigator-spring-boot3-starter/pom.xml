@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>mybatis-plus-navigator-spring-boot3-starter</artifactId>
-    <packaging>pom</packaging>
 
     <properties>
     </properties>

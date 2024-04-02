@@ -13,25 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.processor.annotation.component.processor;
-
-import org.springframework.stereotype.Component;
-
-import java.lang.annotation.*;
+package io.github.photowey.mybatisplus.navigator.processor.datetime;
 
 /**
- * {@code ExpressionProcessor}
+ * {@code TimeConverter}
  *
  * @author photowey
- * @date 2024/03/31
+ * @date 2024/04/02
  * @since 1.0.0
  */
-@Inherited
-@Documented
-@Component
-@Target({ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ExpressionProcessor {
+public interface TimeConverter<T> {
 
-    Class<? extends Annotation> annotation();
+    boolean supports(Class<?> clazz);
+
+    T handle(Long timestamp, Class<?> clazz);
 }

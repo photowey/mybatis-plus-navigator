@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.processor.annotation.condition.processor;
-
-import java.lang.annotation.*;
+package io.github.photowey.mybatisplus.navigator.core.thrower;
 
 /**
- * {@code ConditionProcessor}
+ * {@code AssertionErrorThrower}
  *
  * @author photowey
- * @date 2024/03/31
+ * @date 2024/04/02
  * @since 1.0.0
  */
-@Inherited
-@Documented
-@Target({ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ConditionProcessor {
+public final class AssertionErrorThrower {
 
-    Class<? extends Annotation> annotation();
+    private AssertionErrorThrower() {
+        throwz(AssertionErrorThrower.class);
+    }
+
+    public static <T> void throwz(Class<T> clazz) {
+        throw new AssertionError("No " + clazz.getName() + " instances for you!");
+    }
 }

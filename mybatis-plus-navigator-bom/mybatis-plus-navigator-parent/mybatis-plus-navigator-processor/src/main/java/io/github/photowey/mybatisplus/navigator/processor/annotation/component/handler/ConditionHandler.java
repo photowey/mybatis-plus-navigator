@@ -15,6 +15,7 @@
  */
 package io.github.photowey.mybatisplus.navigator.processor.annotation.component.handler;
 
+import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
@@ -33,5 +34,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ConditionHandler {
 
+    @AliasFor(annotation = Component.class)
     String value() default "";
 }

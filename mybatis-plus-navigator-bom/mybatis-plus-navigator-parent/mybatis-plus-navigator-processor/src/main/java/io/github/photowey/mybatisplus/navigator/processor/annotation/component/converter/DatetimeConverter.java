@@ -13,12 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.processor.annotation.condition.processor;
+package io.github.photowey.mybatisplus.navigator.processor.annotation.component.converter;
+
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
+import java.time.LocalDateTime;
 
 /**
- * {@code ConditionProcessor}
+ * {@code DatetimeConverter}
  *
  * @author photowey
  * @date 2024/03/31
@@ -26,9 +29,10 @@ import java.lang.annotation.*;
  */
 @Inherited
 @Documented
+@Component
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ConditionProcessor {
+public @interface DatetimeConverter {
 
-    Class<? extends Annotation> annotation();
+    Class<?> target() default LocalDateTime.class;
 }
