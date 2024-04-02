@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.processor.annotation.component.handler;
-
-import org.springframework.core.annotation.AliasFor;
-import org.springframework.stereotype.Component;
+package io.github.photowey.mybatisplus.navigator.processor.annotation.condition.processor;
 
 import java.lang.annotation.*;
 
 /**
- * {@code FieldHandler}
+ * {@code AnnotationProcessor}
+ * |- Mark an annotation processor.
  *
  * @author photowey
  * @date 2024/03/31
@@ -29,11 +27,9 @@ import java.lang.annotation.*;
  */
 @Inherited
 @Documented
-@Component
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FieldHandler {
+public @interface AnnotationProcessor {
 
-    @AliasFor(annotation = Component.class, attribute = "value")
-    String value() default "";
+    Class<? extends Annotation> criteria() default Annotation.class;
 }

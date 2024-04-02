@@ -13,27 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.processor.annotation.component.handler;
+package io.github.photowey.mybatisplus.navigator.processor.criteria;
 
-import org.springframework.core.annotation.AliasFor;
-import org.springframework.stereotype.Component;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 
 /**
- * {@code ConditionHandler}
+ * {@code CriteriaAnnotationProcessor}
  *
  * @author photowey
- * @date 2024/03/31
+ * @date 2024/04/02
  * @since 1.0.0
  */
-@Inherited
-@Documented
-@Component
-@Target({ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ConditionHandler {
+public interface CriteriaAnnotationProcessor<A extends Annotation, QUERY extends AbstractQuery<?>, WRAPPER extends QueryWrapper<ENTITY>, ENTITY> {
 
-    @AliasFor(annotation = Component.class)
-    String value() default "";
+    boolean process(WRAPPER queryWrapper, final Field field, final QUERY query, final A annotation);
 }

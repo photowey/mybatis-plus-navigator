@@ -16,7 +16,9 @@
 package io.github.photowey.mybatisplus.navigator.core.util;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import io.github.photowey.mybatisplus.navigator.annotation.symbol.NotNull;
 import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
+import io.github.photowey.mybatisplus.navigator.core.exception.NavigatorRuntimeException;
 import io.github.photowey.mybatisplus.navigator.core.thrower.AssertionErrorThrower;
 
 import java.lang.reflect.Field;
@@ -34,7 +36,7 @@ public final class CriteriaUtils {
         AssertionErrorThrower.throwz(CriteriaUtils.class);
     }
 
-    public static String PascalCase(final String target) {
+    public static String PascalCase(final @NotNull String target) {
         assert target != null;
         final char[] buf = target.toCharArray();
         if (buf[0] >= 'a' && buf[0] <= 'z') {
@@ -45,7 +47,7 @@ public final class CriteriaUtils {
         return String.valueOf(buf);
     }
 
-    public static String camelCase(final String target) {
+    public static String camelCase(final @NotNull String target) {
         assert target != null;
         final char[] buf = target.toCharArray();
         if (buf[0] >= 'A' && buf[0] <= 'Z') {
@@ -61,7 +63,7 @@ public final class CriteriaUtils {
         try {
             return field.get(query);
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            throw new NavigatorRuntimeException(e);
         }
     }
 
@@ -77,7 +79,7 @@ public final class CriteriaUtils {
             case UPPER_SNAKE_CASE:
                 return StringUtils.camelToUnderline(fieldName).toUpperCase();
             default:
-                throw new RuntimeException("unknown column naming strategy:" + strategy.name());
+                throw new NavigatorRuntimeException("unknown column naming strategy:%s", strategy.name());
         }
     }
 }

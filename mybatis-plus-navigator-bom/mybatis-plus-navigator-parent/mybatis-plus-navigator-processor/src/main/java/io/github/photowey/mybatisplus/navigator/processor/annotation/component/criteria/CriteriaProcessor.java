@@ -13,12 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.processor.annotation.condition.processor;
+package io.github.photowey.mybatisplus.navigator.processor.annotation.component.criteria;
+
+import io.github.photowey.mybatisplus.navigator.processor.annotation.condition.processor.AnnotationProcessor;
+import org.springframework.core.annotation.AliasFor;
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
 
 /**
- * {@code ConditionProcessor}
+ * {@code CriteriaProcessor}
+ * |- Mark an annotation processor
  *
  * @author photowey
  * @date 2024/03/31
@@ -26,9 +31,15 @@ import java.lang.annotation.*;
  */
 @Inherited
 @Documented
+@Component
+@AnnotationProcessor
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ConditionProcessor {
+public @interface CriteriaProcessor {
 
-    Class<? extends Annotation> annotation();
+    @AliasFor(annotation = Component.class, attribute = "value")
+    String value() default "";
+
+    @AliasFor(annotation = AnnotationProcessor.class, attribute = "criteria")
+    Class<? extends Annotation> criteria() default Annotation.class;
 }

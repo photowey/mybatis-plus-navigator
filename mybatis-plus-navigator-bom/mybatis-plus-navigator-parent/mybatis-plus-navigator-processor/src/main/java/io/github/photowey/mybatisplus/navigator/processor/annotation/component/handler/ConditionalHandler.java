@@ -13,14 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.processor.annotation.component.expression;
+package io.github.photowey.mybatisplus.navigator.processor.annotation.component.handler;
 
+import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
 
 /**
- * {@code ExpressionProcessor}
+ * {@code ConditionalHandler}
+ * |- Mark a conditional handler
  *
  * @author photowey
  * @date 2024/03/31
@@ -31,7 +33,8 @@ import java.lang.annotation.*;
 @Component
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExpressionProcessor {
+public @interface ConditionalHandler {
 
-    Class<? extends Annotation> annotation();
+    @AliasFor(annotation = Component.class, attribute = "value")
+    String value() default "";
 }
