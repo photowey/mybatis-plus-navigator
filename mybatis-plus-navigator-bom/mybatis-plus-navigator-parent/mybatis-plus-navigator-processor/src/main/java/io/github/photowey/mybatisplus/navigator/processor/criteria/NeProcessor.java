@@ -16,34 +16,26 @@
 package io.github.photowey.mybatisplus.navigator.processor.criteria;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.github.photowey.mybatisplus.navigator.annotation.query.And;
+import io.github.photowey.mybatisplus.navigator.annotation.query.Ne;
 import io.github.photowey.mybatisplus.navigator.processor.annotation.component.criteria.CriteriaProcessor;
-import io.github.photowey.mybatisplus.navigator.processor.handler.ConditionHandler;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 
 import java.lang.reflect.Field;
 
 /**
- * {@code OrProcessor}
+ * {@code NeProcessor}
+ * |- !=
  *
  * @author photowey
- * @date 2024/04/02
+ * @date 2024/04/03
  * @since 1.0.0
  */
-@CriteriaProcessor(criteria = And.class)
-public class OrProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
-        extends AbstractCriteriaAnnotationProcessorAdaptor<And, QUERY, QueryWrapper<ENTITY>, ENTITY> {
+@CriteriaProcessor(criteria = Ne.class)
+public class NeProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
+        extends AbstractCriteriaAnnotationProcessorAdaptor<Ne, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override
-    public boolean process(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, And annotation) {
-        final Object value = this.tryExtractFiledValue(field, query);
-        if (this.isEmpty(value)) {
-            return true;
-        }
-        String handler = annotation.handler();
-        ConditionHandler conditionHandler = this.tryAcquireConditionHandler(handler);
-        conditionHandler.handleOr(queryWrapper, query, field);
-
-        return true;
+    public boolean process(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, Ne annotation) {
+        return this.onProcess(field, query, annotation::alias, annotation::naming, queryWrapper::ne);
     }
 }

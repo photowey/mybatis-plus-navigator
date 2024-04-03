@@ -24,9 +24,12 @@ import io.github.photowey.mybatisplus.navigator.processor.holder.ApplicationCont
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.util.ObjectUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 /**
  * {@code AbstractCriteriaAnnotationProcessorAdaptor}
@@ -41,6 +44,30 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
         WRAPPER extends QueryWrapper<ENTITY>,
         ENTITY>
         implements CriteriaAnnotationProcessor<A, QUERY, WRAPPER, ENTITY> {
+
+    public boolean onProcess(Field field, QUERY query, Supplier<String> as, Supplier<NamingStrategy> ns, BiConsumer<String, Object> expr) {
+        final Object value = this.tryExtractFiledValue(field, query);
+        if (this.isEmpty(value)) {
+            return true;
+        }
+
+        String column = as.get();
+        if (ObjectUtils.isEmpty(column)) {
+            column = this.tryTranslateToColumnName(field, ns.get());
+        }
+        assert column != null;
+        expr.accept(column, value);
+
+        return true;
+    }
+
+    public <T> boolean isNotEmpty(T value) {
+        return !this.isEmpty(value);
+    }
+
+    public <T> boolean isEmpty(T value) {
+        return ObjectUtils.isEmpty(value);
+    }
 
     protected ConditionHandler tryAcquireConditionHandler(String handler) {
         ApplicationContext applicationContext = ApplicationContextHolder.INSTANCE.applicationContext();

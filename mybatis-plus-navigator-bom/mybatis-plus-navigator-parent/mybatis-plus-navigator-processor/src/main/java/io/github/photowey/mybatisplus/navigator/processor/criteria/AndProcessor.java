@@ -20,7 +20,6 @@ import io.github.photowey.mybatisplus.navigator.annotation.query.And;
 import io.github.photowey.mybatisplus.navigator.processor.annotation.component.criteria.CriteriaProcessor;
 import io.github.photowey.mybatisplus.navigator.processor.handler.ConditionHandler;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
-import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Field;
 
@@ -38,7 +37,7 @@ public class AndProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
     @Override
     public boolean process(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, And annotation) {
         final Object value = this.tryExtractFiledValue(field, query);
-        if (ObjectUtils.isEmpty(value)) {
+        if (this.isEmpty(value)) {
             return true;
         }
         String handler = annotation.handler();
