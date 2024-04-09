@@ -24,6 +24,7 @@ import java.lang.reflect.Field;
 
 /**
  * {@code InProcessor}
+ * |- IN (A,B,C,...,Z)
  *
  * @author photowey
  * @version 1.0.0

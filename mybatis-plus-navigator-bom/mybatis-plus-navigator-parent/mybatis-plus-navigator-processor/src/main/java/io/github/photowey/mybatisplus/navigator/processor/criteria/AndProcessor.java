@@ -27,8 +27,8 @@ import java.lang.reflect.Field;
  * {@code AndProcessor}
  *
  * @author photowey
- * @date 2024/04/02
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/04/02
  */
 @CriteriaProcessor(criteria = And.class)
 public class AndProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>

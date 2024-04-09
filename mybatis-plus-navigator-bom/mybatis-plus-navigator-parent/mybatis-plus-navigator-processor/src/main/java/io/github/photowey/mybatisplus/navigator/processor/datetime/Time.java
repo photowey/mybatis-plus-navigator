@@ -20,8 +20,8 @@ package io.github.photowey.mybatisplus.navigator.processor.datetime;
  * |- Mark {@code io.github.photowey.mybatisplus.navigator.processor.datetime} package.
  *
  * @author photowey
- * @date 2024/04/03
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/04/03
  */
 public class Time {
 }

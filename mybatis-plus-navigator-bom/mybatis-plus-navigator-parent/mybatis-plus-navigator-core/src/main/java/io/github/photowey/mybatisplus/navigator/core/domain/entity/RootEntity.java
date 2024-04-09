@@ -22,9 +22,9 @@ import java.time.LocalDateTime;
  * |- must: id | create_time | update_time
  *
  * @author photowey
- * @date 2024/03/19
+ * @version 1.0.0
  * @see <a href="https://developer.aliyun.com/ebook/394">ebook</a>
- * @since 1.0.0
+ * @since 2024/03/19
  */
 public interface RootEntity extends Root {
 

@@ -19,8 +19,8 @@ package io.github.photowey.mybatisplus.navigator.processor.datetime;
  * {@code TimeConverter}
  *
  * @author photowey
- * @date 2024/04/02
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/04/02
  */
 public interface TimeConverter<T> {
 

@@ -27,8 +27,8 @@ import java.lang.reflect.Field;
  * |- ==
  *
  * @author photowey
- * @date 2024/04/03
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/04/03
  */
 @CriteriaProcessor(criteria = Eq.class)
 public class EqProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>

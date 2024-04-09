@@ -24,8 +24,8 @@ import java.util.Map;
  * {@code ApplicationContextHolder}
  *
  * @author photowey
- * @date 2024/04/01
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/04/01
  */
 public enum ApplicationContextHolder {
 

@@ -19,8 +19,8 @@ package io.github.photowey.mybatisplus.navigator.core.enums;
  * {@code SortingOrder}
  *
  * @author photowey
- * @date 2024/03/19
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/03/19
  */
 public enum SortingOrder {
 

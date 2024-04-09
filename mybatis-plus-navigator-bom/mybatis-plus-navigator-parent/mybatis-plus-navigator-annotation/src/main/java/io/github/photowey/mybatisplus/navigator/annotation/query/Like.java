@@ -25,8 +25,8 @@ import java.lang.annotation.*;
  * |- LIKE '%x%' | 'x%' | '%x'
  *
  * @author photowey
- * @date 2024/03/20
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/03/20
  */
 @Documented
 @CriteriaQuery

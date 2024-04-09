@@ -19,8 +19,8 @@ package io.github.photowey.mybatisplus.navigator.core.exception;
  * {@code NavigatorRuntimeException}
  *
  * @author photowey
- * @date 2024/04/02
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/04/02
  */
 public class NavigatorRuntimeException extends RuntimeException {
 

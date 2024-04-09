@@ -26,8 +26,8 @@ import java.lang.annotation.*;
  * |- ORDER BY
  *
  * @author photowey
- * @date 2024/03/26
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/03/26
  */
 @Documented
 @CriteriaQuery

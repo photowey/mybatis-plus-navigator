@@ -24,8 +24,8 @@ import java.time.ZonedDateTime;
  * {@code ZonedDateTimeConverter}
  *
  * @author photowey
- * @date 2024/04/02
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/04/02
  */
 @DatetimeConverter(target = ZonedDateTime.class)
 public class ZonedDateTimeConverter implements TimeConverter<ZonedDateTime> {

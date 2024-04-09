@@ -25,8 +25,8 @@ import java.lang.annotation.*;
  * |- Mark a conditional handler
  *
  * @author photowey
- * @date 2024/03/31
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/03/31
  */
 @Inherited
 @Documented

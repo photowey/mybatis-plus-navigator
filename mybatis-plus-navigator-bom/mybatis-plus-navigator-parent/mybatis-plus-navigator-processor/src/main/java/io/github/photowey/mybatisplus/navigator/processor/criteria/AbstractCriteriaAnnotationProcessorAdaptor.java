@@ -36,8 +36,8 @@ import java.util.function.Supplier;
  * {@code AbstractCriteriaAnnotationProcessorAdaptor}
  *
  * @author photowey
- * @date 2024/04/02
- * @since 1.0.0
+ * @version 1.0.0
+ * @since 2024/04/02
  */
 public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
         A extends Annotation,
