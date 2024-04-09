@@ -28,6 +28,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -52,11 +53,27 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
         }
 
         String column = as.get();
-        if (ObjectUtils.isEmpty(column)) {
+        if (this.isEmpty(column)) {
             column = this.tryTranslateToColumnName(field, ns.get());
         }
         assert column != null;
         expr.accept(column, value);
+
+        return true;
+    }
+
+    public boolean onProcessCollection(Field field, QUERY query, Supplier<String> as, Supplier<NamingStrategy> ns, BiConsumer<String, Collection<?>> expr) {
+        final Collection<?> values = this.tryExtractFiledValues(field, query);
+        if (this.isEmpty(values)) {
+            return true;
+        }
+
+        String column = as.get();
+        if (this.isEmpty(column)) {
+            column = this.tryTranslateToColumnName(field, ns.get());
+        }
+        assert column != null;
+        expr.accept(column, values);
 
         return true;
     }
@@ -80,6 +97,15 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
 
     protected Object tryExtractFiledValue(final Field field, final Object query) {
         return CriteriaUtils.tryExtractFiledValue(field, query);
+    }
+
+    protected Collection<?> tryExtractFiledValues(final Field field, final Object query) {
+        Object value = CriteriaUtils.tryExtractFiledValue(field, query);
+        if (value instanceof Collection) {
+            return (Collection<?>) value;
+        }
+
+        throw new NavigatorRuntimeException("navigator: the field:[%s] must be of type Collection", field.getName());
     }
 
     protected String tryTranslateToColumnName(final Field field, final NamingStrategy strategy) {
