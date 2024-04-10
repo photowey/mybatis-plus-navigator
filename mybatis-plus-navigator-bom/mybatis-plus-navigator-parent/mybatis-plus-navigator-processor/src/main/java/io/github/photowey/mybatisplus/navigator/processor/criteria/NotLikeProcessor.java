@@ -16,6 +16,7 @@
 package io.github.photowey.mybatisplus.navigator.processor.criteria;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.enums.SqlLike;
 import io.github.photowey.mybatisplus.navigator.annotation.query.NotLike;
 import io.github.photowey.mybatisplus.navigator.processor.annotation.component.criteria.CriteriaProcessor;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
@@ -35,6 +36,21 @@ public class NotLikeProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
 
     @Override
     public boolean process(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, NotLike annotation) {
-        return this.onProcess(field, query, annotation::alias, annotation::naming, queryWrapper::notLike);
+        return this.onProcess(field, query, annotation::alias, annotation::naming, (column, value) -> {
+            SqlLike like = annotation.like();
+            switch (like) {
+                case LEFT:
+                    queryWrapper.notLikeLeft(column, value);
+                    break;
+                case RIGHT:
+                    queryWrapper.notLikeRight(column, value);
+                    break;
+                case DEFAULT:
+                    queryWrapper.notLike(column, value);
+                    break;
+                default:
+                    break;
+            }
+        });
     }
 }

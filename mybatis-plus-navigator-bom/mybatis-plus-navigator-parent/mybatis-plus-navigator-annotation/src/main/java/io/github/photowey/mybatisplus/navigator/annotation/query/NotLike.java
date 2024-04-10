@@ -15,6 +15,7 @@
  */
 package io.github.photowey.mybatisplus.navigator.annotation.query;
 
+import com.baomidou.mybatisplus.core.enums.SqlLike;
 import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
 
 import java.lang.annotation.*;
@@ -34,6 +35,8 @@ import java.lang.annotation.*;
 public @interface NotLike {
 
     String alias() default "";
+
+    SqlLike like() default SqlLike.DEFAULT;
 
     NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }
