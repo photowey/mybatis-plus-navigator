@@ -36,7 +36,7 @@ public class TimestampConverter implements TimeConverter<Timestamp> {
     }
 
     @Override
-    public Timestamp handle(Long timestamp, Class<?> clazz) {
+    public Timestamp handle(Long timestamp) {
         return DatetimeUtils.epochMilliToTimestamp(timestamp);
     }
 }

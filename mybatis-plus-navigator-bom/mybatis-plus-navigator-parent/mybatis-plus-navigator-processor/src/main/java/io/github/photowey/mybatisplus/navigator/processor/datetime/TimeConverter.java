@@ -26,5 +26,5 @@ public interface TimeConverter<T> {
 
     boolean supports(Class<?> clazz);
 
-    T handle(Long timestamp, Class<?> clazz);
+    T handle(Long timestamp);
 }

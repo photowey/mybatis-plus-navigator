@@ -36,7 +36,7 @@ public class LocalDateConverter implements TimeConverter<LocalDate> {
     }
 
     @Override
-    public LocalDate handle(Long timestamp, Class<?> clazz) {
+    public LocalDate handle(Long timestamp) {
         return DatetimeUtils.epochMilliToLocalDate(timestamp);
     }
 }

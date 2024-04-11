@@ -36,7 +36,7 @@ public class ZonedDateTimeConverter implements TimeConverter<ZonedDateTime> {
     }
 
     @Override
-    public ZonedDateTime handle(Long timestamp, Class<?> clazz) {
+    public ZonedDateTime handle(Long timestamp) {
         return DatetimeUtils.epochMilliToZonedDateTime(timestamp);
     }
 }

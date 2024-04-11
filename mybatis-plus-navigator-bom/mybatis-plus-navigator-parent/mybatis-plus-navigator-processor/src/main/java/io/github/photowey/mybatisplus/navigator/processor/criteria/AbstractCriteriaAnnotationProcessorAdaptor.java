@@ -17,18 +17,26 @@ package io.github.photowey.mybatisplus.navigator.processor.criteria;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
+import io.github.photowey.mybatisplus.navigator.core.enums.Operator;
 import io.github.photowey.mybatisplus.navigator.core.exception.NavigatorRuntimeException;
 import io.github.photowey.mybatisplus.navigator.core.util.CriteriaUtils;
+import io.github.photowey.mybatisplus.navigator.processor.datetime.LocalDateTimeConverter;
+import io.github.photowey.mybatisplus.navigator.processor.datetime.TimeConverter;
 import io.github.photowey.mybatisplus.navigator.processor.handler.ConditionHandler;
 import io.github.photowey.mybatisplus.navigator.processor.holder.ApplicationContextHolder;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.ObjectUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -44,7 +52,33 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
         QUERY extends AbstractQuery<?>,
         WRAPPER extends QueryWrapper<ENTITY>,
         ENTITY>
-        implements CriteriaAnnotationProcessor<A, QUERY, WRAPPER, ENTITY> {
+        implements CriteriaAnnotationProcessor<A, QUERY, WRAPPER, ENTITY>, BeanFactoryAware {
+
+    private ListableBeanFactory beanFactory;
+
+    // ----------------------------------------------------------------
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = (ListableBeanFactory) beanFactory;
+    }
+
+    // ----------------------------------------------------------------
+
+    public <T> T transferTime(Long timestamp, Class<T> clazz) {
+        Map<String, TimeConverter> beans = this.beanFactory.getBeansOfType(TimeConverter.class);
+        ArrayList<TimeConverter> timeConverters = new ArrayList<>(beans.values());
+        for (TimeConverter timeConverter : timeConverters) {
+            if (timeConverter.supports(clazz)) {
+                return (T) timeConverter.handle(timestamp);
+            }
+        }
+
+        LocalDateTimeConverter standby = this.beanFactory.getBean(LocalDateTimeConverter.class);
+        return (T) standby.handle(timestamp);
+    }
+
+    // ----------------------------------------------------------------
 
     public boolean onProcess(Field field, QUERY query, Supplier<String> as, Supplier<NamingStrategy> ns, BiConsumer<String, Object> expr) {
         final Object value = this.tryExtractFiledValue(field, query);
@@ -78,6 +112,32 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
         return true;
     }
 
+    // ----------------------------------------------------------------
+
+    public void doWrapTime(QueryWrapper<ENTITY> queryWrapper, Operator compare, String column, Object time) {
+        switch (compare) {
+            case EQ:
+                queryWrapper.eq(column, time);
+                break;
+            case NE:
+                queryWrapper.ne(column, time);
+                break;
+            case GE:
+                queryWrapper.ge(column, time);
+                break;
+            case GT:
+                queryWrapper.gt(column, time);
+                break;
+            case LE:
+                queryWrapper.le(column, time);
+                break;
+            default:
+                queryWrapper.lt(column, time);
+        }
+    }
+
+    // ----------------------------------------------------------------
+
     public <T> boolean isNotEmpty(T value) {
         return !this.isEmpty(value);
     }
@@ -85,6 +145,8 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
     public <T> boolean isEmpty(T value) {
         return ObjectUtils.isEmpty(value);
     }
+
+    // ----------------------------------------------------------------
 
     protected ConditionHandler tryAcquireConditionHandler(String handler) {
         ApplicationContext applicationContext = ApplicationContextHolder.INSTANCE.applicationContext();
