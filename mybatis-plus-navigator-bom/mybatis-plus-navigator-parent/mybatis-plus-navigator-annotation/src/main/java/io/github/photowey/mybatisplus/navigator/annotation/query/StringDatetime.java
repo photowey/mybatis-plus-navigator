@@ -24,19 +24,19 @@ import java.time.LocalDateTime;
 /**
  * {@code StringDatetime}
  * <p>
- * # Examples:
+ * Examples:
  * <pre>
  * public class HelloQuery implements Serializable {
  *
- *     // created_at >= ${createdAt}
+ *     // created_at &gt;= ${createdAt}
  *    {@literal @}StringDatetime(alias = "created_at", compare = OperatorEnum.GE, clazz = LocalDateTime.class)
  *     private String createdAt;
  *
- *     // update_time <= ${updateTime}
+ *     // update_time &lt;= ${updateTime}
  *    {@literal @}StringDatetime(compare = OperatorEnum.LE, clazz = LocalDateTime.class, naming = NamingEnum.SNAKE_CASE)
  *     private String updateTime;
  *
- *     // refresh_date > ${refreshDate}
+ *     // refresh_date &gt; ${refreshDate}
  *    {@literal @}StringDatetime(pattern = DatetimeConstants.yyyy_MM_dd, compare = OperatorEnum.GT, clazz = LocalDate.class, naming = NamingEnum.SNAKE_CASE)
  *     private String refreshDate;
  * }
@@ -52,13 +52,38 @@ import java.time.LocalDateTime;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface StringDatetime {
 
+    /**
+     * The alias
+     *
+     * @return the alias of {@code Database} column.
+     */
     String alias() default "";
 
+    /**
+     * The {@code String} pattern of date-time.
+     *
+     * @return the {@code String} pattern of date-time Object.
+     */
     String pattern() default "yyyy-MM-dd HH:mm:ss";
 
+    /**
+     * The operator of compare.
+     *
+     * @return the operator of compare.
+     */
     Operator compare() default Operator.EQ;
 
+    /**
+     * The {@link Class} of date-time Object.
+     *
+     * @return the {@link Class} of date-time Object.
+     */
     Class<?> clazz() default LocalDateTime.class;
 
+    /**
+     * The {@code Database} column name strategy.
+     *
+     * @return the {@code Database} column name strategy.
+     */
     NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }

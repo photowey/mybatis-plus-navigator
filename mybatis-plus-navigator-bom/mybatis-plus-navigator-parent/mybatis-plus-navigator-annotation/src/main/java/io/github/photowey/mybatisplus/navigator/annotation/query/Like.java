@@ -34,9 +34,24 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Like {
 
+    /**
+     * The alias
+     *
+     * @return the alias of {@code Database} column.
+     */
     String alias() default "";
 
+    /**
+     * The pattern of {@code SQL} {@code Like}.
+     *
+     * @return the pattern of {@code SQL} {@code Like}.
+     */
     SqlLike like() default SqlLike.DEFAULT;
 
+    /**
+     * The {@code Database} column name strategy.
+     *
+     * @return the {@code Database} column name strategy.
+     */
     NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }

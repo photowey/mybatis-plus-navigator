@@ -30,5 +30,10 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Select {
 
+    /**
+     * the select fields
+     *
+     * @return the select fields
+     */
     String[] value() default {};
 }

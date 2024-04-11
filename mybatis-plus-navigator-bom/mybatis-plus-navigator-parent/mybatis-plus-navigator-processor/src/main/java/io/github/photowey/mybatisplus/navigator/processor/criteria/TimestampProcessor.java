@@ -26,7 +26,7 @@ import java.lang.reflect.Field;
 /**
  * {@code TimestampProcessor}
  * <p>
- * Example:
+ * Examples:
  * <pre>
  * {@literal  @}Timestamp(alias = "create_time", compare = Operator.GE)
  * {@literal  @}Timestamp(alias = "create_time", compare = Operator.GE, clazz = LocalDateTime.class)

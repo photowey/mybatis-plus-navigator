@@ -35,11 +35,26 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface OrderBy {
 
+    /**
+     * The alias
+     *
+     * @return the alias of {@code Database} column.
+     */
     String alias() default "";
 
     SortingOrder order() default SortingOrder.ASC;
 
-    NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
-
+    /**
+     * The sorting mechanism.
+     *
+     * @return the sorting mechanism.
+     */
     SortingMechanism mechanism() default SortingMechanism.STATIC;
+
+    /**
+     * The {@code Database} column name strategy.
+     *
+     * @return the {@code Database} column name strategy.
+     */
+    NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }

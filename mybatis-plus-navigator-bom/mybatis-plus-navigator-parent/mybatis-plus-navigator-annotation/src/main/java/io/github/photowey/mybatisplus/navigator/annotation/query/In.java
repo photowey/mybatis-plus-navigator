@@ -33,7 +33,17 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface In {
 
+    /**
+     * The alias
+     *
+     * @return the alias of {@code Database} column.
+     */
     String alias() default "";
 
+    /**
+     * The {@code Database} column name strategy.
+     *
+     * @return the {@code Database} column name strategy.
+     */
     NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }

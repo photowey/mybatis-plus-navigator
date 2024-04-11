@@ -24,15 +24,15 @@ import java.time.LocalDateTime;
 /**
  * {@code Datetime}
  * <p>
- * # Examples:
+ * Examples:
  * <pre>
  * public class HelloQuery implements Serializable {
  *
- *     // created_at >= ${createdAt}
+ *     // created_at &gt;= ${createdAt}
  *    {@literal @}Datetime(alias = "created_at", compare = OperatorEnum.GE, clazz = LocalDateTime.class)
  *     private LocalDateTime createdAt;
  *
- *     // update_time <= ${updateTime}
+ *     // update_time &lt;= ${updateTime}
  *    {@literal @}Datetime(compare = OperatorEnum.LE, clazz = LocalDateTime.class, naming = NamingEnum.SNAKE_CASE)
  *     private LocalDateTime updateTime;
  * }
@@ -48,11 +48,31 @@ import java.time.LocalDateTime;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Datetime {
 
+    /**
+     * The alias
+     *
+     * @return the alias of {@code Database} column.
+     */
     String alias() default "";
 
+    /**
+     * The operator of compare.
+     *
+     * @return the operator of compare.
+     */
     Operator compare() default Operator.EQ;
 
+    /**
+     * The {@link Class} of date-time Object.
+     *
+     * @return the {@link Class} of date-time Object.
+     */
     Class<?> clazz() default LocalDateTime.class;
 
+    /**
+     * The {@code Database} column name strategy.
+     *
+     * @return the {@code Database} column name strategy.
+     */
     NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }

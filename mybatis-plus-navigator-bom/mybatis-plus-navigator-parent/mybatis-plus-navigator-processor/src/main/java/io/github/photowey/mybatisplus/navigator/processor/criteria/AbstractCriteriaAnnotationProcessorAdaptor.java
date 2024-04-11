@@ -36,6 +36,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -65,9 +66,10 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
 
     // ----------------------------------------------------------------
 
+    @SuppressWarnings("unchecked")
     public <T> T transferTime(Long timestamp, Class<T> clazz) {
         Map<String, TimeConverter> beans = this.beanFactory.getBeansOfType(TimeConverter.class);
-        ArrayList<TimeConverter> timeConverters = new ArrayList<>(beans.values());
+        List<TimeConverter> timeConverters = new ArrayList<>(beans.values());
         for (TimeConverter timeConverter : timeConverters) {
             if (timeConverter.supports(clazz)) {
                 return (T) timeConverter.handle(timestamp);

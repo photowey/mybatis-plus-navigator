@@ -24,7 +24,7 @@ import java.lang.reflect.Field;
 
 /**
  * {@code GeProcessor}
- * |- >=
+ * |- &gt;=
  *
  * @author photowey
  * @version 1.0.0
