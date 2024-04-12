@@ -15,10 +15,13 @@
  */
 package io.github.photowey.mybatisplus.navigator.core.util;
 
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+import io.github.photowey.mybatisplus.navigator.core.constant.DatetimeConstants;
 import io.github.photowey.mybatisplus.navigator.core.thrower.AssertionErrorThrower;
 
 import java.sql.Timestamp;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -30,8 +33,25 @@ import java.util.Date;
  */
 public final class DatetimeUtils {
 
+    private static final DateTimeFormatter formatter = formatter();
+
     private DatetimeUtils() {
         AssertionErrorThrower.throwz(DatetimeUtils.class);
+    }
+
+    // ----------------------------------------------------------------
+
+    public static DateTimeFormatter formatter() {
+        return formatter(DatetimeConstants.yyyy_MM_dd_HH_mm_ss);
+    }
+
+    public static DateTimeFormatter formatter(String pattern) {
+        String pt = ObjectUtils.isNotEmpty(pattern) ? pattern : DatetimeConstants.yyyy_MM_dd_HH_mm_ss;
+        if (pt.equals(DatetimeConstants.yyyy_MM_dd_HH_mm_ss)) {
+            return formatter;
+        }
+
+        return DateTimeFormatter.ofPattern(pt);
     }
 
     // ----------------------------------------------------------------
@@ -98,6 +118,16 @@ public final class DatetimeUtils {
         return epochMilliToLocalDateTime(timestamp).toLocalTime();
     }
 
+    // ----------------------------------------------------------------
+
+
+    public static LocalDateTime toLocalDateTime(String dateTime, String pattern) {
+        if (ObjectUtils.isEmpty(dateTime)) {
+            return null;
+        }
+
+        return LocalDateTime.parse(dateTime, formatter(pattern));
+    }
     // ----------------------------------------------------------------
 
     public static Date toDate(LocalDateTime target) {
