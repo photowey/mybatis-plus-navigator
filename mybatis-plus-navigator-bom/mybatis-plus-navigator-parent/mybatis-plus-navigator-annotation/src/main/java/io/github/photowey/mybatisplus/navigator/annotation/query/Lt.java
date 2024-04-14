@@ -15,17 +15,17 @@
  */
 package io.github.photowey.mybatisplus.navigator.annotation.query;
 
-import io.github.photowey.mybatisplus.navigator.core.enums.NamingEnum;
+import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
 
 import java.lang.annotation.*;
 
 /**
  * {@code Lt}
- * |- <
+ * |- &lt;
  *
  * @author photowey
- * @date 2024/03/20
- * @since 1.0.0
+ * @version 3.5.5.1.0
+ * @since 2024/03/20
  */
 @Documented
 @CriteriaQuery
@@ -33,7 +33,17 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Lt {
 
+    /**
+     * The alias
+     *
+     * @return the alias of {@code Database} column.
+     */
     String alias() default "";
 
-    NamingEnum naming() default NamingEnum.SNAKE_CASE;
+    /**
+     * The {@code Database} column name strategy.
+     *
+     * @return the {@code Database} column name strategy.
+     */
+    NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }

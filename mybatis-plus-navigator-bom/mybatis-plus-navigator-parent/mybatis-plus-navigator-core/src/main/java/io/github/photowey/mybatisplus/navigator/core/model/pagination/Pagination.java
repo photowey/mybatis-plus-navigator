@@ -13,19 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.core.enums;
+package io.github.photowey.mybatisplus.navigator.core.model.pagination;
 
 /**
- * {@code OrderEnum}
+ * {@code Pagination}
  *
  * @author photowey
- * @date 2024/03/19
- * @since 1.0.0
+ * @version 3.5.5.1.0
+ * @since 2024/03/31
  */
-public enum OrderEnum {
+public interface Pagination {
 
-    ASC,
-    DESC,
+    long DEFAULT_CURRENT = 1;
+    long DEFAULT_SIZE = 10;
 
-    ;
+    long THRESHOLD_CURRENT = 1;
+    long THRESHOLD_SIZE = 100;
+
+    default Long getCurrent() {
+        return DEFAULT_CURRENT;
+    }
+
+    default Long getSize() {
+        return DEFAULT_SIZE;
+    }
 }

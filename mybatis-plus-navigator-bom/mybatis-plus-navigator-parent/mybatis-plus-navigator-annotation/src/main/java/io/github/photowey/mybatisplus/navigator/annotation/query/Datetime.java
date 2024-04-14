@@ -15,8 +15,8 @@
  */
 package io.github.photowey.mybatisplus.navigator.annotation.query;
 
-import io.github.photowey.mybatisplus.navigator.core.enums.NamingEnum;
-import io.github.photowey.mybatisplus.navigator.core.enums.OperatorEnum;
+import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
+import io.github.photowey.mybatisplus.navigator.core.enums.Operator;
 
 import java.lang.annotation.*;
 import java.time.LocalDateTime;
@@ -24,23 +24,23 @@ import java.time.LocalDateTime;
 /**
  * {@code Datetime}
  * <p>
- * # Examples:
+ * Examples:
  * <pre>
  * public class HelloQuery implements Serializable {
  *
- *     // created_at >= ${createdAt}
+ *     // created_at &gt;= ${createdAt}
  *    {@literal @}Datetime(alias = "created_at", compare = OperatorEnum.GE, clazz = LocalDateTime.class)
  *     private LocalDateTime createdAt;
  *
- *     // update_time <= ${updateTime}
+ *     // update_time &lt;= ${updateTime}
  *    {@literal @}Datetime(compare = OperatorEnum.LE, clazz = LocalDateTime.class, naming = NamingEnum.SNAKE_CASE)
  *     private LocalDateTime updateTime;
  * }
  * </pre>
  *
  * @author photowey
- * @date 2024/03/20
- * @since 1.0.0
+ * @version 3.5.5.1.0
+ * @since 2024/03/20
  */
 @Documented
 @CriteriaQuery
@@ -48,11 +48,31 @@ import java.time.LocalDateTime;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Datetime {
 
+    /**
+     * The alias
+     *
+     * @return the alias of {@code Database} column.
+     */
     String alias() default "";
 
-    OperatorEnum compare() default OperatorEnum.EQ;
+    /**
+     * The operator of compare.
+     *
+     * @return the operator of compare.
+     */
+    Operator compare() default Operator.EQ;
 
+    /**
+     * The {@link Class} of date-time Object.
+     *
+     * @return the {@link Class} of date-time Object.
+     */
     Class<?> clazz() default LocalDateTime.class;
 
-    NamingEnum naming() default NamingEnum.SNAKE_CASE;
+    /**
+     * The {@code Database} column name strategy.
+     *
+     * @return the {@code Database} column name strategy.
+     */
+    NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }

@@ -19,8 +19,8 @@ package io.github.photowey.mybatisplus.navigator.core.constant;
  * {@code DatetimeConstants}
  *
  * @author photowey
- * @date 2024/03/20
- * @since 1.0.0
+ * @version 3.5.5.1.0
+ * @since 2024/03/20
  */
 public interface DatetimeConstants {
 

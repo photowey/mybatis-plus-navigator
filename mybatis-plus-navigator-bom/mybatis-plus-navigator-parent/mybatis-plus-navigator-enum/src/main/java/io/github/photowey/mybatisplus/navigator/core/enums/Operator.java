@@ -16,16 +16,22 @@
 package io.github.photowey.mybatisplus.navigator.core.enums;
 
 /**
- * {@code OrderByMechanismEnum}
+ * {@code OperatorEnum}
  *
  * @author photowey
- * @date 2024/03/19
- * @since 1.0.0
+ * @version 3.5.5.1.0
+ * @since 2024/03/19
  */
-public enum OrderMechanismEnum {
+public enum Operator {
 
-    STATIC,
-    DYNAMIC,
+    EQ,
+    NE,
+
+    GE,
+    GT,
+
+    LE,
+    LT,
 
     ;
 }

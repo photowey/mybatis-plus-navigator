@@ -13,33 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.core.enums;
+package io.github.photowey.mybatisplus.navigator.core.thrower;
 
 /**
- * {@code NamingEnum}
+ * {@code AssertionErrorThrower}
  *
  * @author photowey
- * @date 2024/03/19
- * @since 1.0.0
+ * @version 3.5.5.1.0
+ * @since 2024/04/02
  */
-public enum NamingEnum {
+public final class AssertionErrorThrower {
 
-    /**
-     * helloWorld
-     */
-    CAMEL_CASE,
-    /**
-     * hello_world
-     */
-    SNAKE_CASE,
-    /**
-     * HelloWorld
-     */
-    PASCAL_CASE,
-    /**
-     * HELLO_WORLD
-     */
-    UPPER_SNAKE_CASE,
+    private AssertionErrorThrower() {
+        throwz(AssertionErrorThrower.class);
+    }
 
-    ;
+    public static <T> void throwz(Class<T> clazz) {
+        throw new AssertionError("No " + clazz.getName() + " instances for you!");
+    }
 }
