@@ -26,7 +26,7 @@ import org.springframework.lang.NonNull;
  * {@code ApplicationContextInjector}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/04/01
  */
 public class ApplicationContextInjector implements ApplicationContextAware {

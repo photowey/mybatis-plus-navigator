@@ -37,7 +37,7 @@ import java.lang.reflect.Field;
  * </pre>
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/04/12
  */
 @CriteriaProcessor(criteria = Timestamp.class)

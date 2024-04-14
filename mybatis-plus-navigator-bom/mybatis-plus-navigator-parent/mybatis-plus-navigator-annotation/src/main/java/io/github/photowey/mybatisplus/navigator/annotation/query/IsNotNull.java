@@ -24,7 +24,7 @@ import java.lang.annotation.*;
  * |- IS NOT NULL
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/03/26
  */
 @Documented

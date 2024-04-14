@@ -22,7 +22,7 @@ import io.github.photowey.mybatisplus.navigator.core.model.pagination.AbstractPa
  * {@code AbstractQuery}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/03/31
  */
 public abstract class AbstractQuery<T> extends AbstractPagination {

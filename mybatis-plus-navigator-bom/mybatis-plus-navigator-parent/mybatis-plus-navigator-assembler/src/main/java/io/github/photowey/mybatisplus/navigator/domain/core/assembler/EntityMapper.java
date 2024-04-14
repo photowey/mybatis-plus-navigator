@@ -22,7 +22,7 @@ import java.util.List;
  * |- {@code MapStruct}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @see <a href="https://github.com/mapstruct/mapstruct">MapStruct</a>
  * @since 2024/03/19
  */

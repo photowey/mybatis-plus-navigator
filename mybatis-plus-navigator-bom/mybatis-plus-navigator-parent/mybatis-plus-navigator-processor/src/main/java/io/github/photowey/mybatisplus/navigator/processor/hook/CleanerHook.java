@@ -22,7 +22,7 @@ import org.springframework.beans.factory.DisposableBean;
  * {@code CleanerHook}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/03/31
  */
 public class CleanerHook implements DisposableBean {

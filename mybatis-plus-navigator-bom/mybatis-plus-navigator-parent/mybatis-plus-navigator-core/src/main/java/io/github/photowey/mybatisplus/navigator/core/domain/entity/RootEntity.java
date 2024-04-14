@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
  * |- must: id | create_time | update_time
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @see <a href="https://developer.aliyun.com/ebook/394">ebook</a>
  * @since 2024/03/19
  */

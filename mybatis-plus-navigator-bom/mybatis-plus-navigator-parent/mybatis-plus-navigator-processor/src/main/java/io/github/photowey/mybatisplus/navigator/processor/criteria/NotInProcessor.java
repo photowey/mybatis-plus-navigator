@@ -27,7 +27,7 @@ import java.lang.reflect.Field;
  * |- NOT IN (A,B,C,...,Z)
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/04/09
  */
 @CriteriaProcessor(criteria = NotIn.class)

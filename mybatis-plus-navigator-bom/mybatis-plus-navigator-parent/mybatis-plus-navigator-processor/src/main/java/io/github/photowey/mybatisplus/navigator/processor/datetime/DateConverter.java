@@ -24,7 +24,7 @@ import java.util.Date;
  * {@code DateConverter}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/04/02
  */
 @DatetimeConverter(target = Date.class)
