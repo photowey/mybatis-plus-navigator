@@ -23,7 +23,7 @@ import java.lang.annotation.*;
  * {@code Eq}
  * |- ==
  * <p>
- * # Examples:
+ * Examples:
  * <pre>
  * public class HelloQuery implements Serializable {
  *
@@ -42,8 +42,8 @@ import java.lang.annotation.*;
  * </pre>
  *
  * @author photowey
- * @date 2024/03/20
- * @since 1.0.0
+ * @version 3.5.5.1.0
+ * @since 2024/03/20
  */
 @Documented
 @CriteriaQuery
@@ -52,15 +52,20 @@ import java.lang.annotation.*;
 public @interface Eq {
 
     /**
-     * The alias of the field modified by {@code @Eq} annotation in the database.
+     * The alias of the field modified by {@code @Eq} annotation in the {@code Database}.
      * <p>
      * If present, we will automatically ignore the {@link Eq#naming()} value.
      * <p>
      * If not, we will automatically infer it through the field name and {@link Eq#naming()} strategy.
      *
-     * @return the alias of the field in the database
+     * @return the alias of the field in the {@code Database}
      */
     String alias() default "";
 
+    /**
+     * The {@code Database} column name strategy.
+     *
+     * @return the {@code Database} column name strategy.
+     */
     NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }

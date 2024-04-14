@@ -21,8 +21,8 @@ import java.lang.annotation.*;
  * {@code Select}
  *
  * @author photowey
- * @date 2024/03/26
- * @since 1.0.0
+ * @version 3.5.5.1.0
+ * @since 2024/03/26
  */
 @Documented
 @CriteriaQuery
@@ -30,5 +30,10 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Select {
 
+    /**
+     * the select fields
+     *
+     * @return the select fields
+     */
     String[] value() default {};
 }

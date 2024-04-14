@@ -75,13 +75,11 @@
                 <groupId>io.github.photowey</groupId>
                 <artifactId>mybatis-plus-navigator-spring-boot3-starter</artifactId>
                 <version>${project.version}</version>
-                <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>io.github.photowey</groupId>
                 <artifactId>mybatis-plus-navigator-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
-                <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>

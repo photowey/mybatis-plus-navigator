@@ -24,8 +24,8 @@ import java.lang.annotation.*;
  * |- HAVING
  *
  * @author photowey
- * @date 2024/03/26
- * @since 1.0.0
+ * @version 3.5.5.1.0
+ * @since 2024/03/26
  */
 @Documented
 @CriteriaQuery
@@ -33,7 +33,31 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Having {
 
+    /**
+     * The alias
+     *
+     * @return the alias of {@code Database} column.
+     */
     String alias() default "";
 
+    /**
+     * The {@code SQL} of {@code HAVING}.
+     *
+     * @return the {@code SQL} of {@code HAVING}
+     */
+    String having() default "";
+
+    /**
+     * Use dynamic value or not.
+     *
+     * @return true/false.
+     */
+    boolean dynamic() default false;
+
+    /**
+     * The {@code Database} column name strategy.
+     *
+     * @return the {@code Database} column name strategy.
+     */
     NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }

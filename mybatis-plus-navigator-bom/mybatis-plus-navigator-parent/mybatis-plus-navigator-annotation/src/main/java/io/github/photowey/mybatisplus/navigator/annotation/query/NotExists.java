@@ -24,8 +24,8 @@ import java.lang.annotation.*;
  * |- NOT EXISTS
  *
  * @author photowey
- * @date 2024/03/26
- * @since 1.0.0
+ * @version 3.5.5.1.0
+ * @since 2024/03/26
  */
 @Documented
 @CriteriaQuery
@@ -33,9 +33,24 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NotExists {
 
+    /**
+     * The alias
+     *
+     * @return the alias of {@code Database} column.
+     */
     String alias() default "";
 
+    /**
+     * The exists SQL of {@code WHERE} statement.
+     *
+     * @return the exists {@code SQL} of WHERE statement.
+     */
     String existsSql() default "";
 
+    /**
+     * The {@code Database} column name strategy.
+     *
+     * @return the {@code Database} column name strategy.
+     */
     NamingStrategy naming() default NamingStrategy.SNAKE_CASE;
 }

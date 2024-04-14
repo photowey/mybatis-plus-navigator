@@ -19,6 +19,7 @@
     <modules>
         <module>mybatis-plus-navigator-annotation</module>
         <module>mybatis-plus-navigator-assembler</module>
+        <module>mybatis-plus-navigator-autoconfigure</module>
         <module>mybatis-plus-navigator-core</module>
         <module>mybatis-plus-navigator-enum</module>
         <module>mybatis-plus-navigator-meta</module>

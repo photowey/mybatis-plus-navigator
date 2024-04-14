@@ -15,12 +15,28 @@
  */
 package io.github.photowey.mybatisplus.navigator.core.constant;
 
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+
 /**
  * {@code InfrasConstants}
  *
  * @author photowey
- * @date 2024/03/20
- * @since 1.0.0
+ * @version 3.5.5.1.0
+ * @since 2024/03/20
  */
 public interface InfrasConstants {
+
+    interface ConfigKey {
+        int SINGLE_TABLE_QUERY_THRESHOLD = 1 << 5;
+        String SINGLE_TABLE_QUERY_THRESHOLD_CONFIG_KEY = "io.github.photowey.mybatisplus.navigator.single.table.query.threshold";
+    }
+
+    static int determineSingleTableQueryThreshold() {
+        String threshold = System.getenv(ConfigKey.SINGLE_TABLE_QUERY_THRESHOLD_CONFIG_KEY);
+        if (ObjectUtils.isEmpty(threshold)) {
+            threshold = System.getProperty(ConfigKey.SINGLE_TABLE_QUERY_THRESHOLD_CONFIG_KEY);
+        }
+
+        return ObjectUtils.isNotEmpty(threshold) ? Integer.parseInt(threshold) : ConfigKey.SINGLE_TABLE_QUERY_THRESHOLD;
+    }
 }
