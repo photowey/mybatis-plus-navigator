@@ -41,6 +41,20 @@ public @interface Having {
     String alias() default "";
 
     /**
+     * The {@code SQL} of {@code HAVING}.
+     *
+     * @return the {@code SQL} of {@code HAVING}
+     */
+    String having() default "";
+
+    /**
+     * Use dynamic value or not.
+     *
+     * @return true/false.
+     */
+    boolean dynamic() default false;
+
+    /**
      * The {@code Database} column name strategy.
      *
      * @return the {@code Database} column name strategy.

@@ -169,7 +169,17 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
             return (Collection<?>) value;
         }
 
-        throw new NavigatorRuntimeException("navigator: the field:[%s] must be of type Collection", field.getName());
+        throw new NavigatorRuntimeException("navigator: the field:[%s] must be instanceof of Collection", field.getName());
+    }
+
+    @SuppressWarnings("unchecked")
+    protected List<String> tryExtractFiledListValues(final Field field, final Object query) {
+        Object value = CriteriaUtils.tryExtractFiledValue(field, query);
+        if (value instanceof Collection) {
+            return new ArrayList<String>((Collection) value);
+        }
+
+        throw new NavigatorRuntimeException("navigator: the field:[%s] must be instanceof of Collection", field.getName());
     }
 
     protected String tryTranslateToColumnName(final Field field, final NamingStrategy strategy) {
