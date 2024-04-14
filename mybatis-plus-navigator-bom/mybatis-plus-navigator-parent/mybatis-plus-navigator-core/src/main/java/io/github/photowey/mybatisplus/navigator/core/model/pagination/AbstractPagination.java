@@ -42,7 +42,7 @@ public abstract class AbstractPagination implements Pagination, Serializable {
      * Database columns
      * final or NOT ?
      * <p>
-     * -> SELECT columns...
+     * -&gt; SELECT columns...
      */
     private final Set<String> columns = new HashSet<>();
 
