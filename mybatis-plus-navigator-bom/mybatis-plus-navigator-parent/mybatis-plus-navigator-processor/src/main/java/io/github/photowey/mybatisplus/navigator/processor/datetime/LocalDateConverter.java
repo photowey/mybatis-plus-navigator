@@ -27,7 +27,7 @@ import java.time.LocalDate;
  * @version 3.5.5.1.0
  * @since 2024/04/02
  */
-@DatetimeConverter(target = LocalDate.class)
+@DatetimeConverter(value = LocalDate.class)
 public class LocalDateConverter implements TimeConverter<LocalDate> {
 
     @Override

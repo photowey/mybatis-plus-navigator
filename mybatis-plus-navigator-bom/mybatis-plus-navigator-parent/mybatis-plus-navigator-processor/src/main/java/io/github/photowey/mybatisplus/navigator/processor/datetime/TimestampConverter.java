@@ -27,7 +27,7 @@ import java.sql.Timestamp;
  * @version 3.5.5.1.0
  * @since 2024/04/02
  */
-@DatetimeConverter(target = Timestamp.class)
+@DatetimeConverter(value = Timestamp.class)
 public class TimestampConverter implements TimeConverter<Timestamp> {
 
     @Override

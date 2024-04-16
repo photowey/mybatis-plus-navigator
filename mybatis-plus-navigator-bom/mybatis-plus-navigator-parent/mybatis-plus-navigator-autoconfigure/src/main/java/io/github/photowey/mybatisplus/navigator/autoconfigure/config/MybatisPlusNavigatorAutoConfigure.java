@@ -15,7 +15,6 @@
  */
 package io.github.photowey.mybatisplus.navigator.autoconfigure.config;
 
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -30,12 +29,15 @@ import org.springframework.context.annotation.Import;
 @Import(value = {
         MybatisPlusNavigatorAutoConfigure.NavigatorComponentConfigure.class,
 })
-@AutoConfiguration
 public class MybatisPlusNavigatorAutoConfigure {
 
     @Configuration
     @ComponentScan(value = {
             "io.github.photowey.mybatisplus.navigator.processor"
+    })
+    @Import(value = {
+            DatetimeConverterBeanPostProcessor.class,
+            CriteriaAnnotationProcessorBeanPostProcessor.class,
     })
     static class NavigatorComponentConfigure {
 

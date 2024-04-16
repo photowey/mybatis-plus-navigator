@@ -27,7 +27,25 @@
         <dependencies>
             <dependency>
                 <groupId>io.github.photowey</groupId>
+                <artifactId>mybatis-plus-navigator-dependencies</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.photowey</groupId>
                 <artifactId>mybatis-plus-navigator-annotation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.photowey</groupId>
+                <artifactId>mybatis-plus-navigator-assembler</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.photowey</groupId>
+                <artifactId>mybatis-plus-navigator-autoconfigure</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -63,22 +81,6 @@
             <dependency>
                 <groupId>io.github.photowey</groupId>
                 <artifactId>mybatis-plus-navigator-service</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.photowey</groupId>
-                <artifactId>mybatis-plus-navigator-dependencies</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>io.github.photowey</groupId>
-                <artifactId>mybatis-plus-navigator-spring-boot3-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.photowey</groupId>
-                <artifactId>mybatis-plus-navigator-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

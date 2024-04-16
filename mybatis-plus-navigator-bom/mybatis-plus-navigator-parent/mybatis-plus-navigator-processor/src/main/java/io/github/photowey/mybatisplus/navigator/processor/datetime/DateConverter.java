@@ -27,7 +27,7 @@ import java.util.Date;
  * @version 3.5.5.1.0
  * @since 2024/04/02
  */
-@DatetimeConverter(target = Date.class)
+@DatetimeConverter(value = Date.class)
 public class DateConverter implements TimeConverter<Date> {
 
     @Override

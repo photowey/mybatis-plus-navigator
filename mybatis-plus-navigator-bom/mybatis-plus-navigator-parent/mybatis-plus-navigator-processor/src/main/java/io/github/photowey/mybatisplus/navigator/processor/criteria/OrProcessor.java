@@ -16,7 +16,7 @@
 package io.github.photowey.mybatisplus.navigator.processor.criteria;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.github.photowey.mybatisplus.navigator.annotation.query.And;
+import io.github.photowey.mybatisplus.navigator.annotation.query.Or;
 import io.github.photowey.mybatisplus.navigator.processor.annotation.component.criteria.CriteriaProcessor;
 import io.github.photowey.mybatisplus.navigator.processor.handler.ConditionHandler;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
@@ -30,12 +30,12 @@ import java.lang.reflect.Field;
  * @version 3.5.5.1.0
  * @since 2024/04/02
  */
-@CriteriaProcessor(criteria = And.class)
+@CriteriaProcessor(criteria = Or.class)
 public class OrProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
-        extends AbstractCriteriaAnnotationProcessorAdaptor<And, QUERY, QueryWrapper<ENTITY>, ENTITY> {
+        extends AbstractCriteriaAnnotationProcessorAdaptor<Or, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override
-    public boolean process(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, And annotation) {
+    public boolean process(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, Or annotation) {
         final Object value = this.tryExtractFiledValue(field, query);
         if (this.isEmpty(value)) {
             return true;
