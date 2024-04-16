@@ -15,6 +15,12 @@
  */
 package io.github.photowey.mybatisplus.navigator.core.model.pagination;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.github.photowey.mybatisplus.navigator.core.domain.sorting.SortingItem;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * {@code Pagination}
  *
@@ -36,5 +42,13 @@ public interface Pagination {
 
     default Long getSize() {
         return DEFAULT_SIZE;
+    }
+
+    default Set<SortingItem> getSortingItems() {
+        return new HashSet<>();
+    }
+
+    default <T> Page<T> toPage() {
+        return new Page<>(this.getCurrent(), this.getSize());
     }
 }

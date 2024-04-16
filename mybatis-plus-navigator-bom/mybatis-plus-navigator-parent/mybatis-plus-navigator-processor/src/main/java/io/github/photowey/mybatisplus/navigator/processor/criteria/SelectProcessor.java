@@ -16,23 +16,32 @@
 package io.github.photowey.mybatisplus.navigator.processor.criteria;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.github.photowey.mybatisplus.navigator.annotation.query.Select;
+import io.github.photowey.mybatisplus.navigator.processor.annotation.component.criteria.CriteriaProcessor;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 /**
- * {@code CriteriaAnnotationProcessor}
+ * {@code SelectProcessor}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/04/02
+ * @since 2024/04/15
  */
-public interface CriteriaAnnotationProcessor<
-        A extends Annotation,
-        QUERY extends AbstractQuery<?>,
-        WRAPPER extends QueryWrapper<ENTITY>,
-        ENTITY> {
+@CriteriaProcessor(criteria = Select.class)
+public class SelectProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
+        extends AbstractCriteriaAnnotationProcessorAdaptor<Select, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
-    boolean process(WRAPPER queryWrapper, final Field field, final QUERY query, final A annotation);
+    @Override
+    public boolean process(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, Select annotation) {
+        String[] fields = annotation.value();
+        if (this.isEmpty(fields)) {
+            return true;
+        }
+
+        queryWrapper.select(fields);
+
+        return true;
+    }
 }

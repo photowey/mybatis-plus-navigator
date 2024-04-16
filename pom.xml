@@ -68,6 +68,11 @@
         <maven-git-commit-id-plugin.version>4.9.10</maven-git-commit-id-plugin.version>
         <maven-versions-plugin.version>2.7</maven-versions-plugin.version>
 
+        <spring.version>5.3.23</spring.version>
+        <spring-boot.version>2.7.5</spring-boot.version>
+        <spring-boot-v3.version>3.2.4</spring-boot-v3.version>
+        <junit-jupiter-api.version>5.10.2</junit-jupiter-api.version>
+
         <io.github.photowey.project.url>https://github.com/photowey/mybatis-plus-navigator</io.github.photowey.project.url>
     </properties>
     <!-- @formatter:on -->
@@ -77,6 +82,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit-jupiter-api.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -34,5 +34,5 @@ import java.time.LocalDateTime;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DatetimeConverter {
 
-    Class<?> target() default LocalDateTime.class;
+    Class<?> value() default LocalDateTime.class;
 }

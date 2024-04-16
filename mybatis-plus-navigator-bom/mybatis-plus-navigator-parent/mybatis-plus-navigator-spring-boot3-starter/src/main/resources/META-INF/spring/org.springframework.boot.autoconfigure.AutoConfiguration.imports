@@ -1,1 +1,1 @@
-io.github.photowey.mybatisplus.navigator.autoconfigure.config.MybatisPlusNavigatorAutoConfigure
+io.github.photowey.mybatisplus.navigator.spring.boot3.autoconfigure.NavigatorAutoConfigure

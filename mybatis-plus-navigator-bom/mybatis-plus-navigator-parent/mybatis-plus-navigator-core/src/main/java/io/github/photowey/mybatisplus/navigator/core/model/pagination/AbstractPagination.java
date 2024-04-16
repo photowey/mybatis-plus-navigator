@@ -16,6 +16,7 @@
 package io.github.photowey.mybatisplus.navigator.core.model.pagination;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -46,6 +47,14 @@ public abstract class AbstractPagination implements Pagination, Serializable {
      */
     private final Set<String> columns = new HashSet<>();
 
+    // ----------------------------------------------------------------
+
+    public static <T> Page<T> populateDefaultPage() {
+        return new Page<>(Pagination.DEFAULT_CURRENT, Pagination.DEFAULT_SIZE);
+    }
+
+    // ----------------------------------------------------------------
+
     public void tryThresholdSizeEnabled() {
         this.setSize(THRESHOLD_SIZE);
     }
@@ -57,6 +66,16 @@ public abstract class AbstractPagination implements Pagination, Serializable {
     }
 
     public void setTotal(Long total) {
+        this.total = total;
+    }
+
+    // ----------------------------------------------------------------
+
+    public Long total() {
+        return this.getTotal();
+    }
+
+    public void total(Long total) {
         this.total = total;
     }
 

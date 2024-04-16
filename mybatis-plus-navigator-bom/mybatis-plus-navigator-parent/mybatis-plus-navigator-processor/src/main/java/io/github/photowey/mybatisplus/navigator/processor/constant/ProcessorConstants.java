@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.processor.criteria;
+package io.github.photowey.mybatisplus.navigator.processor.constant;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
+import io.github.photowey.mybatisplus.navigator.processor.criteria.Processor;
+import io.github.photowey.mybatisplus.navigator.processor.datetime.Time;
 
 /**
- * {@code CriteriaAnnotationProcessor}
+ * {@code ProcessorConstants}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/04/02
+ * @since 2024/04/16
  */
-public interface CriteriaAnnotationProcessor<
-        A extends Annotation,
-        QUERY extends AbstractQuery<?>,
-        WRAPPER extends QueryWrapper<ENTITY>,
-        ENTITY> {
+public interface ProcessorConstants {
 
-    boolean process(WRAPPER queryWrapper, final Field field, final QUERY query, final A annotation);
+    String ANNOTATION_PROCESSOR_SCAN_BASE_PACKAGE = Processor.class.getPackage().getName();
+    String TIME_PROCESSOR_SCAN_BASE_PACKAGE = Time.class.getPackage().getName();
+
+    String DEFAULT_RESOURCE_PATTERN = "**/*.class";
+
+    char PACKAGE_SEPARATOR = '.';
+    char PATH_SEPARATOR = '/';
+
 }

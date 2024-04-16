@@ -13,26 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.processor.criteria;
+package io.github.photowey.mybatisplus.navigator.spring.boot3.autoconfigure;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
+import io.github.photowey.mybatisplus.navigator.autoconfigure.config.MybatisPlusNavigatorAutoConfigure;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.context.annotation.Import;
 
 /**
- * {@code CriteriaAnnotationProcessor}
+ * {@code NavigatorAutoConfigure}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/04/02
+ * @since 2024/04/17
  */
-public interface CriteriaAnnotationProcessor<
-        A extends Annotation,
-        QUERY extends AbstractQuery<?>,
-        WRAPPER extends QueryWrapper<ENTITY>,
-        ENTITY> {
-
-    boolean process(WRAPPER queryWrapper, final Field field, final QUERY query, final A annotation);
+@AutoConfiguration
+@Import(MybatisPlusNavigatorAutoConfigure.class)
+public class NavigatorAutoConfigure {
 }

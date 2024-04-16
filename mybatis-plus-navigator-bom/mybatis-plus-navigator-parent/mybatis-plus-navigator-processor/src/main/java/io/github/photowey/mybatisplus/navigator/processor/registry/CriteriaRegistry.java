@@ -1,0 +1,78 @@
+/*
+ * Copyright © 2024 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package io.github.photowey.mybatisplus.navigator.processor.registry;
+
+import io.github.photowey.mybatisplus.navigator.core.exception.NavigatorRuntimeException;
+import io.github.photowey.mybatisplus.navigator.core.thrower.AssertionErrorThrower;
+import io.github.photowey.mybatisplus.navigator.processor.criteria.CriteriaAnnotationProcessor;
+import io.github.photowey.mybatisplus.navigator.processor.datetime.TimeConverter;
+
+import java.lang.annotation.Annotation;
+import java.util.concurrent.ConcurrentHashMap;
+
+/**
+ * {@code CriteriaRegistry}
+ *
+ * @author photowey
+ * @version 3.5.5.1.0
+ * @since 2024/04/16
+ */
+public final class CriteriaRegistry {
+
+    private CriteriaRegistry() {
+        AssertionErrorThrower.throwz(CriteriaRegistry.class);
+    }
+
+    private static ConcurrentHashMap<Class<? extends Annotation>, CriteriaAnnotationProcessor> ANNOTATION_PROCESSOR_CACHE = new ConcurrentHashMap<>(1 << 5);
+    private static ConcurrentHashMap<Class<?>, TimeConverter> ANNOTATION_CONVERTER_CACHE = new ConcurrentHashMap<>(1 << 4);
+
+    // ----------------------------------------------------------------
+
+    public static void register(Class<? extends Annotation> targetClazz, CriteriaAnnotationProcessor annotationProcessor) {
+        ANNOTATION_PROCESSOR_CACHE.put(targetClazz, annotationProcessor);
+    }
+
+    public static void register(Class<?> targetClazz, TimeConverter annotationProcessor) {
+        ANNOTATION_CONVERTER_CACHE.put(targetClazz, annotationProcessor);
+    }
+
+    // ----------------------------------------------------------------
+
+    public static CriteriaAnnotationProcessor tryFindProcessor(final Class<?> clazz) {
+        final CriteriaAnnotationProcessor processor = ANNOTATION_PROCESSOR_CACHE.get(clazz);
+        if (null == processor) {
+            throw new NavigatorRuntimeException("No processor found:%s", clazz);
+        }
+
+        return processor;
+    }
+
+    public static TimeConverter tryFindConverter(final Class<?> clazz) {
+        final TimeConverter converter = ANNOTATION_CONVERTER_CACHE.get(clazz);
+        if (null == converter) {
+            throw new NavigatorRuntimeException("No converter found:%s", clazz);
+        }
+
+        return converter;
+    }
+
+    // ----------------------------------------------------------------
+
+    public static void destroy() {
+        ANNOTATION_PROCESSOR_CACHE.clear();
+        ANNOTATION_CONVERTER_CACHE.clear();
+    }
+}
