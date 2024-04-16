@@ -21,21 +21,21 @@ import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQu
 import java.lang.reflect.Field;
 
 /**
- * {@code DefaultConditionHandler}
+ * {@code NoOpConditionHandler}
  *
  * @author photowey
  * @version 3.5.5.1.0
  * @since 2024/04/02
  */
-public class DefaultConditionHandler extends AbstractConditionHandlerAdaptor {
+public class NoOpConditionHandler extends AbstractConditionHandlerAdaptor {
 
     @Override
     public <T> void handleAnd(QueryWrapper<T> queryWrapper, AbstractQuery<T> query, Field field) {
-        // queryWrapper.and((qw) -> {});
+
     }
 
     @Override
     public <T> void handleOr(QueryWrapper<T> queryWrapper, AbstractQuery<?> query, Field field) {
-        // queryWrapper.or((qw) -> {});
+
     }
 }
