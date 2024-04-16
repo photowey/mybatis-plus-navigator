@@ -71,6 +71,16 @@ public abstract class AbstractPagination implements Pagination, Serializable {
 
     // ----------------------------------------------------------------
 
+    public Long total() {
+        return this.getTotal();
+    }
+
+    public void total(Long total) {
+        this.total = total;
+    }
+
+    // ----------------------------------------------------------------
+
     public Long getLimit() {
         return this.getSize();
     }

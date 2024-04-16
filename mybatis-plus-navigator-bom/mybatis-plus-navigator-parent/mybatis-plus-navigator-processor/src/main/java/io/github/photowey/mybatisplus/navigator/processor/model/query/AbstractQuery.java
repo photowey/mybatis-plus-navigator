@@ -19,6 +19,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.github.photowey.mybatisplus.navigator.core.model.pagination.AbstractPagination;
 import io.github.photowey.mybatisplus.navigator.core.util.PaginationUtils;
+import io.github.photowey.mybatisplus.navigator.processor.visitor.CriteriaQueryVisitor;
+import io.github.photowey.mybatisplus.navigator.query.QueryWrapperExt;
 
 /**
  * {@code AbstractQuery}
@@ -29,8 +31,12 @@ import io.github.photowey.mybatisplus.navigator.core.util.PaginationUtils;
  */
 public abstract class AbstractQuery<T> extends AbstractPagination {
 
-    public QueryWrapper<T> tryToQueryWrapper() {
-        return new QueryWrapper<>();
+    public QueryWrapper<T> tryVisitQueryWrapper() {
+        return CriteriaQueryVisitor.visit(this, new QueryWrapper<>());
+    }
+
+    public QueryWrapperExt<T> tryVisitQueryWrapperExt() {
+        return CriteriaQueryVisitor.visitExt(this, new QueryWrapperExt<>());
     }
 
     public IPage<T> populatePage() {

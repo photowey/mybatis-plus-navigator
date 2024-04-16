@@ -20,6 +20,7 @@ import io.github.photowey.mybatisplus.navigator.processor.criteria.CriteriaAnnot
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 import io.github.photowey.mybatisplus.navigator.processor.parser.CriteriaFieldParser;
 import io.github.photowey.mybatisplus.navigator.processor.registry.CriteriaRegistry;
+import io.github.photowey.mybatisplus.navigator.query.QueryWrapperExt;
 
 /**
  * {@code CriteriaQueryVisitor}
@@ -31,6 +32,16 @@ import io.github.photowey.mybatisplus.navigator.processor.registry.CriteriaRegis
 public final class CriteriaQueryVisitor {
 
     public static <QUERY extends AbstractQuery<ENTITY>, ENTITY> QueryWrapper<ENTITY> visit(final QUERY query, QueryWrapper<ENTITY> queryWrapper) {
+        CriteriaFieldParser.getInstance().traversalQuery(query, (field, annotation) -> {
+            final CriteriaAnnotationProcessor processorCached = CriteriaRegistry.tryFindProcessor(annotation.annotationType());
+            assert processorCached != null;
+            return processorCached.process(queryWrapper, field, query, annotation);
+        });
+
+        return queryWrapper;
+    }
+
+    public static <QUERY extends AbstractQuery, ENTITY> QueryWrapperExt<ENTITY> visitExt(final QUERY query, QueryWrapperExt<ENTITY> queryWrapper) {
         CriteriaFieldParser.getInstance().traversalQuery(query, (field, annotation) -> {
             final CriteriaAnnotationProcessor processorCached = CriteriaRegistry.tryFindProcessor(annotation.annotationType());
             assert processorCached != null;

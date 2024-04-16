@@ -16,6 +16,10 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.github.photowey</groupId>
+            <artifactId>mybatis-plus-navigator-annotation</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
