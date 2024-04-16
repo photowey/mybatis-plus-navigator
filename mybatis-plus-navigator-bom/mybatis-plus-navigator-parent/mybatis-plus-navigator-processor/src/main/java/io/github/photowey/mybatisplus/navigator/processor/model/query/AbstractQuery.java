@@ -16,7 +16,9 @@
 package io.github.photowey.mybatisplus.navigator.processor.model.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.github.photowey.mybatisplus.navigator.core.model.pagination.AbstractPagination;
+import io.github.photowey.mybatisplus.navigator.core.util.PaginationUtils;
 
 /**
  * {@code AbstractQuery}
@@ -31,4 +33,7 @@ public abstract class AbstractQuery<T> extends AbstractPagination {
         return new QueryWrapper<>();
     }
 
+    public IPage<T> populatePage() {
+        return PaginationUtils.toPage(this);
+    }
 }

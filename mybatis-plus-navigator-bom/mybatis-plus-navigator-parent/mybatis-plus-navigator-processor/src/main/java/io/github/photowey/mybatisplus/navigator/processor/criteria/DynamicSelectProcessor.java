@@ -27,7 +27,7 @@ import java.util.List;
  * {@code DynamicSelectProcessor}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/04/15
  */
 @CriteriaProcessor(criteria = DynamicSelect.class)
