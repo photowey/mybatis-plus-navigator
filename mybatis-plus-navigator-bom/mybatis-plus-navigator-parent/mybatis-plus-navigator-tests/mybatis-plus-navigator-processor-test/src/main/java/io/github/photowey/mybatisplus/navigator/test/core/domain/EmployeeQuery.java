@@ -16,6 +16,7 @@
 package io.github.photowey.mybatisplus.navigator.test.core.domain;
 
 import com.baomidou.mybatisplus.core.enums.SqlLike;
+import io.github.photowey.mybatisplus.navigator.annotation.query.*;
 import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
 import io.github.photowey.mybatisplus.navigator.core.enums.Operator;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
