@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.github.photowey</groupId>
+        <artifactId>mybatis-plus-navigator-parent</artifactId>
+        <version>3.5.5.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>mybatis-plus-navigator-tests</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>mybatis-plus-navigator-processor-test</module>
+    </modules>
+
+    <properties>
+        <lombok.versioin>1.18.30</lombok.versioin>
+        <h2.versioin>2.1.214</h2.versioin>
+        <mybatis-typehandlers-jsr310.version>1.0.2</mybatis-typehandlers-jsr310.version>
+        <jackson-datatype-jsr310.version>2.9.7</jackson-datatype-jsr310.version>
+
+        <!--
+            skip deploy/install for web module
+            https://maven.apache.org/plugins/maven-deploy-plugin/deploy-mojo.html#skip
+            https://maven.apache.org/plugins/maven-install-plugin/install-mojo.html#skip
+        -->
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.install.skip>true</maven.install.skip>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.versioin}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.versioin}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-typehandlers-jsr310</artifactId>
+                <version>${mybatis-typehandlers-jsr310.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson-datatype-jsr310.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
