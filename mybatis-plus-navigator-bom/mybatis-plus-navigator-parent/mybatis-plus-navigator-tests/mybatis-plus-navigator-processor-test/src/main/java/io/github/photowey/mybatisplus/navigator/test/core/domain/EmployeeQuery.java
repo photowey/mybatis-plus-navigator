@@ -45,7 +45,7 @@ public class EmployeeQuery extends AbstractQuery<Employee> implements Serializab
     @Eq
     private Long id;
 
-    @Eq
+    @Ne
     private Long orgId;
 
     /**
