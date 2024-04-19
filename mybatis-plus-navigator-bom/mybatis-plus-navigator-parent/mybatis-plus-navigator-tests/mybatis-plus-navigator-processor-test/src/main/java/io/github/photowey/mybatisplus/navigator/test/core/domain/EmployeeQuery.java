@@ -60,6 +60,9 @@ public class EmployeeQuery extends AbstractQuery<Employee> implements Serializab
 
     @Ge
     private Integer sorting;
+    @Gt
+    private Integer sortingGt;
+
     @Lt
     private Integer status;
     private String remark;
