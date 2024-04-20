@@ -63,8 +63,10 @@ public class EmployeeQuery extends AbstractQuery<Employee> implements Serializab
     @Gt
     private Integer sortingGt;
 
-    @Lt
+    @Le
     private Integer status;
+    @Lt
+    private Integer statusLt;
     private String remark;
 
     @Eq
