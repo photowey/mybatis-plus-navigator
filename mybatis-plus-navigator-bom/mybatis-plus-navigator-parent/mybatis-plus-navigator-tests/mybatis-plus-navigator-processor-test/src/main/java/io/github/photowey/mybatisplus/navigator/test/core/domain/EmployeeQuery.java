@@ -25,6 +25,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * {@code EmployeeQuery}
@@ -65,6 +66,11 @@ public class EmployeeQuery extends AbstractQuery<Employee> implements Serializab
 
     @Le
     private Integer status;
+    @In(alias = "status")
+    private List<Integer> statusIn;
+    @NotIn(alias = "status")
+    private List<Integer> statusNotIn;
+
     @Lt
     private Integer statusLt;
     private String remark;
