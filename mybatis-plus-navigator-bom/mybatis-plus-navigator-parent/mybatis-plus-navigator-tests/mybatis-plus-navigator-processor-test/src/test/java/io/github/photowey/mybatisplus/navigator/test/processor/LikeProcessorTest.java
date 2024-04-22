@@ -25,27 +25,39 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * {@code NeProcessorTest}
+ * {@code LikeProcessorTest}
  *
  * @author photowey
  * @version 1.0.0
- * @since 2024/04/19
+ * @since 2024/04/22
  */
 @SpringBootTest(classes = App.class)
-class NeProcessorTest extends LocalTest {
+class LikeProcessorTest extends LocalTest {
 
     void holdOn() {
         App.holdOn();
     }
 
     @Test
-    void testNe() {
+    void testLike() {
         EmployeeQuery query = EmployeeQuery.builder()
-                .organizationId(1713369638000L)
+                .organizationName("Hello")
                 .build();
 
         QueryWrapper<Employee> wrapper = query.tryVisitQueryWrapper();
         String targetSql = wrapper.getTargetSql();
-        Assertions.assertEquals("(organization_id <> ?)", targetSql);
+        Assertions.assertEquals("(ORGANIZATION_NAME LIKE ?)", targetSql);
+    }
+
+    @Test
+    void testLike_2() {
+        EmployeeQuery query = EmployeeQuery.builder()
+                .organizationName("Hello")
+                .employeeNo("89757")
+                .build();
+
+        QueryWrapper<Employee> wrapper = query.tryVisitQueryWrapper();
+        String targetSql = wrapper.getTargetSql();
+        Assertions.assertEquals("(ORGANIZATION_NAME LIKE ? AND employee_no LIKE ?)", targetSql);
     }
 }

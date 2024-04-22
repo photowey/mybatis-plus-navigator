@@ -47,16 +47,16 @@ public class EmployeeQuery extends AbstractQuery<Employee> implements Serializab
     private Long id;
 
     @Ne
-    private Long orgId;
+    private Long organizationId;
 
     /**
      * ORG_NAME
      */
     @Like(naming = NamingStrategy.UPPER_SNAKE_CASE)
-    private String orgName;
+    private String organizationName;
     @Like(alias = "employee_no", like = SqlLike.RIGHT)
     private String employeeNo;
-    @Like(like = SqlLike.LEFT)
+    @NotLike(like = SqlLike.LEFT)
     private String employeeName;
 
     @Ge

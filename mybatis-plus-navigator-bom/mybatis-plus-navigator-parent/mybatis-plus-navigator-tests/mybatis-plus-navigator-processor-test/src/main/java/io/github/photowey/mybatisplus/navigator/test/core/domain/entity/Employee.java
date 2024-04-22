@@ -44,8 +44,8 @@ public class Employee implements Serializable {
 
     private Long id;
 
-    private Long orgId;
-    private String orgName;
+    private Long organizationId;
+    private String organizationName;
 
     private String employeeNo;
 

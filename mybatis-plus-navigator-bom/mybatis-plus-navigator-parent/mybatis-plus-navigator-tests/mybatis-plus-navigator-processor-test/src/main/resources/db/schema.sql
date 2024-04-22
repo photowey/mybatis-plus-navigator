@@ -3,8 +3,8 @@ DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee`
 (
     `id`          BIGINT PRIMARY KEY COMMENT 'ID',
-    `org_id`      BIGINT       NOT NULL COMMENT 'Organization ID',
-    `org_name`    VARCHAR(128) NOT NULL COMMENT 'Organization name',
+    `organization_id`   BIGINT       NOT NULL COMMENT 'Organization ID',
+    `organization_name` VARCHAR(128) NOT NULL COMMENT 'Organization name',
     `employee_no` VARCHAR(32)  NOT NULL COMMENT 'Employee no.',
     `sorting`     INT          NOT NULL COMMENT 'Sorting order',
     `status`      INT          NOT NULL COMMENT 'Status',

@@ -25,27 +25,27 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * {@code NeProcessorTest}
+ * {@code NotLikeProcessorTest}
  *
  * @author photowey
  * @version 1.0.0
- * @since 2024/04/19
+ * @since 2024/04/22
  */
 @SpringBootTest(classes = App.class)
-class NeProcessorTest extends LocalTest {
+class NotLikeProcessorTest extends LocalTest {
 
     void holdOn() {
         App.holdOn();
     }
 
     @Test
-    void testNe() {
+    void testNotLike() {
         EmployeeQuery query = EmployeeQuery.builder()
-                .organizationId(1713369638000L)
+                .employeeName("photowey")
                 .build();
 
         QueryWrapper<Employee> wrapper = query.tryVisitQueryWrapper();
         String targetSql = wrapper.getTargetSql();
-        Assertions.assertEquals("(organization_id <> ?)", targetSql);
+        Assertions.assertEquals("(employee_name NOT LIKE ?)", targetSql);
     }
 }
