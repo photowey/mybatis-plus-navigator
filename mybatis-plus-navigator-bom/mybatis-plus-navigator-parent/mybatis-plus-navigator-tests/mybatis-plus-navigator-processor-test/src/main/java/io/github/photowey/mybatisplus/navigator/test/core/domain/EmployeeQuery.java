@@ -17,6 +17,7 @@ package io.github.photowey.mybatisplus.navigator.test.core.domain;
 
 import com.baomidou.mybatisplus.core.enums.SqlLike;
 import io.github.photowey.mybatisplus.navigator.annotation.query.*;
+import io.github.photowey.mybatisplus.navigator.core.constant.DatetimeConstants;
 import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
 import io.github.photowey.mybatisplus.navigator.core.enums.Operator;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
@@ -24,7 +25,9 @@ import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Employee
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -84,4 +87,11 @@ public class EmployeeQuery extends AbstractQuery<Employee> implements Serializab
     private LocalDateTime createdAt;
     @Timestamp(compare = Operator.LT)
     private Long updatedAt;
+
+    @StringDatetime(compare = Operator.GE)
+    private String registerDatetime;
+    @StringDatetime(compare = Operator.LT, pattern = DatetimeConstants.yyyy_MM_dd, clazz = LocalDate.class)
+    private String registerDate;
+    @StringDatetime(compare = Operator.LE, pattern = DatetimeConstants.HH_mm_ss, clazz = LocalTime.class)
+    private String registerTime;
 }

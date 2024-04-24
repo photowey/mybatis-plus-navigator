@@ -23,7 +23,6 @@ import io.github.photowey.mybatisplus.navigator.processor.annotation.component.c
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 
 import java.lang.reflect.Field;
-import java.time.LocalDateTime;
 
 /**
  * {@code StringDatetimeProcessor}
@@ -40,10 +39,12 @@ public class StringDatetimeProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY
     public boolean process(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, StringDatetime annotation) {
         return this.onProcess(field, query, annotation::alias, annotation::naming, (column, value) -> {
             String datetime = (String) value;
+
             Operator compare = annotation.compare();
             String pattern = annotation.pattern();
+            Class<?> clazz = annotation.clazz();
 
-            LocalDateTime dt = DatetimeUtils.toLocalDateTime(datetime, pattern);
+            Object dt = DatetimeUtils.tryParseDateTime(datetime, pattern, clazz);
 
             this.doWrapTime(queryWrapper, compare, column, dt);
         });
