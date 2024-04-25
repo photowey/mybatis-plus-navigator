@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.test.core.domain;
+package io.github.photowey.mybatisplus.navigator.test.core.query;
 
 import com.baomidou.mybatisplus.core.enums.SqlLike;
 import io.github.photowey.mybatisplus.navigator.annotation.query.*;
@@ -34,7 +34,7 @@ import java.util.List;
  * {@code EmployeeQuery}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/04/17
  */
 @Data
@@ -94,4 +94,7 @@ public class EmployeeQuery extends AbstractQuery<Employee> implements Serializab
     private String registerDate;
     @StringDatetime(compare = Operator.LE, pattern = DatetimeConstants.HH_mm_ss, clazz = LocalTime.class)
     private String registerTime;
+
+    @Exists(existsSql = "SELECT id FROM employee WHERE organization_id = {0}")
+    private Long organizationIdExists;
 }

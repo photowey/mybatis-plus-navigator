@@ -26,28 +26,26 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * {@code Employee}
+ * {@code Organization}
  *
  * @author photowey
- * @version 3.5.5.1.0
- * @since 2024/04/17
+ * @version 1.0.0
+ * @since 2024/04/26
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias("Employee")
-@TableName(value = "employee")
-public class Employee implements Serializable {
+@Alias("Organization")
+@TableName(value = "organization")
+public class Organization implements Serializable {
 
-    private static final long serialVersionUID = -7339266817608723266L;
+    private static final long serialVersionUID = -7400199381089063967L;
 
     private Long id;
 
-    private Long organizationId;
+    private String organizationNo;
     private String organizationName;
-
-    private String employeeNo;
 
     private Integer sorting;
     private Integer status;

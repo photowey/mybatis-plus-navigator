@@ -19,7 +19,7 @@ package io.github.photowey.mybatisplus.navigator.core.enums;
  * {@code DatetimePattern}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/04/24
  */
 public enum DatetimePattern {
@@ -34,8 +34,9 @@ public enum DatetimePattern {
     yyMM("yyMM"),
     yyMMdd("yyMMdd"),
 
-    yyyyMMddHHmmss("yyyyMMddHHmmss"),
     yyyyMMddHHmmssSSS("yyyyMMddHHmmssSSS"),
+    yyyyMMddHHmmss("yyyyMMddHHmmss"),
+    HHmmss("HHmmss"),
 
     yyyy_MM_dd_T_HH_mm_ss_SSS_Z("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
     yyyy_MM_dd_T_HH_mm_ss_Z("yyyy-MM-dd'T'HH:mm:ss.'Z'"),

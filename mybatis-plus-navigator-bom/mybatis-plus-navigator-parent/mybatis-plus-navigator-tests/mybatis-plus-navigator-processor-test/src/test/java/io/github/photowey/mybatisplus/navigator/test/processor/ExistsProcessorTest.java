@@ -19,33 +19,59 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.github.photowey.mybatisplus.navigator.test.App;
 import io.github.photowey.mybatisplus.navigator.test.LocalTest;
 import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Employee;
+import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Organization;
+import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeMultiExistQuery;
 import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeQuery;
+import io.github.photowey.mybatisplus.navigator.test.core.query.OrganizationQuery;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
+
 /**
- * {@code GtProcessorTest}
+ * {@code ExistsProcessorTest}
  *
  * @author photowey
- * @version 3.5.5.1.0
- * @since 2024/04/20
+ * @version 1.0.0
+ * @since 2024/04/26
  */
 @SpringBootTest(classes = App.class)
-class GtProcessorTest extends LocalTest {
+class ExistsProcessorTest extends LocalTest {
 
     void holdOn() {
         App.holdOn();
     }
 
     @Test
-    void testGt() {
+    void testExists() {
+        OrganizationQuery query = OrganizationQuery.builder()
+                .build();
+
+        QueryWrapper<Organization> wrapper = query.tryVisitQueryWrapper();
+        String targetSql = wrapper.getTargetSql();
+        Assertions.assertEquals("(EXISTS (SELECT id FROM organization WHERE organization_no = 89757))", targetSql);
+    }
+
+    @Test
+    void testExists_has_value() {
         EmployeeQuery query = EmployeeQuery.builder()
-                .sortingGt(1024)
+                .organizationIdExists(89757L)
                 .build();
 
         QueryWrapper<Employee> wrapper = query.tryVisitQueryWrapper();
         String targetSql = wrapper.getTargetSql();
-        Assertions.assertEquals("(sorting_gt > ?)", targetSql);
+        Assertions.assertEquals("(EXISTS (SELECT id FROM employee WHERE organization_id = ?))", targetSql);
+    }
+
+    @Test
+    void testExists_has_multi_value() {
+        EmployeeMultiExistQuery query = EmployeeMultiExistQuery.builder()
+                .employeeExists(Arrays.asList("89757", 1))
+                .build();
+
+        QueryWrapper<Employee> wrapper = query.tryVisitQueryWrapper();
+        String targetSql = wrapper.getTargetSql();
+        Assertions.assertEquals("(EXISTS (SELECT id FROM employee WHERE employee_no = ? AND status = ?))", targetSql);
     }
 }

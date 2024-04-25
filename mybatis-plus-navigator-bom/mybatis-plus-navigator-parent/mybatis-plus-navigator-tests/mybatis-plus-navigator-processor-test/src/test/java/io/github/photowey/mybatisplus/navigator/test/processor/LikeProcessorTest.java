@@ -18,8 +18,8 @@ package io.github.photowey.mybatisplus.navigator.test.processor;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.github.photowey.mybatisplus.navigator.test.App;
 import io.github.photowey.mybatisplus.navigator.test.LocalTest;
-import io.github.photowey.mybatisplus.navigator.test.core.domain.EmployeeQuery;
 import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Employee;
+import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeQuery;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,7 +28,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * {@code LikeProcessorTest}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/04/22
  */
 @SpringBootTest(classes = App.class)
