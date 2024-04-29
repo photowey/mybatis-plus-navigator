@@ -20,16 +20,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * {@code MybatisPlusNavigatorAutoConfigure}
+ * {@code MybatisPlusNavigatorConfigure}
  *
  * @author photowey
  * @version 3.5.5.1.0
  * @since 2024/04/02
  */
 @Import(value = {
-        MybatisPlusNavigatorAutoConfigure.NavigatorComponentConfigure.class,
+        MybatisPlusNavigatorConfigure.NavigatorComponentConfigure.class,
 })
-public class MybatisPlusNavigatorAutoConfigure {
+public class MybatisPlusNavigatorConfigure {
 
     @Configuration
     @ComponentScan(value = {

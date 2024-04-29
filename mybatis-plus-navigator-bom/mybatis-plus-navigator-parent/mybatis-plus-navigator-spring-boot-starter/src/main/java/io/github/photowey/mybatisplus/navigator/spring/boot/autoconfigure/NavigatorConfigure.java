@@ -15,7 +15,7 @@
  */
 package io.github.photowey.mybatisplus.navigator.spring.boot.autoconfigure;
 
-import io.github.photowey.mybatisplus.navigator.autoconfigure.config.MybatisPlusNavigatorAutoConfigure;
+import io.github.photowey.mybatisplus.navigator.autoconfigure.config.MybatisPlusNavigatorConfigure;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -28,6 +28,6 @@ import org.springframework.context.annotation.Import;
  * @since 2024/04/30
  */
 @Configuration
-@Import(MybatisPlusNavigatorAutoConfigure.class)
+@Import(MybatisPlusNavigatorConfigure.class)
 @ConditionalOnMissingClass("org.springframework.boot.autoconfigure.AutoConfiguration")
 public class NavigatorConfigure {}
