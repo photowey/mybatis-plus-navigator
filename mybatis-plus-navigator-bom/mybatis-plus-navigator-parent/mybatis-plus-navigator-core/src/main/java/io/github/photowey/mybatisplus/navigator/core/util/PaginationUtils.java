@@ -19,7 +19,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.photowey.mybatisplus.navigator.core.domain.sorting.SortingItem;
+import io.github.photowey.mybatisplus.navigator.core.domain.sorting.SortingTerm;
 import io.github.photowey.mybatisplus.navigator.core.enums.SortingOrder;
 import io.github.photowey.mybatisplus.navigator.core.model.pagination.Pagination;
 import io.github.photowey.mybatisplus.navigator.core.thrower.AssertionErrorThrower;
@@ -48,9 +48,9 @@ public final class PaginationUtils {
     public static <T, Q extends Pagination> IPage<T> toPage(Q query, Consumer<IPage<T>> callback) {
         Page<T> page = query.toPage();
 
-        Collection<SortingItem> items = query.getSortingItems();
-        if (ObjectUtils.isNotEmpty(items)) {
-            page.addOrder(items.stream().map(PaginationUtils::sorting).collect(Collectors.toList()));
+        Collection<SortingTerm> terms = query.getSortingTerms();
+        if (ObjectUtils.isNotEmpty(terms)) {
+            page.addOrder(terms.stream().map(PaginationUtils::sorting).collect(Collectors.toList()));
         }
 
         if (null != callback) {
@@ -60,7 +60,7 @@ public final class PaginationUtils {
         return page;
     }
 
-    private static OrderItem sorting(SortingItem item) {
-        return SortingOrder.ASC.equals(item.getOrder()) ? OrderItem.asc(item.getColumn()) : OrderItem.desc(item.getColumn());
+    private static OrderItem sorting(SortingTerm term) {
+        return SortingOrder.ASC.equals(term.getOrder()) ? OrderItem.asc(term.getColumn()) : OrderItem.desc(term.getColumn());
     }
 }

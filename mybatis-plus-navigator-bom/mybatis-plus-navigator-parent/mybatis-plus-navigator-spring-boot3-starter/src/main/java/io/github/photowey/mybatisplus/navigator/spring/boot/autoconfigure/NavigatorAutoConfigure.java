@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.spring.boot3.autoconfigure;
+package io.github.photowey.mybatisplus.navigator.spring.boot.autoconfigure;
 
 import io.github.photowey.mybatisplus.navigator.autoconfigure.config.MybatisPlusNavigatorAutoConfigure;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
