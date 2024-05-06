@@ -16,32 +16,33 @@
 package io.github.photowey.mybatisplus.navigator.test.core.query;
 
 import io.github.photowey.mybatisplus.navigator.annotation.query.Eq;
-import io.github.photowey.mybatisplus.navigator.annotation.query.Exists;
+import io.github.photowey.mybatisplus.navigator.annotation.query.NotExists;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
-import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Organization;
+import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Employee;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * {@code OrganizationQuery}
+ * {@code EmployeeMultiNotExistQuery}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/04/26
+ * @since 2024/05/06
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class OrganizationQuery extends AbstractQuery<Organization> implements Serializable {
+public class EmployeeMultiNotExistQuery extends AbstractQuery<Employee> implements Serializable {
 
-    private static final long serialVersionUID = 7278864977416518807L;
+    private static final long serialVersionUID = 3587811972079952638L;
 
     @Eq
     private Long id;
 
-    @Exists(existsSql = "SELECT id FROM organization WHERE organization_no = 89757")
-    private String organizationNoExists;
+    @NotExists(existsSql = "SELECT id FROM employee WHERE employee_no = {0} AND status = {1}")
+    private List<Object> employeeExists;
 }

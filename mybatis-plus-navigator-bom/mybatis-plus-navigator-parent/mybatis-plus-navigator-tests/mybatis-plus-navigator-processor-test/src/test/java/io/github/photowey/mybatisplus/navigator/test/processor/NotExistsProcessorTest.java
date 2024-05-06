@@ -20,9 +20,9 @@ import io.github.photowey.mybatisplus.navigator.test.App;
 import io.github.photowey.mybatisplus.navigator.test.LocalTest;
 import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Employee;
 import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Organization;
-import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeMultiExistQuery;
-import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeQuery;
-import io.github.photowey.mybatisplus.navigator.test.core.query.OrganizationQuery;
+import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeMultiNotExistQuery;
+import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeNotExistQuery;
+import io.github.photowey.mybatisplus.navigator.test.core.query.OrganizationNotExistQuery;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,48 +30,48 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Arrays;
 
 /**
- * {@code ExistsProcessorTest}
+ * {@code NotExistsProcessorTest}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/04/26
+ * @since 2024/05/06
  */
 @SpringBootTest(classes = App.class)
-class ExistsProcessorTest extends LocalTest {
+class NotExistsProcessorTest extends LocalTest {
 
     void holdOn() {
         App.holdOn();
     }
 
     @Test
-    void testExists() {
-        OrganizationQuery query = OrganizationQuery.builder()
+    void testNotExists() {
+        OrganizationNotExistQuery query = OrganizationNotExistQuery.builder()
                 .build();
 
         QueryWrapper<Organization> wrapper = query.tryVisitQueryWrapper();
         String targetSql = wrapper.getTargetSql();
-        Assertions.assertEquals("(EXISTS (SELECT id FROM organization WHERE organization_no = 89757))", targetSql);
+        Assertions.assertEquals("(NOT EXISTS (SELECT id FROM organization WHERE organization_no = 89757))", targetSql);
     }
 
     @Test
-    void testExists_has_value() {
-        EmployeeQuery query = EmployeeQuery.builder()
+    void testNotExists_has_value() {
+        EmployeeNotExistQuery query = EmployeeNotExistQuery.builder()
                 .organizationIdExists(89757L)
                 .build();
 
         QueryWrapper<Employee> wrapper = query.tryVisitQueryWrapper();
         String targetSql = wrapper.getTargetSql();
-        Assertions.assertEquals("(EXISTS (SELECT id FROM employee WHERE organization_id = ?))", targetSql);
+        Assertions.assertEquals("(NOT EXISTS (SELECT id FROM employee WHERE organization_id = ?))", targetSql);
     }
 
     @Test
-    void testExists_has_multi_value() {
-        EmployeeMultiExistQuery query = EmployeeMultiExistQuery.builder()
+    void testNotExists_has_multi_value() {
+        EmployeeMultiNotExistQuery query = EmployeeMultiNotExistQuery.builder()
                 .employeeExists(Arrays.asList("89757", 1))
                 .build();
 
         QueryWrapper<Employee> wrapper = query.tryVisitQueryWrapper();
         String targetSql = wrapper.getTargetSql();
-        Assertions.assertEquals("(EXISTS (SELECT id FROM employee WHERE employee_no = ? AND status = ?))", targetSql);
+        Assertions.assertEquals("(NOT EXISTS (SELECT id FROM employee WHERE employee_no = ? AND status = ?))", targetSql);
     }
 }
