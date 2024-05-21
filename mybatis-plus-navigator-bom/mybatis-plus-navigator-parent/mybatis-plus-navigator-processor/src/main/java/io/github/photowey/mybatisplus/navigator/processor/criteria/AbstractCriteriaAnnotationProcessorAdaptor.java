@@ -194,4 +194,8 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
     protected String tryTranslateToColumnName(final Field field, final NamingStrategy strategy) {
         return CriteriaUtils.tryTranslateToColumnName(field, strategy);
     }
+
+    protected String tryTranslateToColumnName(final String fieldName, final NamingStrategy strategy) {
+        return CriteriaUtils.tryTranslateToColumnName(fieldName, strategy);
+    }
 }
