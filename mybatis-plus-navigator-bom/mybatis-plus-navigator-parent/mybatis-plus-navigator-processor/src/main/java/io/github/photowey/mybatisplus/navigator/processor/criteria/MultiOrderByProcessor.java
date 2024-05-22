@@ -41,14 +41,14 @@ public class MultiOrderByProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
 
     @Override
     public boolean process(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, MultiOrderBy annotation) {
-        final List<String> columns = this.tryExtractFiledListValues(field, query);
+        final List<String> properties = this.tryExtractFiledListValues(field, query);
         SortingMechanism mechanism = annotation.mechanism();
-        if (SortingMechanism.DYNAMIC.equals(mechanism) && this.isEmpty(columns)) {
+        if (SortingMechanism.DYNAMIC.equals(mechanism) && this.isEmpty(properties)) {
             return true;
         }
 
         if (SortingMechanism.DYNAMIC.equals(mechanism)) {
-            return this.handleDynamic(queryWrapper, field, query, annotation, columns);
+            return this.handleDynamic(queryWrapper, field, query, annotation, properties);
         }
 
         return this.handleStatic(queryWrapper, field, query, annotation);
