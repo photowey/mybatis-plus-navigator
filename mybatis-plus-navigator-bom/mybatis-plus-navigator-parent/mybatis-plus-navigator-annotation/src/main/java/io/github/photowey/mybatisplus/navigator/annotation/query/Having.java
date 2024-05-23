@@ -35,6 +35,7 @@ public @interface Having {
 
     /**
      * The alias
+     * |- Unused now.
      *
      * @return the alias of {@code Database} column.
      */
@@ -56,6 +57,7 @@ public @interface Having {
 
     /**
      * The {@code Database} column name strategy.
+     * |- Unused now.
      *
      * @return the {@code Database} column name strategy.
      */

@@ -35,10 +35,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -175,6 +172,19 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
         }
 
         throw new NavigatorRuntimeException("navigator: the field:[%s] must be instanceof of Collection", field.getName());
+    }
+
+    protected Collection<?> tryMustExtractFiledValues(final Field field, final Object query) {
+        Object value = CriteriaUtils.tryExtractFiledValue(field, query);
+        if (null == value) {
+            return ProcessorConstants.emptyList();
+        }
+
+        if (value instanceof Collection) {
+            return (Collection<?>) value;
+        }
+
+        return Collections.singletonList(value);
     }
 
     @SuppressWarnings("unchecked")
