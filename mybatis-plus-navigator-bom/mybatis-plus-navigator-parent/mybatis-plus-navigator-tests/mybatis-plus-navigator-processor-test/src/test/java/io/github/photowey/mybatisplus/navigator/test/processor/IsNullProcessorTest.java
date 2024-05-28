@@ -19,33 +19,33 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.github.photowey.mybatisplus.navigator.test.App;
 import io.github.photowey.mybatisplus.navigator.test.LocalTest;
 import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Employee;
-import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeTimestampQuery;
+import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeIsNullQuery;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * {@code TimestampProcessorTest}
+ * {@code IsNullProcessorTest}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/04/23
+ * @since 2024/05/29
  */
 @SpringBootTest(classes = App.class)
-class TimestampProcessorTest extends LocalTest {
+class IsNullProcessorTest extends LocalTest {
 
     void holdOn() {
         App.holdOn();
     }
 
     @Test
-    void testTimestamp_lt() {
-        EmployeeTimestampQuery query = EmployeeTimestampQuery.builder()
-                .updatedAt(System.currentTimeMillis())
+    void testIsNull() {
+        EmployeeIsNullQuery query = EmployeeIsNullQuery.builder()
+                .id(1716914167000L)
                 .build();
 
         QueryWrapper<Employee> wrapper = query.tryVisitQueryWrapper();
         String targetSql = wrapper.getTargetSql();
-        Assertions.assertEquals("(updated_at < ?)", targetSql);
+        Assertions.assertEquals("(id = ? AND organization_id IS NULL)", targetSql);
     }
 }

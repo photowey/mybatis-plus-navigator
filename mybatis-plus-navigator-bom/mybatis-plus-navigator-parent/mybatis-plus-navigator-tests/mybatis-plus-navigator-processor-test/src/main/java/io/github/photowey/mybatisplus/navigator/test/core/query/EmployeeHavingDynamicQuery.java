@@ -27,7 +27,7 @@ import java.io.Serializable;
  * {@code EmployeeHavingQuery}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/05/23
  */
 @Data

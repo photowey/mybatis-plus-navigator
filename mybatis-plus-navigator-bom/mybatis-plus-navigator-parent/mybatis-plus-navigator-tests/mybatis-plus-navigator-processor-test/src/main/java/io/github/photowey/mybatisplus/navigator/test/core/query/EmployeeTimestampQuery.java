@@ -15,8 +15,9 @@
  */
 package io.github.photowey.mybatisplus.navigator.test.core.query;
 
-import io.github.photowey.mybatisplus.navigator.annotation.query.GroupBy;
-import io.github.photowey.mybatisplus.navigator.annotation.query.Having;
+import io.github.photowey.mybatisplus.navigator.annotation.query.Eq;
+import io.github.photowey.mybatisplus.navigator.annotation.query.Timestamp;
+import io.github.photowey.mybatisplus.navigator.core.enums.Operator;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Employee;
 import lombok.*;
@@ -24,24 +25,24 @@ import lombok.*;
 import java.io.Serializable;
 
 /**
- * {@code EmployeeHavingQuery}
+ * {@code EmployeeTimestampQuery}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/05/23
+ * @since 2024/05/29
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class EmployeeHavingQuery extends AbstractQuery<Employee> implements Serializable {
+public class EmployeeTimestampQuery extends AbstractQuery<Employee> implements Serializable {
 
     private static final long serialVersionUID = 7891195884218678284L;
 
-    @GroupBy
-    private Long organizationId;
+    @Eq
+    private Long id;
 
-    @Having(having = "COUNT(*) > 1")
-    private Integer having;
+    @Timestamp(compare = Operator.LT)
+    private Long updatedAt;
 }

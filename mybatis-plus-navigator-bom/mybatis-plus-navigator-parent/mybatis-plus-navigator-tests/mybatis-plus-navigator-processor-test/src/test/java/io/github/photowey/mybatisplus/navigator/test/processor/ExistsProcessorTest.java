@@ -20,8 +20,8 @@ import io.github.photowey.mybatisplus.navigator.test.App;
 import io.github.photowey.mybatisplus.navigator.test.LocalTest;
 import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Employee;
 import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Organization;
+import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeExistsQuery;
 import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeMultiExistQuery;
-import io.github.photowey.mybatisplus.navigator.test.core.query.EmployeeQuery;
 import io.github.photowey.mybatisplus.navigator.test.core.query.OrganizationQuery;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -55,7 +55,7 @@ class ExistsProcessorTest extends LocalTest {
 
     @Test
     void testExists_has_value() {
-        EmployeeQuery query = EmployeeQuery.builder()
+        EmployeeExistsQuery query = EmployeeExistsQuery.builder()
                 .organizationIdExists(89757L)
                 .build();
 

@@ -94,7 +94,4 @@ public class EmployeeQuery extends AbstractQuery<Employee> implements Serializab
     private String registerDate;
     @StringDatetime(compare = Operator.LE, pattern = DatetimeConstants.HH_mm_ss, clazz = LocalTime.class)
     private String registerTime;
-
-    @Exists(existsSql = "SELECT id FROM employee WHERE organization_id = {0}")
-    private Long organizationIdExists;
 }
