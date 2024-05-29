@@ -15,6 +15,8 @@
  */
 package io.github.photowey.mybatisplus.navigator.autoconfigure.config;
 
+import io.github.photowey.mybatisplus.navigator.processor.injector.ApplicationContextInjector;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -41,6 +43,10 @@ public class MybatisPlusNavigatorConfigure {
     })
     static class NavigatorComponentConfigure {
 
+        @Bean("io.github.photowey.mybatisplus.navigator.processor.injector.ApplicationContextInjector")
+        public ApplicationContextInjector applicationContextInjector() {
+            return new ApplicationContextInjector();
+        }
     }
 
 }
