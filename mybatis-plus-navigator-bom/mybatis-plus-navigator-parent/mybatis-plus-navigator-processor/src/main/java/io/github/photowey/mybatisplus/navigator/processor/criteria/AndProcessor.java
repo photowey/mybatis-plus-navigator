@@ -17,6 +17,7 @@ package io.github.photowey.mybatisplus.navigator.processor.criteria;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.github.photowey.mybatisplus.navigator.annotation.query.And;
+import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
 import io.github.photowey.mybatisplus.navigator.processor.annotation.component.criteria.CriteriaProcessor;
 import io.github.photowey.mybatisplus.navigator.processor.handler.ConditionHandler;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
@@ -40,9 +41,12 @@ public class AndProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         if (this.isEmpty(value)) {
             return true;
         }
+
         String handler = annotation.handler();
+        NamingStrategy strategy = annotation.naming();
+
         ConditionHandler conditionHandler = this.tryAcquireConditionHandler(handler);
-        conditionHandler.handleAnd(queryWrapper, query, field);
+        conditionHandler.handleAnd(queryWrapper, query, field, strategy);
 
         return true;
     }
