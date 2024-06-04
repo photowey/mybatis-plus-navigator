@@ -16,7 +16,7 @@
 package io.github.photowey.mybatisplus.navigator.core.model.pagination;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.photowey.mybatisplus.navigator.core.domain.sorting.SortingItem;
+import io.github.photowey.mybatisplus.navigator.core.domain.sorting.SortingTerm;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -44,7 +44,7 @@ public interface Pagination {
         return DEFAULT_SIZE;
     }
 
-    default Set<SortingItem> getSortingItems() {
+    default Set<SortingTerm> getSortingTerms() {
         return new HashSet<>();
     }
 

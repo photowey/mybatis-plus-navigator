@@ -36,11 +36,11 @@ import java.lang.annotation.*;
 public @interface MultiOrderBy {
 
     /**
-     * The alias
+     * The properties
      *
-     * @return the alias of {@code Database} column.
+     * @return the properties of {@code Database} Entity.
      */
-    String alias() default "";
+    String[] properties() default {};
 
     SortingOrder order() default SortingOrder.ASC;
 

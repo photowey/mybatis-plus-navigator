@@ -18,6 +18,11 @@ package io.github.photowey.mybatisplus.navigator.processor.constant;
 import io.github.photowey.mybatisplus.navigator.processor.criteria.Processor;
 import io.github.photowey.mybatisplus.navigator.processor.datetime.Time;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * {@code ProcessorConstants}
  *
@@ -34,5 +39,13 @@ public interface ProcessorConstants {
 
     char PACKAGE_SEPARATOR = '.';
     char PATH_SEPARATOR = '/';
+
+    static <T> List<T> emptyList() {
+        return new ArrayList<>(0);
+    }
+
+    static <T> Set<T> emptySet() {
+        return new HashSet<>(0);
+    }
 
 }

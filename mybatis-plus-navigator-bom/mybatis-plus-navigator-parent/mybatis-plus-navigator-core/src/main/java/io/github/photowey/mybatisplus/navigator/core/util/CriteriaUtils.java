@@ -69,6 +69,10 @@ public final class CriteriaUtils {
 
     public static String tryTranslateToColumnName(final Field field, final NamingStrategy strategy) {
         String fieldName = field.getName();
+        return tryTranslateToColumnName(fieldName, strategy);
+    }
+
+    public static String tryTranslateToColumnName(final String fieldName, final NamingStrategy strategy) {
         switch (strategy) {
             case CAMEL_CASE:
                 return CriteriaUtils.camelCase(fieldName);

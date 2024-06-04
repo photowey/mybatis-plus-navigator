@@ -35,6 +35,7 @@ public @interface Having {
 
     /**
      * The alias
+     * |- Unused now.
      *
      * @return the alias of {@code Database} column.
      */
@@ -48,14 +49,16 @@ public @interface Having {
     String having() default "";
 
     /**
-     * Use dynamic value or not.
+     * Determines whether dynamic values are enabled.
+     * If true, dynamic values are enabled and list-type dynamic values are supported.
      *
-     * @return true/false.
+     * @return true if dynamic values are enabled; false otherwise.
      */
     boolean dynamic() default false;
 
     /**
      * The {@code Database} column name strategy.
+     * |- Unused now.
      *
      * @return the {@code Database} column name strategy.
      */

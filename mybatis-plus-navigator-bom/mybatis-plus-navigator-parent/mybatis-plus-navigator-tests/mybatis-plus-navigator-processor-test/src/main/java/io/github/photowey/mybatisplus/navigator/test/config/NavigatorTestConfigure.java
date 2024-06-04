@@ -13,34 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.autoconfigure.config;
+package io.github.photowey.mybatisplus.navigator.test.config;
 
-import org.springframework.context.annotation.ComponentScan;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 /**
- * {@code MybatisPlusNavigatorAutoConfigure}
+ * {@code NavigatorTestConfigure}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/04/02
+ * @since 2024/04/17
  */
-@Import(value = {
-        MybatisPlusNavigatorAutoConfigure.NavigatorComponentConfigure.class,
-})
-public class MybatisPlusNavigatorAutoConfigure {
-
-    @Configuration
-    @ComponentScan(value = {
-            "io.github.photowey.mybatisplus.navigator.processor"
-    })
-    @Import(value = {
-            DatetimeConverterBeanPostProcessor.class,
-            CriteriaAnnotationProcessorBeanPostProcessor.class,
-    })
-    static class NavigatorComponentConfigure {
-
-    }
-
+@Configuration
+@MapperScan("io.github.photowey.mybatisplus.navigator.test.repository")
+public class NavigatorTestConfigure {
 }

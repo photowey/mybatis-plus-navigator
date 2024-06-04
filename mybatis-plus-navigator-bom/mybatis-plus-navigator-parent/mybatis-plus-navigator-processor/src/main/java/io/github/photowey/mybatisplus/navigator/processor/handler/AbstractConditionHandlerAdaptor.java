@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
 import io.github.photowey.mybatisplus.navigator.core.util.CriteriaUtils;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
+import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Field;
 
@@ -32,20 +33,28 @@ import java.lang.reflect.Field;
 public abstract class AbstractConditionHandlerAdaptor implements ConditionHandler {
 
     @Override
-    public <T> void handleAnd(QueryWrapper<T> queryWrapper, AbstractQuery<T> query, Field field) {
+    public <T> void handleAnd(QueryWrapper<T> queryWrapper, AbstractQuery<T> query, Field field, NamingStrategy strategy) {
 
     }
 
     @Override
-    public <T> void handleOr(QueryWrapper<T> queryWrapper, AbstractQuery<?> query, Field field) {
+    public <T> void handleOr(QueryWrapper<T> queryWrapper, AbstractQuery<T> query, Field field, NamingStrategy strategy) {
 
     }
 
-    public Object tryExtractFiledValue(final Field field, final Object query) {
+    protected Object tryExtractFiledValue(final Field field, final Object query) {
         return CriteriaUtils.tryExtractFiledValue(field, query);
     }
 
-    public String tryTranslateToColumnName(final Field field, final NamingStrategy strategy) {
+    protected String tryTranslateToColumnName(final Field field, final NamingStrategy strategy) {
         return CriteriaUtils.tryTranslateToColumnName(field, strategy);
+    }
+
+    protected <T> boolean isNotEmpty(T source) {
+        return !this.isEmpty(source);
+    }
+
+    protected <T> boolean isEmpty(T source) {
+        return ObjectUtils.isEmpty(source);
     }
 }

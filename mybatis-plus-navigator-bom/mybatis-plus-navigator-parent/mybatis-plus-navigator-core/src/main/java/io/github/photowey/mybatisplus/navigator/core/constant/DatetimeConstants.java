@@ -24,7 +24,10 @@ package io.github.photowey.mybatisplus.navigator.core.constant;
  */
 public interface DatetimeConstants {
 
-    String yyyy_MM_dd = "yyyy-MM-dd ";
+    String yyyy_MM_dd_HH_mm_ss_SSS = "yyyy-MM-dd HH:mm:ss.SSS";
+    String yyyy_MM_dd_HH_mm_ss = "yyyy-MM-dd HH:mm:ss";
+
+    String yyyy_MM_dd = "yyyy-MM-dd";
     String HH_mm_ss = "HH:mm:ss";
     String yyyyMMdd = "yyyyMMdd";
     String yyyyMM = "yyyyMM";
@@ -32,12 +35,9 @@ public interface DatetimeConstants {
     String yyMMdd = "yyMMdd";
     String HHmmss = "HHmmss";
 
-    String yyyy_MM_dd_HH_mm_ss = "yyyy-MM-dd HH:mm:ss";
-    String yyyy_MM_dd_HH_mm_ss_SSS = "yyyy-MM-dd HH:mm:ss.SSS";
-
-    String yyyyMMddHHmmss = "yyyyMMddHHmmss";
     String yyyyMMddHHmmssSSS = "yyyyMMddHHmmssSSS";
+    String yyyyMMddHHmmss = "yyyyMMddHHmmss";
 
-    String yyyy_MM_dd_T_HH_mm_ss_Z = "yyyy-MM-dd'T'HH:mm:ss'Z'";
     String yyyy_MM_dd_T_HH_mm_ss_SSS_Z = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    String yyyy_MM_dd_T_HH_mm_ss_Z = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 }

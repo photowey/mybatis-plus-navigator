@@ -16,6 +16,7 @@
 package io.github.photowey.mybatisplus.navigator.processor.handler;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 
 import java.lang.reflect.Field;
@@ -29,11 +30,7 @@ import java.lang.reflect.Field;
  */
 public interface ConditionHandler {
 
-    default <T> void handleAnd(QueryWrapper<T> queryWrapper, AbstractQuery<T> query, Field field) {
+    default <T> void handleAnd(QueryWrapper<T> queryWrapper, AbstractQuery<T> query, Field field, NamingStrategy strategy) {}
 
-    }
-
-    default <T> void handleOr(QueryWrapper<T> queryWrapper, AbstractQuery<?> query, Field field) {
-
-    }
+    default <T> void handleOr(QueryWrapper<T> queryWrapper, AbstractQuery<T> query, Field field, NamingStrategy strategy) {}
 }
