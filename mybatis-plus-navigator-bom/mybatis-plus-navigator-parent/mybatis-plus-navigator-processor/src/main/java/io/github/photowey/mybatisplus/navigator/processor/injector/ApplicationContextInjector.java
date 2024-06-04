@@ -17,6 +17,7 @@ package io.github.photowey.mybatisplus.navigator.processor.injector;
 
 import io.github.photowey.mybatisplus.navigator.processor.holder.ApplicationContextHolder;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -29,10 +30,22 @@ import org.springframework.lang.NonNull;
  * @version 3.5.5.1.0
  * @since 2024/04/01
  */
-public class ApplicationContextInjector implements ApplicationContextAware {
+public class ApplicationContextInjector implements ApplicationContextAware, DisposableBean {
+
+    private ConfigurableApplicationContext applicationContext;
 
     @Override
     public void setApplicationContext(@NonNull final ApplicationContext applicationContext) throws BeansException {
-        ApplicationContextHolder.INSTANCE.setApplicationContext((ConfigurableApplicationContext) applicationContext);
+        this.applicationContext = (ConfigurableApplicationContext) applicationContext;
+        this.inject();
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        ApplicationContextHolder.clean();
+    }
+
+    private void inject() {
+        ApplicationContextHolder.INSTANCE.setApplicationContext(this.applicationContext);
     }
 }

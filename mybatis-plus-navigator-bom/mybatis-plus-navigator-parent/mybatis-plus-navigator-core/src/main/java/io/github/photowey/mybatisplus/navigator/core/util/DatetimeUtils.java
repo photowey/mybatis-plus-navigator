@@ -17,12 +17,14 @@ package io.github.photowey.mybatisplus.navigator.core.util;
 
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import io.github.photowey.mybatisplus.navigator.core.constant.DatetimeConstants;
+import io.github.photowey.mybatisplus.navigator.core.exception.NavigatorRuntimeException;
 import io.github.photowey.mybatisplus.navigator.core.thrower.AssertionErrorThrower;
 
 import java.sql.Timestamp;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * {@code DatetimeUtils}
@@ -33,7 +35,7 @@ import java.util.Date;
  */
 public final class DatetimeUtils {
 
-    private static final DateTimeFormatter formatter = formatter();
+    private static final ConcurrentHashMap<String, DateTimeFormatter> CTX = new ConcurrentHashMap<>(1 << 3);
 
     private DatetimeUtils() {
         AssertionErrorThrower.throwz(DatetimeUtils.class);
@@ -47,11 +49,7 @@ public final class DatetimeUtils {
 
     public static DateTimeFormatter formatter(String pattern) {
         String pt = ObjectUtils.isNotEmpty(pattern) ? pattern : DatetimeConstants.yyyy_MM_dd_HH_mm_ss;
-        if (pt.equals(DatetimeConstants.yyyy_MM_dd_HH_mm_ss)) {
-            return formatter;
-        }
-
-        return DateTimeFormatter.ofPattern(pt);
+        return CTX.computeIfAbsent(pattern, (x) -> DateTimeFormatter.ofPattern(pt));
     }
 
     // ----------------------------------------------------------------
@@ -120,14 +118,50 @@ public final class DatetimeUtils {
 
     // ----------------------------------------------------------------
 
+    public static <T> T tryParseDateTime(String dateTime, String pattern, Class<T> clazz) {
+        if (ObjectUtils.isEmpty(dateTime)) {
+            return null;
+        }
 
-    public static LocalDateTime toLocalDateTime(String dateTime, String pattern) {
+        if (clazz.equals(LocalDateTime.class)) {
+            return (T) tryLocalDateTime(dateTime, pattern);
+        }
+
+        if (clazz.equals(LocalDate.class)) {
+            return (T) tryLocalDate(dateTime, pattern);
+        }
+
+        if (clazz.equals(LocalTime.class)) {
+            return (T) tryLocalTime(dateTime, pattern);
+        }
+
+        throw new NavigatorRuntimeException("Unsupported datatime type:{}", clazz.getName());
+    }
+
+    public static LocalDateTime tryLocalDateTime(String dateTime, String pattern) {
         if (ObjectUtils.isEmpty(dateTime)) {
             return null;
         }
 
         return LocalDateTime.parse(dateTime, formatter(pattern));
     }
+
+    public static LocalDate tryLocalDate(String date, String pattern) {
+        if (ObjectUtils.isEmpty(date)) {
+            return null;
+        }
+
+        return LocalDate.parse(date, formatter(pattern));
+    }
+
+    public static LocalTime tryLocalTime(String time, String pattern) {
+        if (ObjectUtils.isEmpty(time)) {
+            return null;
+        }
+
+        return LocalTime.parse(time, formatter(pattern));
+    }
+
     // ----------------------------------------------------------------
 
     public static Date toDate(LocalDateTime target) {

@@ -20,6 +20,7 @@ import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
 import io.github.photowey.mybatisplus.navigator.core.enums.Operator;
 import io.github.photowey.mybatisplus.navigator.core.exception.NavigatorRuntimeException;
 import io.github.photowey.mybatisplus.navigator.core.util.CriteriaUtils;
+import io.github.photowey.mybatisplus.navigator.processor.constant.ProcessorConstants;
 import io.github.photowey.mybatisplus.navigator.processor.datetime.LocalDateTimeConverter;
 import io.github.photowey.mybatisplus.navigator.processor.datetime.TimeConverter;
 import io.github.photowey.mybatisplus.navigator.processor.handler.ConditionHandler;
@@ -34,10 +35,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -165,6 +163,10 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
 
     protected Collection<?> tryExtractFiledValues(final Field field, final Object query) {
         Object value = CriteriaUtils.tryExtractFiledValue(field, query);
+        if (null == value) {
+            return ProcessorConstants.emptyList();
+        }
+
         if (value instanceof Collection) {
             return (Collection<?>) value;
         }
@@ -172,9 +174,26 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
         throw new NavigatorRuntimeException("navigator: the field:[%s] must be instanceof of Collection", field.getName());
     }
 
+    protected Collection<?> tryMustExtractFiledValues(final Field field, final Object query) {
+        Object value = CriteriaUtils.tryExtractFiledValue(field, query);
+        if (null == value) {
+            return ProcessorConstants.emptyList();
+        }
+
+        if (value instanceof Collection) {
+            return (Collection<?>) value;
+        }
+
+        return Collections.singletonList(value);
+    }
+
     @SuppressWarnings("unchecked")
     protected List<String> tryExtractFiledListValues(final Field field, final Object query) {
         Object value = CriteriaUtils.tryExtractFiledValue(field, query);
+        if (null == value) {
+            return ProcessorConstants.emptyList();
+        }
+
         if (value instanceof Collection) {
             return new ArrayList<String>((Collection) value);
         }
@@ -184,5 +203,9 @@ public abstract class AbstractCriteriaAnnotationProcessorAdaptor<
 
     protected String tryTranslateToColumnName(final Field field, final NamingStrategy strategy) {
         return CriteriaUtils.tryTranslateToColumnName(field, strategy);
+    }
+
+    protected String tryTranslateToColumnName(final String fieldName, final NamingStrategy strategy) {
+        return CriteriaUtils.tryTranslateToColumnName(fieldName, strategy);
     }
 }

@@ -13,34 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.autoconfigure.config;
+package io.github.photowey.mybatisplus.navigator.spring.boot.autoconfigure;
 
-import org.springframework.context.annotation.ComponentScan;
+import io.github.photowey.mybatisplus.navigator.autoconfigure.config.MybatisPlusNavigatorConfigure;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * {@code MybatisPlusNavigatorAutoConfigure}
+ * {@code NavigatorConfigure}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/04/02
+ * @since 2024/04/30
  */
-@Import(value = {
-        MybatisPlusNavigatorAutoConfigure.NavigatorComponentConfigure.class,
-})
-public class MybatisPlusNavigatorAutoConfigure {
-
-    @Configuration
-    @ComponentScan(value = {
-            "io.github.photowey.mybatisplus.navigator.processor"
-    })
-    @Import(value = {
-            DatetimeConverterBeanPostProcessor.class,
-            CriteriaAnnotationProcessorBeanPostProcessor.class,
-    })
-    static class NavigatorComponentConfigure {
-
-    }
-
-}
+@Configuration
+@Import(MybatisPlusNavigatorConfigure.class)
+@ConditionalOnMissingClass("org.springframework.boot.autoconfigure.AutoConfiguration")
+public class NavigatorConfigure {}

@@ -21,23 +21,23 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * {@code SortingColumn}
+ * {@code SortingTerm}
  *
  * @author photowey
  * @version 3.5.5.1.0
  * @since 2024/04/16
  */
-public class SortingItem implements Serializable {
+public class SortingTerm implements Serializable {
 
     private static final long serialVersionUID = -7493258064912684126L;
 
     private String column;
     private SortingOrder order;
 
-    public SortingItem() {
+    public SortingTerm() {
     }
 
-    public SortingItem(String column, SortingOrder order) {
+    public SortingTerm(String column, SortingOrder order) {
         this.column = column;
         this.order = order;
     }
@@ -62,7 +62,7 @@ public class SortingItem implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SortingItem that = (SortingItem) o;
+        SortingTerm that = (SortingTerm) o;
         return Objects.equals(column, that.column) && order == that.order;
     }
 

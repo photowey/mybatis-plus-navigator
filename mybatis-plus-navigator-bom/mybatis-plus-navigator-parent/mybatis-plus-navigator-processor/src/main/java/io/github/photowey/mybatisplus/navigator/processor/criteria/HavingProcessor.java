@@ -21,6 +21,7 @@ import io.github.photowey.mybatisplus.navigator.processor.annotation.component.c
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 
 /**
  * {@code HavingProcessor}
@@ -44,14 +45,14 @@ public class HavingProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
     }
 
     private boolean handleDynamic(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, Having annotation) {
-        final Object value = this.tryExtractFiledValue(field, query);
-        if (this.isEmpty(value)) {
+        final Collection<?> values = this.tryMustExtractFiledValues(field, query);
+        if (this.isEmpty(values)) {
             return true;
         }
 
         String having = annotation.having();
         if (this.isNotEmpty(having)) {
-            queryWrapper.having(having, value);
+            queryWrapper.having(having, values.toArray());
         }
 
         return true;

@@ -23,8 +23,10 @@ import io.github.photowey.mybatisplus.navigator.processor.annotation.component.c
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * {@code MultiOrderByProcessor}
@@ -39,21 +41,26 @@ public class MultiOrderByProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
 
     @Override
     public boolean process(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, MultiOrderBy annotation) {
-        final List<String> columns = this.tryExtractFiledListValues(field, query);
+        final List<String> properties = this.tryExtractFiledListValues(field, query);
         SortingMechanism mechanism = annotation.mechanism();
-        if (SortingMechanism.DYNAMIC.equals(mechanism) && this.isEmpty(columns)) {
+        if (SortingMechanism.DYNAMIC.equals(mechanism) && this.isEmpty(properties)) {
             return true;
         }
 
         if (SortingMechanism.DYNAMIC.equals(mechanism)) {
-            return this.handleDynamic(queryWrapper, field, query, annotation, columns);
+            return this.handleDynamic(queryWrapper, field, query, annotation, properties);
         }
 
         return this.handleStatic(queryWrapper, field, query, annotation);
     }
 
-    private boolean handleDynamic(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, MultiOrderBy annotation, List<String> columns) {
+    private boolean handleDynamic(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, MultiOrderBy annotation, List<String> properties) {
+        if (this.isEmpty(properties)) {
+            return true;
+        }
+
         SortingOrder order = annotation.order();
+        List<String> columns = this.toNamedColumns(annotation, properties);
         if (Objects.requireNonNull(order) == SortingOrder.DESC) {
             queryWrapper.orderByDesc(columns);
         } else {
@@ -64,20 +71,29 @@ public class MultiOrderByProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
     }
 
     private boolean handleStatic(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, MultiOrderBy annotation) {
-        String column = annotation.alias();
-        if (this.isEmpty(column)) {
-            column = this.tryTranslateToColumnName(field, annotation.naming());
+        String[] properties = annotation.properties();
+        if (this.isEmpty(properties)) {
+            return true;
         }
 
-        if (this.isNotEmpty(column)) {
-            SortingOrder order = annotation.order();
-            if (Objects.requireNonNull(order) == SortingOrder.DESC) {
-                queryWrapper.orderByDesc(column);
-            } else {
-                queryWrapper.orderByAsc(column);
-            }
+        SortingOrder order = annotation.order();
+        List<String> columns = this.toNamedColumns(annotation, properties);
+        if (Objects.requireNonNull(order) == SortingOrder.DESC) {
+            queryWrapper.orderByDesc(columns);
+        } else {
+            queryWrapper.orderByAsc(columns);
         }
 
         return true;
+    }
+
+    private List<String> toNamedColumns(MultiOrderBy annotation, String[] alias) {
+        return this.toNamedColumns(annotation, Arrays.asList(alias));
+    }
+
+    private List<String> toNamedColumns(MultiOrderBy annotation, List<String> alias) {
+        return alias.stream()
+                .map(value -> this.tryTranslateToColumnName(value, annotation.naming()))
+                .collect(Collectors.toList());
     }
 }

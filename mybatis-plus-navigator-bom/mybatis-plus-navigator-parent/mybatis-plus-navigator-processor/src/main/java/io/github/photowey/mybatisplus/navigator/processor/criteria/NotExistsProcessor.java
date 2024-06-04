@@ -21,6 +21,7 @@ import io.github.photowey.mybatisplus.navigator.processor.annotation.component.c
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 
 /**
  * {@code NotExistsProcessor}
@@ -37,10 +38,22 @@ public class NotExistsProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
     public boolean process(QueryWrapper<ENTITY> queryWrapper, Field field, QUERY query, NotExists annotation) {
         final Object value = this.tryExtractFiledValue(field, query);
         if (this.isEmpty(value)) {
+            String existsSql = annotation.existsSql();
+            if (this.isNotEmpty(existsSql)) {
+                queryWrapper.notExists(existsSql);
+            }
+
             return true;
         }
+
         String existsSql = annotation.existsSql();
         if (this.isNotEmpty(existsSql)) {
+            if (value instanceof Collection) {
+                queryWrapper.notExists(existsSql, ((Collection<?>) value).toArray());
+
+                return true;
+            }
+
             queryWrapper.notExists(existsSql, value);
         }
 

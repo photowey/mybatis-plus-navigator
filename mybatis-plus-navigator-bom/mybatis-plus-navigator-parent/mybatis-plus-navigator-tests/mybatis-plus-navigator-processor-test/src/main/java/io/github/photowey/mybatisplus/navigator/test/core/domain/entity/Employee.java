@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
  * {@code Employee}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/04/17
  */
 @Data
@@ -44,8 +44,8 @@ public class Employee implements Serializable {
 
     private Long id;
 
-    private Long orgId;
-    private String orgName;
+    private Long organizationId;
+    private String organizationName;
 
     private String employeeNo;
 

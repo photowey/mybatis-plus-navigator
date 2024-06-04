@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.test.core.domain;
+package io.github.photowey.mybatisplus.navigator.test.core.query;
 
 import com.baomidou.mybatisplus.core.enums.SqlLike;
 import io.github.photowey.mybatisplus.navigator.annotation.query.*;
+import io.github.photowey.mybatisplus.navigator.core.constant.DatetimeConstants;
 import io.github.photowey.mybatisplus.navigator.core.enums.NamingStrategy;
 import io.github.photowey.mybatisplus.navigator.core.enums.Operator;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
@@ -24,13 +25,16 @@ import io.github.photowey.mybatisplus.navigator.test.core.domain.entity.Employee
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 
 /**
  * {@code EmployeeQuery}
  *
  * @author photowey
- * @version 1.0.0
+ * @version 3.5.5.1.0
  * @since 2024/04/17
  */
 @Data
@@ -45,23 +49,33 @@ public class EmployeeQuery extends AbstractQuery<Employee> implements Serializab
     @Eq
     private Long id;
 
-    @Eq
-    private Long orgId;
+    @Ne
+    private Long organizationId;
 
     /**
      * ORG_NAME
      */
     @Like(naming = NamingStrategy.UPPER_SNAKE_CASE)
-    private String orgName;
+    private String organizationName;
     @Like(alias = "employee_no", like = SqlLike.RIGHT)
     private String employeeNo;
-    @Like(like = SqlLike.LEFT)
+    @NotLike(like = SqlLike.LEFT)
     private String employeeName;
 
     @Ge
     private Integer sorting;
-    @Lt
+    @Gt
+    private Integer sortingGt;
+
+    @Le
     private Integer status;
+    @In(alias = "status")
+    private List<Integer> statusIn;
+    @NotIn(alias = "status")
+    private List<Integer> statusNotIn;
+
+    @Lt
+    private Integer statusLt;
     private String remark;
 
     @Eq
@@ -73,4 +87,11 @@ public class EmployeeQuery extends AbstractQuery<Employee> implements Serializab
     private LocalDateTime createdAt;
     @Timestamp(compare = Operator.LT)
     private Long updatedAt;
+
+    @StringDatetime(compare = Operator.GE)
+    private String registerDatetime;
+    @StringDatetime(compare = Operator.LT, pattern = DatetimeConstants.yyyy_MM_dd, clazz = LocalDate.class)
+    private String registerDate;
+    @StringDatetime(compare = Operator.LE, pattern = DatetimeConstants.HH_mm_ss, clazz = LocalTime.class)
+    private String registerTime;
 }
