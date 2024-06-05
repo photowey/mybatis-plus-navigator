@@ -28,6 +28,4 @@ import java.lang.annotation.*;
 @CriteriaQuery
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DynamicSelect {
-
-}
+public @interface DynamicSelect {}
