@@ -37,6 +37,8 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
         return (LambdaQueryWrapperExt<T>) super.eq(function, value);
     }
 
+    // ----------------------------------------------------------------
+
     public <V> LambdaQueryWrapperExt<T> neIfPresent(SFunction<T, V> function, @Nullable V value) {
         return (LambdaQueryWrapperExt<T>) super.ne(ObjectUtils.isNotEmpty(value), function, value);
     }
@@ -44,4 +46,26 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     public <V> LambdaQueryWrapperExt<T> ne(SFunction<T, V> function, @Nullable V value) {
         return (LambdaQueryWrapperExt<T>) super.ne(function, value);
     }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaQueryWrapperExt<T> gtIfPresent(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.gt(ObjectUtils.isNotEmpty(value), function, value);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> gt(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.gt(function, value);
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaQueryWrapperExt<T> geIfPresent(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.ge(ObjectUtils.isNotEmpty(value), function, value);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> ge(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.ge(function, value);
+    }
+
+    // ----------------------------------------------------------------
 }

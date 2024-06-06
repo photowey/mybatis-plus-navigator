@@ -171,7 +171,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
     }
 
     public <V> QueryWrapperExt<T> inIfPresent(String column, @Nullable @Emptable V... values) {
-        if (!ArrayUtils.isEmpty(values)) {
+        if (ArrayUtils.isNotEmpty(values)) {
             return (QueryWrapperExt<T>) super.in(column, values);
         }
 
@@ -193,7 +193,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
     }
 
     public <V> QueryWrapperExt<T> notInIfPresent(String column, @Nullable @Emptable V... values) {
-        if (!ArrayUtils.isEmpty(values)) {
+        if (ArrayUtils.isNotEmpty(values)) {
             return (QueryWrapperExt<T>) super.notIn(column, values);
         }
 
