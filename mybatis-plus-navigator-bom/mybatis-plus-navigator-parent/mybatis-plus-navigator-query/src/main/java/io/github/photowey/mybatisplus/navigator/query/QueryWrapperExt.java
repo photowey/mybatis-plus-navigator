@@ -178,7 +178,8 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return this;
     }
 
-    public <V> QueryWrapperExt<T> in(String column, @Nullable @Emptable V... values) {
+    @SafeVarargs
+    public final <V> QueryWrapperExt<T> in(String column, @Nullable @Emptable V... values) {
         return (QueryWrapperExt<T>) super.in(column, values);
     }
 
@@ -226,7 +227,15 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
+    @Override
     public QueryWrapperExt<T> select(String... columns) {
+        super.select(columns);
+
+        return this;
+    }
+
+    @Override
+    public QueryWrapperExt<T> select(List<String> columns) {
         super.select(columns);
 
         return this;
@@ -234,30 +243,36 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
+    @Override
     public QueryWrapperExt<T> orderByAsc(String column) {
         return this.orderByAsc(true, column);
     }
 
+    @Override
     public QueryWrapperExt<T> orderByAsc(boolean condition, String column) {
         super.orderByAsc(condition, column);
 
         return this;
     }
 
+    @Override
     public QueryWrapperExt<T> orderByAsc(List<String> columns) {
         return this.orderByAsc(true, columns);
     }
 
+    @Override
     public QueryWrapperExt<T> orderByAsc(boolean condition, List<String> columns) {
         super.orderByAsc(condition, columns);
 
         return this;
     }
 
+    @Override
     public QueryWrapperExt<T> orderByAsc(String column, String... columns) {
         return this.orderByAsc(true, column, columns);
     }
 
+    @Override
     public QueryWrapperExt<T> orderByAsc(boolean condition, String column, String... columns) {
         super.orderByAsc(condition, column, columns);
 
@@ -266,30 +281,36 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
+    @Override
     public QueryWrapperExt<T> orderByDesc(String column) {
         return this.orderByDesc(true, column);
     }
 
+    @Override
     public QueryWrapperExt<T> orderByDesc(boolean condition, String column) {
         super.orderByDesc(condition, column);
 
         return this;
     }
 
+    @Override
     public QueryWrapperExt<T> orderByDesc(List<String> columns) {
         return this.orderByDesc(true, columns);
     }
 
+    @Override
     public QueryWrapperExt<T> orderByDesc(boolean condition, List<String> columns) {
         super.orderByDesc(condition, columns);
 
         return this;
     }
 
+    @Override
     public QueryWrapperExt<T> orderByDesc(String column, String... columns) {
         return this.orderByDesc(true, column, columns);
     }
 
+    @Override
     public QueryWrapperExt<T> orderByDesc(boolean condition, String column, String... columns) {
         super.orderByDesc(condition, column, columns);
 
