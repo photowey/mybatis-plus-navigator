@@ -68,4 +68,24 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     }
 
     // ----------------------------------------------------------------
+
+    public <V> LambdaQueryWrapperExt<T> ltIfPresent(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.lt(ObjectUtils.isNotEmpty(value), function, value);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> lt(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.lt(function, value);
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaQueryWrapperExt<T> leIfPresent(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.le(ObjectUtils.isNotEmpty(value), function, value);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> le(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.le(function, value);
+    }
+
+    // ----------------------------------------------------------------
 }
