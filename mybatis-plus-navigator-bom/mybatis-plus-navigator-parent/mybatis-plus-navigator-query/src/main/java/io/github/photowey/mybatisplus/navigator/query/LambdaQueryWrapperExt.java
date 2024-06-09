@@ -16,9 +16,12 @@
 package io.github.photowey.mybatisplus.navigator.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.enums.SqlLike;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
+
+import java.util.Objects;
 
 /**
  * {@code LambdaQueryWrapperExt}
@@ -85,6 +88,60 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
 
     public <V> LambdaQueryWrapperExt<T> le(SFunction<T, V> function, @Nullable V value) {
         return (LambdaQueryWrapperExt<T>) super.le(function, value);
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaQueryWrapperExt<T> likeIfPresent(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.like(ObjectUtils.isNotEmpty(value), function, value);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> like(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.like(function, value);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> likeLeftIfPresent(SFunction<T, V> function, @Nullable V value) {
+        return this.likeIfPresent(function, value, SqlLike.LEFT);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> likeLeft(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.likeLeft(function, value);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> likeRightIfPresent(SFunction<T, V> function, @Nullable V value) {
+        return this.likeIfPresent(function, value, SqlLike.RIGHT);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> likeRight(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.likeRight(function, value);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> likeIfPresent(SFunction<T, V> function, @Nullable V value, SqlLike sqlLike) {
+        if (Objects.isNull(sqlLike)) {
+            return this.likeIfPresent(function, value);
+        }
+        switch (sqlLike) {
+            case LEFT:
+                return (LambdaQueryWrapperExt<T>) super.likeLeft(ObjectUtils.isNotEmpty(value), function, value);
+            case RIGHT:
+                return (LambdaQueryWrapperExt<T>) super.likeRight(ObjectUtils.isNotEmpty(value), function, value);
+            default:
+                return this.likeIfPresent(function, value);
+        }
+    }
+
+    public <V> LambdaQueryWrapperExt<T> like(SFunction<T, V> function, @Nullable V value, SqlLike sqlLike) {
+        if (Objects.isNull(sqlLike)) {
+            return this.like(function, value);
+        }
+        switch (sqlLike) {
+            case LEFT:
+                return (LambdaQueryWrapperExt<T>) super.likeLeft(function, value);
+            case RIGHT:
+                return (LambdaQueryWrapperExt<T>) super.likeRight(function, value);
+            default:
+                return this.like(function, value);
+        }
     }
 
     // ----------------------------------------------------------------
