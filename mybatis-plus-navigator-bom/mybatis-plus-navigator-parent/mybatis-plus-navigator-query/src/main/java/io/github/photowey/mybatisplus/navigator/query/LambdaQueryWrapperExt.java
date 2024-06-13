@@ -17,10 +17,13 @@ package io.github.photowey.mybatisplus.navigator.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
+import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import io.github.photowey.mybatisplus.navigator.annotation.symbol.Emptable;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
 
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -142,6 +145,38 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
             default:
                 return this.like(function, value);
         }
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaQueryWrapperExt<T> notLikeIfPresent(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.notLike(ObjectUtils.isNotEmpty(value), function, value);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> notLike(SFunction<T, V> function, @Nullable V value) {
+        return (LambdaQueryWrapperExt<T>) super.notLike(function, value);
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaQueryWrapperExt<T> inIfPresent(SFunction<T, V> function, @Nullable @Emptable Collection<V> values) {
+        return (LambdaQueryWrapperExt<T>) super.in(ObjectUtils.isNotEmpty(values), function, values);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> in(SFunction<T, V> function, @Nullable @Emptable Collection<V> values) {
+        return (LambdaQueryWrapperExt<T>) super.in(function, values);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> inIfPresent(SFunction<T, V> function, @Nullable @Emptable V... values) {
+        if (!ArrayUtils.isEmpty(values)) {
+            return (LambdaQueryWrapperExt<T>) super.in(function, values);
+        }
+
+        return this;
+    }
+
+    public <V> LambdaQueryWrapperExt<T> in(SFunction<T, V> function, @Nullable @Emptable V... values) {
+        return (LambdaQueryWrapperExt<T>) super.in(function, values);
     }
 
     // ----------------------------------------------------------------
