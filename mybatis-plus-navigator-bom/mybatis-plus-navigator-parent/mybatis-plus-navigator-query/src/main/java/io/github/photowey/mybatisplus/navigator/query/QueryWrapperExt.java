@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
-import io.github.photowey.mybatisplus.navigator.annotation.symbol.Emptable;
+import io.github.photowey.mybatisplus.navigator.annotation.symbol.Emptyable;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
 
 import java.util.Collection;
@@ -162,15 +162,15 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> inIf(String column, @Nullable @Emptable Collection<V> values) {
+    public <V> QueryWrapperExt<T> inIf(String column, @Emptyable Collection<V> values) {
         return (QueryWrapperExt<T>) super.in(CollectionUtils.isNotEmpty(values), column, values);
     }
 
-    public <V> QueryWrapperExt<T> in(String column, @Nullable @Emptable Collection<V> values) {
+    public <V> QueryWrapperExt<T> in(String column, @Emptyable Collection<V> values) {
         return (QueryWrapperExt<T>) super.in(column, values);
     }
 
-    public <V> QueryWrapperExt<T> inIf(String column, @Nullable @Emptable V... values) {
+    public <V> QueryWrapperExt<T> inIf(String column, @Emptyable V... values) {
         if (ArrayUtils.isNotEmpty(values)) {
             return (QueryWrapperExt<T>) super.in(column, values);
         }
@@ -179,21 +179,21 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
     }
 
     @SafeVarargs
-    public final <V> QueryWrapperExt<T> in(String column, @Nullable @Emptable V... values) {
+    public final <V> QueryWrapperExt<T> in(String column, @Emptyable V... values) {
         return (QueryWrapperExt<T>) super.in(column, values);
     }
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> notInIf(String column, @Nullable @Emptable Collection<V> values) {
+    public <V> QueryWrapperExt<T> notInIf(String column, @Emptyable Collection<V> values) {
         return (QueryWrapperExt<T>) super.notIn(CollectionUtils.isNotEmpty(values), column, values);
     }
 
-    public <V> QueryWrapperExt<T> notIn(String column, @Nullable @Emptable Collection<V> values) {
+    public <V> QueryWrapperExt<T> notIn(String column, @Emptyable Collection<V> values) {
         return (QueryWrapperExt<T>) super.notIn(column, values);
     }
 
-    public <V> QueryWrapperExt<T> notInIf(String column, @Nullable @Emptable V... values) {
+    public <V> QueryWrapperExt<T> notInIf(String column, @Emptyable V... values) {
         if (ArrayUtils.isNotEmpty(values)) {
             return (QueryWrapperExt<T>) super.notIn(column, values);
         }
@@ -201,7 +201,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return this;
     }
 
-    public <V> QueryWrapperExt<T> notIn(String column, @Nullable @Emptable V... values) {
+    public <V> QueryWrapperExt<T> notIn(String column, @Emptyable V... values) {
         return (QueryWrapperExt<T>) super.notIn(column, values);
     }
 
@@ -243,37 +243,31 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    @Override
-    public QueryWrapperExt<T> orderByAsc(String column) {
-        return this.orderByAsc(true, column);
+    public QueryWrapperExt<T> asc(String column) {
+        return this.asc(true, column);
     }
 
-    @Override
-    public QueryWrapperExt<T> orderByAsc(boolean condition, String column) {
+    public QueryWrapperExt<T> asc(boolean condition, String column) {
         super.orderByAsc(condition, column);
 
         return this;
     }
 
-    @Override
-    public QueryWrapperExt<T> orderByAsc(List<String> columns) {
-        return this.orderByAsc(true, columns);
+    public QueryWrapperExt<T> asc(List<String> columns) {
+        return this.asc(true, columns);
     }
 
-    @Override
-    public QueryWrapperExt<T> orderByAsc(boolean condition, List<String> columns) {
+    public QueryWrapperExt<T> asc(boolean condition, List<String> columns) {
         super.orderByAsc(condition, columns);
 
         return this;
     }
 
-    @Override
-    public QueryWrapperExt<T> orderByAsc(String column, String... columns) {
-        return this.orderByAsc(true, column, columns);
+    public QueryWrapperExt<T> asc(String column, String... columns) {
+        return this.asc(true, column, columns);
     }
 
-    @Override
-    public QueryWrapperExt<T> orderByAsc(boolean condition, String column, String... columns) {
+    public QueryWrapperExt<T> asc(boolean condition, String column, String... columns) {
         super.orderByAsc(condition, column, columns);
 
         return this;
@@ -281,37 +275,31 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    @Override
-    public QueryWrapperExt<T> orderByDesc(String column) {
-        return this.orderByDesc(true, column);
+    public QueryWrapperExt<T> desc(String column) {
+        return this.desc(true, column);
     }
 
-    @Override
-    public QueryWrapperExt<T> orderByDesc(boolean condition, String column) {
+    public QueryWrapperExt<T> desc(boolean condition, String column) {
         super.orderByDesc(condition, column);
 
         return this;
     }
 
-    @Override
-    public QueryWrapperExt<T> orderByDesc(List<String> columns) {
-        return this.orderByDesc(true, columns);
+    public QueryWrapperExt<T> desc(List<String> columns) {
+        return this.desc(true, columns);
     }
 
-    @Override
-    public QueryWrapperExt<T> orderByDesc(boolean condition, List<String> columns) {
+    public QueryWrapperExt<T> desc(boolean condition, List<String> columns) {
         super.orderByDesc(condition, columns);
 
         return this;
     }
 
-    @Override
-    public QueryWrapperExt<T> orderByDesc(String column, String... columns) {
-        return this.orderByDesc(true, column, columns);
+    public QueryWrapperExt<T> desc(String column, String... columns) {
+        return this.desc(true, column, columns);
     }
 
-    @Override
-    public QueryWrapperExt<T> orderByDesc(boolean condition, String column, String... columns) {
+    public QueryWrapperExt<T> desc(boolean condition, String column, String... columns) {
         super.orderByDesc(condition, column, columns);
 
         return this;
@@ -333,6 +321,16 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return this;
     }
 
+    public QueryWrapperExt<T> limit(long limit) {
+        if (limit <= 0) {
+            throw new MybatisPlusException("Invalid parameter 'limit'");
+        }
+
+        super.last(String.format("LIMIT %d", limit));
+
+        return this;
+    }
+
     // ----------------------------------------------------------------
 
     public QueryWrapperExt<T> thiz(Consumer<QueryWrapperExt<T>> fx) {
@@ -346,4 +344,6 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
         return this;
     }
+
+    // ----------------------------------------------------------------
 }

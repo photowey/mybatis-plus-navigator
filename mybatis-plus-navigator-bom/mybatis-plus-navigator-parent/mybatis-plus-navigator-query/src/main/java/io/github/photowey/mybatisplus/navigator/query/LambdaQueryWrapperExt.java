@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
-import io.github.photowey.mybatisplus.navigator.annotation.symbol.Emptable;
+import io.github.photowey.mybatisplus.navigator.annotation.symbol.Emptyable;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
 
 import java.util.Collection;
@@ -164,15 +164,15 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> LambdaQueryWrapperExt<T> inIf(SFunction<T, V> function, @Nullable @Emptable Collection<V> values) {
+    public <V> LambdaQueryWrapperExt<T> inIf(SFunction<T, V> function, @Emptyable Collection<V> values) {
         return (LambdaQueryWrapperExt<T>) super.in(ObjectUtils.isNotEmpty(values), function, values);
     }
 
-    public <V> LambdaQueryWrapperExt<T> in(SFunction<T, V> function, @Nullable @Emptable Collection<V> values) {
+    public <V> LambdaQueryWrapperExt<T> in(SFunction<T, V> function, @Emptyable Collection<V> values) {
         return (LambdaQueryWrapperExt<T>) super.in(function, values);
     }
 
-    public <V> LambdaQueryWrapperExt<T> inIf(SFunction<T, V> function, @Nullable @Emptable V... values) {
+    public <V> LambdaQueryWrapperExt<T> inIf(SFunction<T, V> function, @Emptyable V... values) {
         if (!ArrayUtils.isEmpty(values)) {
             return (LambdaQueryWrapperExt<T>) super.in(function, values);
         }
@@ -180,21 +180,21 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
         return this;
     }
 
-    public <V> LambdaQueryWrapperExt<T> in(SFunction<T, V> function, @Nullable @Emptable V... values) {
+    public <V> LambdaQueryWrapperExt<T> in(SFunction<T, V> function, @Emptyable V... values) {
         return (LambdaQueryWrapperExt<T>) super.in(function, values);
     }
 
     // ----------------------------------------------------------------
 
-    public <V> LambdaQueryWrapperExt<T> notInIf(SFunction<T, V> function, @Nullable @Emptable Collection<V> values) {
+    public <V> LambdaQueryWrapperExt<T> notInIf(SFunction<T, V> function, @Emptyable Collection<V> values) {
         return (LambdaQueryWrapperExt<T>) super.notIn(ObjectUtils.isNotEmpty(values), function, values);
     }
 
-    public <V> LambdaQueryWrapperExt<T> notIn(SFunction<T, V> function, @Nullable @Emptable Collection<V> values) {
+    public <V> LambdaQueryWrapperExt<T> notIn(SFunction<T, V> function, @Emptyable Collection<V> values) {
         return (LambdaQueryWrapperExt<T>) super.notIn(function, values);
     }
 
-    public <V> LambdaQueryWrapperExt<T> notInIf(SFunction<T, V> function, @Nullable @Emptable V... values) {
+    public <V> LambdaQueryWrapperExt<T> notInIf(SFunction<T, V> function, @Emptyable V... values) {
         if (!ArrayUtils.isEmpty(values)) {
             return (LambdaQueryWrapperExt<T>) super.notIn(function, values);
         }
@@ -202,7 +202,7 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
         return this;
     }
 
-    public <V> LambdaQueryWrapperExt<T> notIn(SFunction<T, V> function, @Nullable @Emptable V... values) {
+    public <V> LambdaQueryWrapperExt<T> notIn(SFunction<T, V> function, @Emptyable V... values) {
         return (LambdaQueryWrapperExt<T>) super.notIn(function, values);
     }
 
