@@ -17,6 +17,7 @@ package io.github.photowey.mybatisplus.navigator.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
@@ -25,6 +26,7 @@ import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * {@code LambdaQueryWrapperExt}
@@ -219,6 +221,22 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
 
     public <V> LambdaQueryWrapperExt<T> between(SFunction<T, V> function, @Nullable V from, @Nullable V to) {
         return (LambdaQueryWrapperExt<T>) super.between(function, from, to);
+    }
+
+    // ----------------------------------------------------------------
+
+    @SafeVarargs
+    public final LambdaQueryWrapperExt<T> selectx(SFunction<T, ?>... columns) {
+        super.select(columns);
+
+        return this;
+    }
+
+    @Override
+    public LambdaQueryWrapperExt<T> select(Class<T> entityClass, Predicate<TableFieldInfo> predicate) {
+        super.select(entityClass, predicate);
+
+        return this;
     }
 
     // ----------------------------------------------------------------
