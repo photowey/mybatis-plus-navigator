@@ -38,7 +38,7 @@ import java.util.function.Consumer;
  */
 public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
-    public <V> QueryWrapperExt<T> eqIfPresent(String column, @Nullable V value) {
+    public <V> QueryWrapperExt<T> eqIf(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.eq(ObjectUtils.isNotEmpty(value), column, value);
     }
 
@@ -48,7 +48,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> neIfPresent(String column, @Nullable V value) {
+    public <V> QueryWrapperExt<T> neIf(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.ne(ObjectUtils.isNotEmpty(value), column, value);
     }
 
@@ -58,7 +58,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> gtIfPresent(String column, @Nullable V value) {
+    public <V> QueryWrapperExt<T> gtIf(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.gt(ObjectUtils.isNotEmpty(value), column, value);
     }
 
@@ -68,7 +68,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> geIfPresent(String column, @Nullable V value) {
+    public <V> QueryWrapperExt<T> geIf(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.ge(ObjectUtils.isNotEmpty(value), column, value);
     }
 
@@ -78,7 +78,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> ltIfPresent(String column, @Nullable V value) {
+    public <V> QueryWrapperExt<T> ltIf(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.lt(ObjectUtils.isNotEmpty(value), column, value);
     }
 
@@ -88,7 +88,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> leIfPresent(String column, @Nullable V value) {
+    public <V> QueryWrapperExt<T> leIf(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.le(ObjectUtils.isNotEmpty(value), column, value);
     }
 
@@ -98,7 +98,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> likeIfPresent(String column, @Nullable V value) {
+    public <V> QueryWrapperExt<T> likeIf(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.like(ObjectUtils.isNotEmpty(value), column, value);
     }
 
@@ -106,25 +106,25 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return (QueryWrapperExt<T>) super.like(column, value);
     }
 
-    public <V> QueryWrapperExt<T> likeLeftIfPresent(String column, @Nullable V value) {
-        return this.likeIfPresent(column, value, SqlLike.LEFT);
+    public <V> QueryWrapperExt<T> likeLeftIf(String column, @Nullable V value) {
+        return this.likeIf(column, value, SqlLike.LEFT);
     }
 
     public <V> QueryWrapperExt<T> likeLeft(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.likeLeft(column, value);
     }
 
-    public <V> QueryWrapperExt<T> likeRightIfPresent(String column, @Nullable V value) {
-        return this.likeIfPresent(column, value, SqlLike.RIGHT);
+    public <V> QueryWrapperExt<T> likeRightIf(String column, @Nullable V value) {
+        return this.likeIf(column, value, SqlLike.RIGHT);
     }
 
     public <V> QueryWrapperExt<T> likeRight(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.likeRight(ObjectUtils.isNotEmpty(value), column, value);
     }
 
-    public <V> QueryWrapperExt<T> likeIfPresent(String column, @Nullable V value, SqlLike sqlLike) {
+    public <V> QueryWrapperExt<T> likeIf(String column, @Nullable V value, SqlLike sqlLike) {
         if (Objects.isNull(sqlLike)) {
-            return this.likeIfPresent(column, value);
+            return this.likeIf(column, value);
         }
         switch (sqlLike) {
             case LEFT:
@@ -132,7 +132,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
             case RIGHT:
                 return (QueryWrapperExt<T>) super.likeRight(ObjectUtils.isNotEmpty(value), column, value);
             default:
-                return this.likeIfPresent(column, value);
+                return this.likeIf(column, value);
         }
     }
 
@@ -152,7 +152,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> notLikeIfPresent(String column, @Nullable V value) {
+    public <V> QueryWrapperExt<T> notLikeIf(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.notLike(ObjectUtils.isNotEmpty(value), column, value);
     }
 
@@ -162,7 +162,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> inIfPresent(String column, @Nullable @Emptable Collection<V> values) {
+    public <V> QueryWrapperExt<T> inIf(String column, @Nullable @Emptable Collection<V> values) {
         return (QueryWrapperExt<T>) super.in(CollectionUtils.isNotEmpty(values), column, values);
     }
 
@@ -170,7 +170,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return (QueryWrapperExt<T>) super.in(column, values);
     }
 
-    public <V> QueryWrapperExt<T> inIfPresent(String column, @Nullable @Emptable V... values) {
+    public <V> QueryWrapperExt<T> inIf(String column, @Nullable @Emptable V... values) {
         if (ArrayUtils.isNotEmpty(values)) {
             return (QueryWrapperExt<T>) super.in(column, values);
         }
@@ -185,7 +185,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> notInIfPresent(String column, @Nullable @Emptable Collection<V> values) {
+    public <V> QueryWrapperExt<T> notInIf(String column, @Nullable @Emptable Collection<V> values) {
         return (QueryWrapperExt<T>) super.notIn(CollectionUtils.isNotEmpty(values), column, values);
     }
 
@@ -193,7 +193,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return (QueryWrapperExt<T>) super.notIn(column, values);
     }
 
-    public <V> QueryWrapperExt<T> notInIfPresent(String column, @Nullable @Emptable V... values) {
+    public <V> QueryWrapperExt<T> notInIf(String column, @Nullable @Emptable V... values) {
         if (ArrayUtils.isNotEmpty(values)) {
             return (QueryWrapperExt<T>) super.notIn(column, values);
         }
@@ -207,7 +207,7 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> QueryWrapperExt<T> betweenIfPresent(String column, @Nullable V from, @Nullable V to) {
+    public <V> QueryWrapperExt<T> betweenIf(String column, @Nullable V from, @Nullable V to) {
         if (from != null && to != null) {
             return (QueryWrapperExt<T>) super.between(column, from, to);
         }
