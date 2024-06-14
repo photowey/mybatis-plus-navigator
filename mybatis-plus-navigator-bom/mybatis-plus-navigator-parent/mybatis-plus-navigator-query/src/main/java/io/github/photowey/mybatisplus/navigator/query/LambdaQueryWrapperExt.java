@@ -180,4 +180,46 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     }
 
     // ----------------------------------------------------------------
+
+    public <V> LambdaQueryWrapperExt<T> notInIfPresent(SFunction<T, V> function, @Nullable @Emptable Collection<V> values) {
+        return (LambdaQueryWrapperExt<T>) super.notIn(ObjectUtils.isNotEmpty(values), function, values);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> notIn(SFunction<T, V> function, @Nullable @Emptable Collection<V> values) {
+        return (LambdaQueryWrapperExt<T>) super.notIn(function, values);
+    }
+
+    public <V> LambdaQueryWrapperExt<T> notInIfPresent(SFunction<T, V> function, @Nullable @Emptable V... values) {
+        if (!ArrayUtils.isEmpty(values)) {
+            return (LambdaQueryWrapperExt<T>) super.notIn(function, values);
+        }
+
+        return this;
+    }
+
+    public <V> LambdaQueryWrapperExt<T> notIn(SFunction<T, V> function, @Nullable @Emptable V... values) {
+        return (LambdaQueryWrapperExt<T>) super.notIn(function, values);
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaQueryWrapperExt<T> betweenIfPresent(SFunction<T, V> function, @Nullable V from, @Nullable V to) {
+        if (from != null && to != null) {
+            return (LambdaQueryWrapperExt<T>) super.between(function, from, to);
+        }
+        if (from != null) {
+            return (LambdaQueryWrapperExt<T>) super.ge(function, from);
+        }
+        if (to != null) {
+            return (LambdaQueryWrapperExt<T>) super.le(function, to);
+        }
+
+        return this;
+    }
+
+    public <V> LambdaQueryWrapperExt<T> between(SFunction<T, V> function, @Nullable V from, @Nullable V to) {
+        return (LambdaQueryWrapperExt<T>) super.between(function, from, to);
+    }
+
+    // ----------------------------------------------------------------
 }
