@@ -17,6 +17,7 @@ package io.github.photowey.mybatisplus.navigator.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
+import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
@@ -25,7 +26,9 @@ import io.github.photowey.mybatisplus.navigator.annotation.symbol.Emptable;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -235,6 +238,112 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     @Override
     public LambdaQueryWrapperExt<T> select(Class<T> entityClass, Predicate<TableFieldInfo> predicate) {
         super.select(entityClass, predicate);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public LambdaQueryWrapperExt<T> asc(SFunction<T, ?> column) {
+        return this.asc(true, column);
+    }
+
+    public LambdaQueryWrapperExt<T> asc(boolean condition, SFunction<T, ?> column) {
+        super.orderByAsc(condition, column);
+
+        return this;
+    }
+
+    public LambdaQueryWrapperExt<T> asc(List<SFunction<T, ?>> columns) {
+        return this.asc(true, columns);
+    }
+
+    public LambdaQueryWrapperExt<T> asc(boolean condition, List<SFunction<T, ?>> columns) {
+        super.orderByAsc(condition, columns);
+
+        return this;
+    }
+
+    public LambdaQueryWrapperExt<T> asc(SFunction<T, ?> column, SFunction<T, ?>... columns) {
+        return this.asc(true, column, columns);
+    }
+
+    public LambdaQueryWrapperExt<T> asc(boolean condition, SFunction<T, ?> column, SFunction<T, ?>... columns) {
+        super.orderByAsc(condition, column, columns);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public LambdaQueryWrapperExt<T> desc(SFunction<T, ?> column) {
+        return this.desc(true, column);
+    }
+
+    public LambdaQueryWrapperExt<T> desc(boolean condition, SFunction<T, ?> column) {
+        super.orderByDesc(condition, column);
+
+        return this;
+    }
+
+    public LambdaQueryWrapperExt<T> desc(List<SFunction<T, ?>> columns) {
+        return this.desc(true, columns);
+    }
+
+    public LambdaQueryWrapperExt<T> desc(boolean condition, List<SFunction<T, ?>> columns) {
+        super.orderByDesc(condition, columns);
+
+        return this;
+    }
+
+    public LambdaQueryWrapperExt<T> desc(SFunction<T, ?> column, SFunction<T, ?>... columns) {
+        return this.desc(true, column, columns);
+    }
+
+    public LambdaQueryWrapperExt<T> desc(boolean condition, SFunction<T, ?> column, SFunction<T, ?>... columns) {
+        super.orderByDesc(condition, column, columns);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    /**
+     * LIMIT 1
+     * |- wrapper.last("LIMIT 1")
+     *
+     * @return {@link LambdaQueryWrapperExt<T>}
+     */
+    public LambdaQueryWrapperExt<T> limitOne() {
+        return this.limit(1);
+    }
+
+    /**
+     * LIMIT ${limit}
+     * |- wrapper.last("LIMIT ${limit}")
+     *
+     * @return {@link LambdaQueryWrapperExt<T>}
+     */
+    public LambdaQueryWrapperExt<T> limit(int limit) {
+        if (limit <= 0) {
+            throw new MybatisPlusException("Invalid parameter 'limit'");
+        }
+
+        super.last(String.format("LIMIT %d", limit));
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public LambdaQueryWrapperExt<T> thiz(Consumer<LambdaQueryWrapperExt<T>> fx) {
+        return this.thiz(true, fx);
+    }
+
+    public LambdaQueryWrapperExt<T> thiz(boolean condition, Consumer<LambdaQueryWrapperExt<T>> fx) {
+        if (condition) {
+            fx.accept(this);
+        }
 
         return this;
     }
