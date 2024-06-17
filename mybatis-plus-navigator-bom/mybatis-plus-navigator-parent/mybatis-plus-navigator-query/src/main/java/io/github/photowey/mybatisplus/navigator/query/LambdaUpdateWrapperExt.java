@@ -20,6 +20,8 @@ import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
 
+import java.util.function.Consumer;
+
 /**
  * {@code LambdaUpdateWrapperExt}
  *
@@ -44,4 +46,63 @@ public class LambdaUpdateWrapperExt<T> extends LambdaUpdateWrapper<T> {
     public <V> LambdaUpdateWrapperExt<T> ne(SFunction<T, V> function, @Nullable V value) {
         return (LambdaUpdateWrapperExt<T>) super.ne(function, value);
     }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaUpdateWrapperExt<T> setIfPresent(SFunction<T, V> column, V value) {
+        super.set(ObjectUtils.isNotEmpty(value), column, value);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> setIfPresent(SFunction<T, V> column, V value, String mapping) {
+        super.set(ObjectUtils.isNotEmpty(value), column, value, mapping);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    @Override
+    public LambdaUpdateWrapperExt<T> set(SFunction<T, ?> column, Object value) {
+        super.set(column, value);
+
+        return this;
+    }
+
+    @Override
+    public LambdaUpdateWrapperExt<T> set(boolean condition, SFunction<T, ?> column, Object value) {
+        super.set(condition, column, value);
+
+        return this;
+    }
+
+    @Override
+    public LambdaUpdateWrapperExt<T> set(SFunction<T, ?> column, Object value, String mapping) {
+        super.set(column, value, mapping);
+
+        return this;
+    }
+
+    @Override
+    public LambdaUpdateWrapperExt<T> set(boolean condition, SFunction<T, ?> column, Object value, String mapping) {
+        super.set(condition, column, value, mapping);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public LambdaUpdateWrapperExt<T> thiz(Consumer<LambdaUpdateWrapperExt<T>> fx) {
+        return this.thiz(true, fx);
+    }
+
+    public LambdaUpdateWrapperExt<T> thiz(boolean condition, Consumer<LambdaUpdateWrapperExt<T>> fx) {
+        if (condition) {
+            fx.accept(this);
+        }
+
+        return this;
+    }
+
 }
