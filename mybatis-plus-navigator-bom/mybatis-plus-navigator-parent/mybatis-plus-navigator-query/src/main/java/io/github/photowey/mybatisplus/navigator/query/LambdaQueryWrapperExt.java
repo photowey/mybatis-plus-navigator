@@ -41,71 +41,99 @@ import java.util.function.Predicate;
 public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
 
     public <V> LambdaQueryWrapperExt<T> eqIf(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.eq(ObjectUtils.isNotEmpty(value), function, value);
+        super.eq(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> eq(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.eq(function, value);
+        super.eq(function, value);
+
+        return this;
     }
 
     // ----------------------------------------------------------------
 
     public <V> LambdaQueryWrapperExt<T> neIf(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.ne(ObjectUtils.isNotEmpty(value), function, value);
+        super.ne(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> ne(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.ne(function, value);
+        super.ne(function, value);
+
+        return this;
     }
 
     // ----------------------------------------------------------------
 
     public <V> LambdaQueryWrapperExt<T> gtIf(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.gt(ObjectUtils.isNotEmpty(value), function, value);
+        super.gt(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> gt(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.gt(function, value);
+        super.gt(function, value);
+
+        return this;
     }
 
     // ----------------------------------------------------------------
 
     public <V> LambdaQueryWrapperExt<T> geIf(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.ge(ObjectUtils.isNotEmpty(value), function, value);
+        super.ge(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> ge(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.ge(function, value);
+        super.ge(function, value);
+
+        return this;
     }
 
     // ----------------------------------------------------------------
 
     public <V> LambdaQueryWrapperExt<T> ltIf(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.lt(ObjectUtils.isNotEmpty(value), function, value);
+        super.lt(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> lt(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.lt(function, value);
+        super.lt(function, value);
+
+        return this;
     }
 
     // ----------------------------------------------------------------
 
     public <V> LambdaQueryWrapperExt<T> leIf(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.le(ObjectUtils.isNotEmpty(value), function, value);
+        super.le(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> le(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.le(function, value);
+        super.le(function, value);
+
+        return this;
     }
 
     // ----------------------------------------------------------------
 
     public <V> LambdaQueryWrapperExt<T> likeIf(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.like(ObjectUtils.isNotEmpty(value), function, value);
+        super.like(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> like(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.like(function, value);
+        super.like(function, value);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> likeLeftIf(SFunction<T, V> function, @Nullable V value) {
@@ -113,7 +141,9 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     }
 
     public <V> LambdaQueryWrapperExt<T> likeLeft(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.likeLeft(function, value);
+        super.likeLeft(function, value);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> likeRightIf(SFunction<T, V> function, @Nullable V value) {
@@ -121,7 +151,9 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     }
 
     public <V> LambdaQueryWrapperExt<T> likeRight(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.likeRight(function, value);
+        super.likeRight(function, value);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> likeIf(SFunction<T, V> function, @Nullable V value, SqlLike sqlLike) {
@@ -155,21 +187,29 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     // ----------------------------------------------------------------
 
     public <V> LambdaQueryWrapperExt<T> notLikeIf(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.notLike(ObjectUtils.isNotEmpty(value), function, value);
+        super.notLike(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> notLike(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaQueryWrapperExt<T>) super.notLike(function, value);
+        super.notLike(function, value);
+
+        return this;
     }
 
     // ----------------------------------------------------------------
 
     public <V> LambdaQueryWrapperExt<T> inIf(SFunction<T, V> function, @Emptyable Collection<V> values) {
-        return (LambdaQueryWrapperExt<T>) super.in(ObjectUtils.isNotEmpty(values), function, values);
+        super.in(ObjectUtils.isNotEmpty(values), function, values);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> in(SFunction<T, V> function, @Emptyable Collection<V> values) {
-        return (LambdaQueryWrapperExt<T>) super.in(function, values);
+        super.in(function, values);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> inIf(SFunction<T, V> function, @Emptyable V... values) {
@@ -181,17 +221,23 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     }
 
     public <V> LambdaQueryWrapperExt<T> in(SFunction<T, V> function, @Emptyable V... values) {
-        return (LambdaQueryWrapperExt<T>) super.in(function, values);
+        super.in(function, values);
+
+        return this;
     }
 
     // ----------------------------------------------------------------
 
     public <V> LambdaQueryWrapperExt<T> notInIf(SFunction<T, V> function, @Emptyable Collection<V> values) {
-        return (LambdaQueryWrapperExt<T>) super.notIn(ObjectUtils.isNotEmpty(values), function, values);
+        super.notIn(ObjectUtils.isNotEmpty(values), function, values);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> notIn(SFunction<T, V> function, @Emptyable Collection<V> values) {
-        return (LambdaQueryWrapperExt<T>) super.notIn(function, values);
+        super.notIn(function, values);
+
+        return this;
     }
 
     public <V> LambdaQueryWrapperExt<T> notInIf(SFunction<T, V> function, @Emptyable V... values) {
@@ -203,7 +249,9 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     }
 
     public <V> LambdaQueryWrapperExt<T> notIn(SFunction<T, V> function, @Emptyable V... values) {
-        return (LambdaQueryWrapperExt<T>) super.notIn(function, values);
+        super.notIn(function, values);
+
+        return this;
     }
 
     // ----------------------------------------------------------------
@@ -223,7 +271,9 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     }
 
     public <V> LambdaQueryWrapperExt<T> between(SFunction<T, V> function, @Nullable V from, @Nullable V to) {
-        return (LambdaQueryWrapperExt<T>) super.between(function, from, to);
+        super.between(function, from, to);
+
+        return this;
     }
 
     // ----------------------------------------------------------------
