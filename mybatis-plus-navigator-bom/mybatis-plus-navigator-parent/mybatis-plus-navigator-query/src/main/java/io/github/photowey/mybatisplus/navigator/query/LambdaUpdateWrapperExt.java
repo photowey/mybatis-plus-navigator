@@ -31,31 +31,99 @@ import java.util.function.Consumer;
  */
 public class LambdaUpdateWrapperExt<T> extends LambdaUpdateWrapper<T> {
 
-    public <V> LambdaUpdateWrapperExt<T> eqIfPresent(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaUpdateWrapperExt<T>) super.eq(ObjectUtils.isNotEmpty(value), function, value);
+    // If == IfPresent
+
+    public <V> LambdaUpdateWrapperExt<T> eqIf(SFunction<T, V> function, @Nullable V value) {
+        super.eq(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
     }
 
     public <V> LambdaUpdateWrapperExt<T> eq(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaUpdateWrapperExt<T>) super.eq(function, value);
-    }
+        super.eq(function, value);
 
-    public <V> LambdaUpdateWrapperExt<T> neIfPresent(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaUpdateWrapperExt<T>) super.ne(ObjectUtils.isNotEmpty(value), function, value);
-    }
-
-    public <V> LambdaUpdateWrapperExt<T> ne(SFunction<T, V> function, @Nullable V value) {
-        return (LambdaUpdateWrapperExt<T>) super.ne(function, value);
+        return this;
     }
 
     // ----------------------------------------------------------------
 
-    public <V> LambdaUpdateWrapperExt<T> setIfPresent(SFunction<T, V> column, V value) {
+    public <V> LambdaUpdateWrapperExt<T> neIf(SFunction<T, V> function, @Nullable V value) {
+        super.ne(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> ne(SFunction<T, V> function, @Nullable V value) {
+        super.ne(function, value);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaUpdateWrapperExt<T> gtIf(SFunction<T, V> function, @Nullable V value) {
+        super.gt(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> gt(SFunction<T, V> function, @Nullable V value) {
+        super.gt(function, value);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaUpdateWrapperExt<T> geIf(SFunction<T, V> function, @Nullable V value) {
+        super.ge(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> ge(SFunction<T, V> function, @Nullable V value) {
+        super.ge(function, value);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaUpdateWrapperExt<T> ltIf(SFunction<T, V> function, @Nullable V value) {
+        super.lt(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> lt(SFunction<T, V> function, @Nullable V value) {
+        super.lt(function, value);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaUpdateWrapperExt<T> leIf(SFunction<T, V> function, @Nullable V value) {
+        super.le(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> le(SFunction<T, V> function, @Nullable V value) {
+        super.le(function, value);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaUpdateWrapperExt<T> setIf(SFunction<T, V> column, V value) {
         super.set(ObjectUtils.isNotEmpty(value), column, value);
 
         return this;
     }
 
-    public <V> LambdaUpdateWrapperExt<T> setIfPresent(SFunction<T, V> column, V value, String mapping) {
+    public <V> LambdaUpdateWrapperExt<T> setIf(SFunction<T, V> column, V value, String mapping) {
         super.set(ObjectUtils.isNotEmpty(value), column, value, mapping);
 
         return this;

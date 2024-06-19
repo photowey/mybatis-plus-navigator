@@ -40,6 +40,8 @@ import java.util.function.Predicate;
  */
 public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
 
+    // If == IfPresent
+
     public <V> LambdaQueryWrapperExt<T> eqIf(SFunction<T, V> function, @Nullable V value) {
         super.eq(ObjectUtils.isNotEmpty(value), function, value);
 
