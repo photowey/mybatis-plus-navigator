@@ -16,10 +16,12 @@
 package io.github.photowey.mybatisplus.navigator.query;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.enums.SqlLike;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
@@ -99,6 +101,68 @@ public class LambdaUpdateWrapperExt<T> extends LambdaUpdateWrapper<T> {
         super.lt(function, value);
 
         return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaUpdateWrapperExt<T> likeIf(SFunction<T, V> function, @Nullable V value) {
+        super.like(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> like(SFunction<T, V> function, @Nullable V value) {
+        super.like(function, value);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> likeLeftIf(SFunction<T, V> function, @Nullable V value) {
+        return this.likeIf(function, value, SqlLike.LEFT);
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> likeLeft(SFunction<T, V> function, @Nullable V value) {
+        super.likeLeft(function, value);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> likeRightIf(SFunction<T, V> function, @Nullable V value) {
+        return this.likeIf(function, value, SqlLike.RIGHT);
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> likeRight(SFunction<T, V> function, @Nullable V value) {
+        super.likeRight(function, value);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> likeIf(SFunction<T, V> function, @Nullable V value, SqlLike sqlLike) {
+        if (Objects.isNull(sqlLike)) {
+            return this.likeIf(function, value);
+        }
+        switch (sqlLike) {
+            case LEFT:
+                return (LambdaUpdateWrapperExt<T>) super.likeLeft(ObjectUtils.isNotEmpty(value), function, value);
+            case RIGHT:
+                return (LambdaUpdateWrapperExt<T>) super.likeRight(ObjectUtils.isNotEmpty(value), function, value);
+            default:
+                return this.likeIf(function, value);
+        }
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> like(SFunction<T, V> function, @Nullable V value, SqlLike sqlLike) {
+        if (Objects.isNull(sqlLike)) {
+            return this.like(function, value);
+        }
+        switch (sqlLike) {
+            case LEFT:
+                return (LambdaUpdateWrapperExt<T>) super.likeLeft(function, value);
+            case RIGHT:
+                return (LambdaUpdateWrapperExt<T>) super.likeRight(function, value);
+            default:
+                return this.like(function, value);
+        }
     }
 
     // ----------------------------------------------------------------
