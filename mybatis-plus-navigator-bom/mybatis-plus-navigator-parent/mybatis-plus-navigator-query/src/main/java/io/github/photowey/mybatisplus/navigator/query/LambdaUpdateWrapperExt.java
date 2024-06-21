@@ -105,6 +105,20 @@ public class LambdaUpdateWrapperExt<T> extends LambdaUpdateWrapper<T> {
 
     // ----------------------------------------------------------------
 
+    public <V> LambdaUpdateWrapperExt<T> leIf(SFunction<T, V> function, @Nullable V value) {
+        super.le(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> le(SFunction<T, V> function, @Nullable V value) {
+        super.le(function, value);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
     public <V> LambdaUpdateWrapperExt<T> likeIf(SFunction<T, V> function, @Nullable V value) {
         super.like(ObjectUtils.isNotEmpty(value), function, value);
 
@@ -167,14 +181,14 @@ public class LambdaUpdateWrapperExt<T> extends LambdaUpdateWrapper<T> {
 
     // ----------------------------------------------------------------
 
-    public <V> LambdaUpdateWrapperExt<T> leIf(SFunction<T, V> function, @Nullable V value) {
-        super.le(ObjectUtils.isNotEmpty(value), function, value);
+    public <V> LambdaUpdateWrapperExt<T> notLikeIf(SFunction<T, V> function, @Nullable V value) {
+        super.notLike(ObjectUtils.isNotEmpty(value), function, value);
 
         return this;
     }
 
-    public <V> LambdaUpdateWrapperExt<T> le(SFunction<T, V> function, @Nullable V value) {
-        super.le(function, value);
+    public <V> LambdaUpdateWrapperExt<T> notLike(SFunction<T, V> function, @Nullable V value) {
+        super.notLike(function, value);
 
         return this;
     }
