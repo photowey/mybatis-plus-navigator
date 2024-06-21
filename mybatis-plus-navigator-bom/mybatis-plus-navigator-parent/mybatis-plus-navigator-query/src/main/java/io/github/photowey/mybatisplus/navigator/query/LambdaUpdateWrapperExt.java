@@ -17,10 +17,13 @@ package io.github.photowey.mybatisplus.navigator.query;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
+import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import io.github.photowey.mybatisplus.navigator.annotation.symbol.Emptyable;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
 
+import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -189,6 +192,34 @@ public class LambdaUpdateWrapperExt<T> extends LambdaUpdateWrapper<T> {
 
     public <V> LambdaUpdateWrapperExt<T> notLike(SFunction<T, V> function, @Nullable V value) {
         super.notLike(function, value);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaUpdateWrapperExt<T> inIf(SFunction<T, V> function, @Emptyable Collection<V> values) {
+        super.in(ObjectUtils.isNotEmpty(values), function, values);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> in(SFunction<T, V> function, @Emptyable Collection<V> values) {
+        super.in(function, values);
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> inIf(SFunction<T, V> function, @Emptyable V... values) {
+        if (!ArrayUtils.isEmpty(values)) {
+            return (LambdaUpdateWrapperExt<T>) super.in(function, values);
+        }
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> in(SFunction<T, V> function, @Emptyable V... values) {
+        super.in(function, values);
 
         return this;
     }
