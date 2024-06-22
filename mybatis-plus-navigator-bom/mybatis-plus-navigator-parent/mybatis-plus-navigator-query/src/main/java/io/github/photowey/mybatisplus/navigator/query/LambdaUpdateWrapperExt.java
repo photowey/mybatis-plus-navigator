@@ -226,6 +226,44 @@ public class LambdaUpdateWrapperExt<T> extends LambdaUpdateWrapper<T> {
 
     // ----------------------------------------------------------------
 
+    public <V> LambdaUpdateWrapperExt<T> notInIf(SFunction<T, V> function, @Emptyable V... values) {
+        if (!ArrayUtils.isEmpty(values)) {
+            return (LambdaUpdateWrapperExt<T>) super.notIn(function, values);
+        }
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> notIn(SFunction<T, V> function, @Emptyable V... values) {
+        super.notIn(function, values);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public <V> LambdaUpdateWrapperExt<T> betweenIf(SFunction<T, V> function, @Nullable V from, @Nullable V to) {
+        if (from != null && to != null) {
+            return (LambdaUpdateWrapperExt<T>) super.between(function, from, to);
+        }
+        if (from != null) {
+            return (LambdaUpdateWrapperExt<T>) super.ge(function, from);
+        }
+        if (to != null) {
+            return (LambdaUpdateWrapperExt<T>) super.le(function, to);
+        }
+
+        return this;
+    }
+
+    public <V> LambdaUpdateWrapperExt<T> between(SFunction<T, V> function, @Nullable V from, @Nullable V to) {
+        super.between(function, from, to);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
     public <V> LambdaUpdateWrapperExt<T> setIf(SFunction<T, V> column, V value) {
         super.set(ObjectUtils.isNotEmpty(value), column, value);
 
