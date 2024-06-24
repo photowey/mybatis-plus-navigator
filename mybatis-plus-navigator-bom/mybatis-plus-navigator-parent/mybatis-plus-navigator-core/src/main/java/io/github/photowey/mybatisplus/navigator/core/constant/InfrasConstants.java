@@ -26,7 +26,16 @@ import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
  */
 public interface InfrasConstants {
 
+    interface Common {
+
+        /**
+         * LIMIT n.
+         */
+        String SQL_LIMIT_N_TEMPLATE = "LIMIT %d";
+    }
+
     interface ConfigKey {
+
         int SINGLE_TABLE_QUERY_THRESHOLD = 1 << 5;
         String SINGLE_TABLE_QUERY_THRESHOLD_CONFIG_KEY = "io.github.photowey.mybatisplus.navigator.single.table.query.threshold";
     }

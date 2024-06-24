@@ -18,7 +18,7 @@ package io.github.photowey.mybatisplus.navigator.annotation.symbol;
 import java.lang.annotation.*;
 
 /**
- * {@code Emptable}
+ * {@code Emptyable}
  *
  * @author photowey
  * @version 3.5.5.1.0
@@ -27,5 +27,5 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
-public @interface Emptable {
-}
+@Nullable
+public @interface Emptyable {}
