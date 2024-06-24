@@ -117,6 +117,23 @@ public abstract class AbstractPagination implements Pagination, Serializable {
         return this.columns;
     }
 
+    // ----------------------------------------------------------------
+
+    public void selectOne() {
+        this.selectPage(1L, 1L);
+    }
+
+    public void selectPage(long current, long size) {
+        this.setCurrent(current);
+        this.setSize(size);
+    }
+
+    public <Q extends AbstractPagination> void selectPage(Q pagination) {
+        this.selectPage(pagination.getCurrent(), pagination.getSize());
+    }
+
+    // ----------------------------------------------------------------
+
     public void tryFilterProperties(String... properties) {
         this.tryFilterProperties(true, properties);
     }
@@ -130,6 +147,8 @@ public abstract class AbstractPagination implements Pagination, Serializable {
         List<String> columns = Stream.of(properties).map(fx).collect(Collectors.toList());
         this.columns.addAll(columns);
     }
+
+    // ----------------------------------------------------------------
 
     private String toColumn(boolean filter, String property) {
         if (filter) {
