@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.domain.core.assembler;
+package io.github.photowey.mybatisplus.navigator.repository.ext;
 
 /**
- * {@code EntityAssembler}
- * |- Base {@code Assembler}
+ * {@code BatchBaseMapperExt}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/03/19
+ * @since 2024/06/24
  */
-public interface EntityAssembler<D, E> extends EntityMapper<D, E> {}
+public interface BatchBaseMapperExt<T> extends BatchRepositoryExt<T> {}
+

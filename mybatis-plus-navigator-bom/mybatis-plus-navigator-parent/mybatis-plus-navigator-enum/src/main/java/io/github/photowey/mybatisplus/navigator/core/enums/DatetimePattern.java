@@ -33,6 +33,8 @@ public enum DatetimePattern {
     yyyyMM("yyyyMM"),
     yyMM("yyMM"),
     yyMMdd("yyMMdd"),
+    MM_dd("MM-dd"),
+    MMdd("MMdd"),
 
     yyyyMMddHHmmssSSS("yyyyMMddHHmmssSSS"),
     yyyyMMddHHmmss("yyyyMMddHHmmss"),

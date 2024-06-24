@@ -368,7 +368,7 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
      * LIMIT 1
      * |- wrapper.last("LIMIT 1")
      *
-     * @return {@link LambdaQueryWrapperExt<T>}
+     * @return {@code LambdaQueryWrapperExt<T>}
      */
     public LambdaQueryWrapperExt<T> limitOne() {
         return this.limit(1);
@@ -378,7 +378,7 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
      * LIMIT ${limit}
      * |- wrapper.last("LIMIT ${limit}")
      *
-     * @return {@link LambdaQueryWrapperExt<T>}
+     * @return {@code LambdaQueryWrapperExt<T>}
      */
     public LambdaQueryWrapperExt<T> limit(int limit) {
         if (limit <= 0) {

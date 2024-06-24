@@ -24,7 +24,7 @@
 
         <dependency>
             <groupId>io.github.photowey</groupId>
-            <artifactId>mybatis-plus-navigator-processor</artifactId>
+            <artifactId>mybatis-plus-navigator-repository</artifactId>
         </dependency>
     </dependencies>
 

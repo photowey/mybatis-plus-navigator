@@ -28,11 +28,35 @@ import java.util.List;
  */
 public interface EntityMapper<D, E> {
 
+    /**
+     * To entity.
+     *
+     * @param dto DTO
+     * @return E
+     */
     E toEntity(D dto);
 
+    /**
+     * To DTO.
+     *
+     * @param entity Entity
+     * @return D
+     */
     D toDto(E entity);
 
+    /**
+     * To entity.
+     *
+     * @param dtoList DTO list
+     * @return E
+     */
     List<E> toEntity(List<D> dtoList);
 
+    /**
+     * To DTO.
+     *
+     * @param entityList Entity list
+     * @return D
+     */
     List<D> toDto(List<E> entityList);
 }
