@@ -15,8 +15,12 @@
  */
 package io.github.photowey.mybatisplus.navigator.repository.ext;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import io.github.photowey.mybatisplus.navigator.annotation.symbol.NotNull;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 import io.github.photowey.mybatisplus.navigator.query.QueryWrapperExt;
 
@@ -32,17 +36,70 @@ import java.util.function.Consumer;
 public interface RepositoryExt<T> extends BaseMapper<T> {
 
     default IPage<T> selectPage(AbstractQuery<T> query) {
-        QueryWrapperExt<T> queryWrapperExt = query.tryVisitQueryWrapperExt();
+        QueryWrapperExt<T> wrapper = query.tryVisitQueryWrapperExt();
         IPage<T> page = query.populatePage();
-        return this.selectPage(page, queryWrapperExt);
+        return this.selectPage(page, wrapper);
     }
 
     default IPage<T> selectPage(AbstractQuery<T> query, Consumer<QueryWrapperExt<T>> callback) {
-        QueryWrapperExt<T> queryWrapperExt = query.tryVisitQueryWrapperExt();
-        callback.accept(queryWrapperExt);
+        QueryWrapperExt<T> wrapper = query.tryVisitQueryWrapperExt();
+        callback.accept(wrapper);
 
         IPage<T> page = query.populatePage();
-        return this.selectPage(page, queryWrapperExt);
+        return this.selectPage(page, wrapper);
     }
 
+    // ----------------------------------------------------------------
+
+    default <V> T selectOne(String column, @NotNull V value) {
+        this.checkNull(column, value);
+
+        return this.selectOne(this.createQueryWrapper().eq(column, value));
+    }
+
+    default T selectOne(Consumer<QueryWrapper<T>> callback) {
+        QueryWrapper<T> wrapper = this.createQueryWrapper();
+        callback.accept(wrapper);
+
+        return this.selectOne(wrapper);
+    }
+
+    default <V> T selectOne(String column, @NotNull V value, Consumer<QueryWrapper<T>> callback) {
+        this.checkNull(column, value);
+
+        QueryWrapper<T> wrapper = this.createQueryWrapper().eq(column, value);
+        callback.accept(wrapper);
+
+        return this.selectOne(wrapper);
+    }
+
+    default <V> T selectOne(SFunction<T, ?> function, @NotNull V value) {
+        this.checkNull(value);
+
+        return this.selectOne(this.createLambdaQueryWrapper().eq(function, value));
+    }
+
+    // ----------------------------------------------------------------
+
+    default <V> void checkNull(String column, V value) {
+        if (null == value) {
+            throw new NullPointerException(String.format("The parameter:[%s] value can't be null", column));
+        }
+    }
+
+    default <V> void checkNull(V value) {
+        if (null == value) {
+            throw new NullPointerException("The parameter:[value] can't be null");
+        }
+    }
+
+    // ----------------------------------------------------------------
+
+    default QueryWrapper<T> createQueryWrapper() {
+        return new QueryWrapper<>();
+    }
+
+    default LambdaQueryWrapper<T> createLambdaQueryWrapper() {
+        return new LambdaQueryWrapper<>();
+    }
 }
