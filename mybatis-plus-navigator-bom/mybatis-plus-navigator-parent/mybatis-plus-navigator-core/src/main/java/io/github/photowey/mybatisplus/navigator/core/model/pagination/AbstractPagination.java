@@ -53,6 +53,17 @@ public abstract class AbstractPagination implements Pagination, Serializable {
         return new Page<>(Pagination.DEFAULT_CURRENT, Pagination.DEFAULT_SIZE);
     }
 
+    public static <T, Q extends AbstractPagination> Page<T> copyPage(Q query) {
+        // NPE
+        return new Page<>(query.getCurrent(), query.getSize());
+    }
+
+    // ----------------------------------------------------------------
+
+    public <T> Page<T> copyPage() {
+        return new Page<>(this.getCurrent(), this.getSize());
+    }
+
     // ----------------------------------------------------------------
 
     public void tryThresholdSizeEnabled() {

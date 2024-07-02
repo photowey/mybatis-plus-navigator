@@ -24,6 +24,7 @@ import io.github.photowey.mybatisplus.navigator.annotation.symbol.NotNull;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 import io.github.photowey.mybatisplus.navigator.query.QueryWrapperExt;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -76,7 +77,45 @@ public interface RepositoryExt<T> extends BaseMapper<T> {
     default <V> T selectOne(SFunction<T, ?> function, @NotNull V value) {
         this.checkNull(value);
 
-        return this.selectOne(this.createLambdaQueryWrapper().eq(function, value));
+        LambdaQueryWrapper<T> wrapper = this.createLambdaQueryWrapper().eq(function, value);
+
+        return this.selectOne(wrapper);
+    }
+
+    // ----------------------------------------------------------------
+
+    default <V> long selectCount(String column, @NotNull V value) {
+        this.checkNull(value);
+
+        QueryWrapper<T> wrapper = this.createQueryWrapper().eq(column, value);
+
+        return Optional.ofNullable(this.selectCount(wrapper)).orElse(0L);
+    }
+
+    default <V> long selectCount(String column, @NotNull V value, Consumer<QueryWrapper<T>> callback) {
+        this.checkNull(value);
+
+        QueryWrapper<T> wrapper = this.createQueryWrapper().eq(column, value);
+        callback.accept(wrapper);
+
+        return Optional.ofNullable(this.selectCount(wrapper)).orElse(0L);
+    }
+
+    default <V> long selectCount(SFunction<T, ?> function, @NotNull V value) {
+        this.checkNull(value);
+
+        LambdaQueryWrapper<T> wrapper = this.createLambdaQueryWrapper().eq(function, value);
+
+        return Optional.ofNullable(this.selectCount(wrapper)).orElse(0L);
+    }
+
+    default <V> long selectCount(SFunction<T, ?> function, @NotNull V value, Consumer<LambdaQueryWrapper<T>> callback) {
+        this.checkNull(value);
+
+        LambdaQueryWrapper<T> wrapper = this.createLambdaQueryWrapper().eq(function, value);
+        callback.accept(wrapper);
+
+        return Optional.ofNullable(this.selectCount(wrapper)).orElse(0L);
     }
 
     // ----------------------------------------------------------------
