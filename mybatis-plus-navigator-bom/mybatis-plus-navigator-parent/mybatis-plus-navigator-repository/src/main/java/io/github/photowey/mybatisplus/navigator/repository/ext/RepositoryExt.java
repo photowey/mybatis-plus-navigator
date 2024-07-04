@@ -19,11 +19,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.NotNull;
+import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
 import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQuery;
 import io.github.photowey.mybatisplus.navigator.query.QueryWrapperExt;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -116,6 +119,40 @@ public interface RepositoryExt<T> extends BaseMapper<T> {
         callback.accept(wrapper);
 
         return Optional.ofNullable(this.selectCount(wrapper)).orElse(0L);
+    }
+
+    // ----------------------------------------------------------------
+
+    default List<T> selectList() {
+        return selectList(this.createQueryWrapper());
+    }
+
+    default <V> List<T> selectList(String column, @Nullable V value) {
+        QueryWrapper<T> wrapper = this.createQueryWrapper().eq(ObjectUtils.isNotEmpty(value), column, value);
+        return this.selectList(wrapper);
+    }
+
+    default <V> List<T> selectList(String column, @Nullable V value, Consumer<QueryWrapper<T>> callback) {
+        QueryWrapper<T> wrapper = this.createQueryWrapper()
+                .eq(ObjectUtils.isNotEmpty(value), column, value);
+        callback.accept(wrapper);
+
+        return this.selectList(wrapper);
+    }
+
+    default <V> List<T> selectList(SFunction<T, ?> function, @Nullable V value) {
+        LambdaQueryWrapper<T> wrapper = this.createLambdaQueryWrapper()
+                .eq(ObjectUtils.isNotEmpty(value), function, value);
+
+        return this.selectList(wrapper);
+    }
+
+    default <V> List<T> selectList(SFunction<T, ?> function, @Nullable V value, Consumer<LambdaQueryWrapper<T>> callback) {
+        LambdaQueryWrapper<T> wrapper = this.createLambdaQueryWrapper()
+                .eq(ObjectUtils.isNotEmpty(value), function, value);
+        callback.accept(wrapper);
+
+        return selectList(wrapper);
     }
 
     // ----------------------------------------------------------------
