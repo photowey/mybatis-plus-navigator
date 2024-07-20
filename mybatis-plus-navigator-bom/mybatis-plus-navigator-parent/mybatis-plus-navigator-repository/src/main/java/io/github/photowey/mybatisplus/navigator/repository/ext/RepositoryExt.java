@@ -157,6 +157,41 @@ public interface RepositoryExt<T> extends BaseMapper<T> {
 
     // ----------------------------------------------------------------
 
+    default int deleteBatch() {
+        return this.delete(this.createQueryWrapper());
+    }
+
+    default <V> int delete(String column, @NotNull V value) {
+        this.checkNull(column, value);
+
+        return this.delete(this.createQueryWrapper().eq(column, value));
+    }
+
+    default <V> int delete(String column, @NotNull V value, Consumer<QueryWrapper<T>> callback) {
+        this.checkNull(column, value);
+
+        QueryWrapper<T> wrapper = this.createQueryWrapper().eq(column, value);
+        callback.accept(wrapper);
+
+        return delete(wrapper);
+    }
+
+    default <V> int delete(SFunction<T, ?> function, @NotNull V value) {
+        this.checkNull(value);
+
+        return this.delete(this.createLambdaQueryWrapper().eq(function, value));
+    }
+
+    default <V> int delete(SFunction<T, ?> function, @NotNull V value, Consumer<LambdaQueryWrapper<T>> callback) {
+        this.checkNull(value);
+        LambdaQueryWrapper<T> wrapper = this.createLambdaQueryWrapper().eq(function, value);
+        callback.accept(wrapper);
+
+        return this.delete(wrapper);
+    }
+
+    // ----------------------------------------------------------------
+
     default <V> void checkNull(String column, V value) {
         if (null == value) {
             throw new NullPointerException(String.format("The parameter:[%s] value can't be null", column));
