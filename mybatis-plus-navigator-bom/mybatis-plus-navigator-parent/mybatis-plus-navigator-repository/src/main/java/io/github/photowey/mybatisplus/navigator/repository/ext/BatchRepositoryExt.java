@@ -45,6 +45,12 @@ public interface BatchRepositoryExt<T> extends RepositoryExt<T> {
 
     // ----------------------------------------------------------------
 
+    default boolean batchUpdates(Collection<T> entityList, Class<T> entityClass) {
+        return this.executeBatch(entityList, entityClass, this.batchSize(), SqlMethod.UPDATE_BY_ID);
+    }
+
+    // ----------------------------------------------------------------
+
     default boolean executeBatch(Collection<T> entityList, Class<T> entityClass, int batchSize, SqlMethod sqlMethod) {
         return this.executeBatch(entityList, entityClass, batchSize, (sqlSession, entity) -> {
             if (SqlMethod.INSERT_ONE.equals(sqlMethod)) {
@@ -55,6 +61,7 @@ public interface BatchRepositoryExt<T> extends RepositoryExt<T> {
         });
     }
 
+    @Deprecated
     default boolean executeBatch(Collection<T> entityList, Class<T> entityClass, int batchSize, BiConsumer<SqlSession, T> callback) {
         return SqlHelper.executeBatch(entityClass, this.log(), entityList, batchSize, callback);
     }
