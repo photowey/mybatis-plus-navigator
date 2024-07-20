@@ -28,5 +28,4 @@ import org.springframework.context.annotation.Import;
  */
 @AutoConfiguration
 @Import(MybatisPlusNavigatorConfigure.class)
-public class NavigatorAutoConfigure {
-}
+public class NavigatorAutoConfigure {}

@@ -20,6 +20,7 @@ import io.github.photowey.mybatisplus.navigator.processor.model.query.AbstractQu
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -36,27 +37,23 @@ public interface CounterService<T> {
         return new ArrayList<>(0);
     }
 
-    default Long determineCounter(Supplier<Long> fx) {
-        Long total = fx.get();
+    // ----------------------------------------------------------------
 
-        return null == total ? 0L : total;
+    default Long determineCounter(Supplier<Long> fx) {
+        return Optional.ofNullable(fx.get()).orElse(0L);
     }
 
     default Integer determineIntegerCounter(Supplier<Integer> fx) {
-        Integer total = fx.get();
-
-        return null == total ? 0 : total;
+        return Optional.ofNullable(fx.get()).orElse(0);
     }
 
     default BigDecimal determineBigDecimalCounter(Supplier<BigDecimal> fx) {
-        BigDecimal total = fx.get();
-
-        return null == total ? BigDecimal.ZERO : total;
+        return Optional.ofNullable(fx.get()).orElse(BigDecimal.ZERO);
     }
 
-    default <Q extends AbstractQuery<T>> Long determineCounter(Q query, Function<Q, Long> fx) {
-        Long total = fx.apply(query);
+    // ----------------------------------------------------------------
 
-        return null == total ? 0L : total;
+    default <Q extends AbstractQuery<T>> Long determineCounter(Q query, Function<Q, Long> fx) {
+        return Optional.ofNullable(fx.apply(query)).orElse(0L);
     }
 }

@@ -67,6 +67,7 @@ public interface GracefulPaginationService<T> extends CounterService<T> {
             if (page.getCurrent() == page.getPages()) {
                 break;
             }
+
             current++;
         }
 
