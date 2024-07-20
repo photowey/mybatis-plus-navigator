@@ -13,34 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.core.domain.entity;
+package io.github.photowey.mybatisplus.navigator.meta.operator;
 
-import java.time.LocalDateTime;
+import io.github.photowey.mybatisplus.navigator.core.domain.operator.Operator;
+import org.springframework.core.Ordered;
 
 /**
- * {@code RootAtEntity}
+ * {@code OperatorTranslator}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/03/19
+ * @since 2024/07/21
  */
-public interface RootAtEntity extends CreatorEntity {
+public interface OperatorTranslator extends Ordered {
 
-    // created_at | updated_at
-
-    // ---------------------------------------------------------------- Setter
-
-    default void setCreatedAt(LocalDateTime createdAt) {}
-
-    default void setUpdatedAt(LocalDateTime updatedAt) {}
-
-    // ---------------------------------------------------------------- Getter
-
-    default LocalDateTime getCreatedAt() {
-        return null;
+    @Override
+    default int getOrder() {
+        return 0;
     }
 
-    default LocalDateTime getUpdatedAt() {
-        return null;
+    default Operator tryAcquireOperator() {
+        return Operator.builder()
+                .operatorId(0L)
+                .operatorName("Unknown")
+                .build();
     }
 }

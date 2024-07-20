@@ -24,13 +24,13 @@ package io.github.photowey.mybatisplus.navigator.core.domain.entity;
  */
 public interface Root {
 
-    default void setId(Long id) {
-
-    }
+    default void setId(Long id) {}
 
     default Long getId() {
         return null;
     }
+
+    // ----------------------------------------------------------------
 
     /**
      * Deleted
@@ -39,9 +39,7 @@ public interface Root {
      *
      * @param deleted 0 | 1
      */
-    default void setDeleted(Integer deleted) {
-
-    }
+    default void setDeleted(Integer deleted) {}
 
     default Integer getDeleted() {
         return null;

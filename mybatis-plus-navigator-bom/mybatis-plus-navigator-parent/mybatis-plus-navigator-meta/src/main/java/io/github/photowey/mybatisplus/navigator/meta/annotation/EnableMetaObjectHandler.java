@@ -13,34 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.core.domain.entity;
+package io.github.photowey.mybatisplus.navigator.meta.annotation;
 
-import java.time.LocalDateTime;
+import io.github.photowey.mybatisplus.navigator.meta.config.MybatisPlusNavigatorMetaAutoConfigure;
+import org.springframework.context.annotation.Import;
+
+import java.lang.annotation.*;
 
 /**
- * {@code RootAtEntity}
+ * {@code EnableMetaObjectHandler}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/03/19
+ * @since 2024/07/21
  */
-public interface RootAtEntity extends CreatorEntity {
+@Documented
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Import(value = {MybatisPlusNavigatorMetaAutoConfigure.class})
+public @interface EnableMetaObjectHandler {}
 
-    // created_at | updated_at
-
-    // ---------------------------------------------------------------- Setter
-
-    default void setCreatedAt(LocalDateTime createdAt) {}
-
-    default void setUpdatedAt(LocalDateTime updatedAt) {}
-
-    // ---------------------------------------------------------------- Getter
-
-    default LocalDateTime getCreatedAt() {
-        return null;
-    }
-
-    default LocalDateTime getUpdatedAt() {
-        return null;
-    }
-}

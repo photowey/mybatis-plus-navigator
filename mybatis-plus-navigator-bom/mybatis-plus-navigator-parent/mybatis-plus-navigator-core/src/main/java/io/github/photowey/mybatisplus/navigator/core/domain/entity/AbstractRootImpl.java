@@ -15,34 +15,37 @@
  */
 package io.github.photowey.mybatisplus.navigator.core.domain.entity;
 
-import java.time.LocalDateTime;
-
 /**
- * {@code RootEntity}
- * |- must: id | create_time | update_time
+ * {@code AbstractRootImpl}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @see <a href="https://developer.aliyun.com/ebook/394">ebook</a>
- * @since 2024/03/19
+ * @since 2024/07/20
  */
-public interface RootEntity extends CreatorEntity {
+public abstract class AbstractRootImpl implements Root {
 
-    // create_time | update_time
+    protected Long id;
+    protected Integer deleted;
 
-    // ---------------------------------------------------------------- Setter
+    // ----------------------------------------------------------------
 
-    default void setCreateTime(LocalDateTime createTime) {}
-
-    default void setUpdateTime(LocalDateTime updateTime) {}
-
-    // ---------------------------------------------------------------- Getter
-
-    default LocalDateTime getCreateTime() {
-        return null;
+    @Override
+    public Long getId() {
+        return id;
     }
 
-    default LocalDateTime getUpdateTime() {
-        return null;
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    @Override
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
     }
 }

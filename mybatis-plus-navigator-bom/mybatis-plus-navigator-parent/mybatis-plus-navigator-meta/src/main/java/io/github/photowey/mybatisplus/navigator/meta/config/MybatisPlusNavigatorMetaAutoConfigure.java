@@ -13,34 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.photowey.mybatisplus.navigator.core.domain.entity;
+package io.github.photowey.mybatisplus.navigator.meta.config;
 
-import java.time.LocalDateTime;
+import io.github.photowey.mybatisplus.navigator.meta.selector.MybatisPlusNavigatorMetaFillerSelector;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
- * {@code RootAtEntity}
+ * {@code MybatisPlusNavigatorMetaAutoConfigure}
  *
  * @author photowey
  * @version 3.5.5.1.0
- * @since 2024/03/19
+ * @since 2024/07/20
  */
-public interface RootAtEntity extends CreatorEntity {
-
-    // created_at | updated_at
-
-    // ---------------------------------------------------------------- Setter
-
-    default void setCreatedAt(LocalDateTime createdAt) {}
-
-    default void setUpdatedAt(LocalDateTime updatedAt) {}
-
-    // ---------------------------------------------------------------- Getter
-
-    default LocalDateTime getCreatedAt() {
-        return null;
-    }
-
-    default LocalDateTime getUpdatedAt() {
-        return null;
-    }
-}
+@Configuration
+@Import(value = {MybatisPlusNavigatorMetaFillerSelector.class})
+public class MybatisPlusNavigatorMetaAutoConfigure {}
