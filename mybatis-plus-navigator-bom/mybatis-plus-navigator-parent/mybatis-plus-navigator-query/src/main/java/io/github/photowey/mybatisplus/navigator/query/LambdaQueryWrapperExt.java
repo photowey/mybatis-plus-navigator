@@ -20,11 +20,13 @@ import com.baomidou.mybatisplus.core.enums.SqlLike;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Emptyable;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -39,6 +41,8 @@ import java.util.function.Predicate;
  * @since 2024/04/17
  */
 public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
+
+    private final List<SFunction<T, ?>> selectedFields = new ArrayList<>();
 
     // If == IfPresent
 
@@ -281,7 +285,7 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     // ----------------------------------------------------------------
 
     @SafeVarargs
-    public final LambdaQueryWrapperExt<T> selectx(SFunction<T, ?>... columns) {
+    public final LambdaQueryWrapperExt<T> trySelect(SFunction<T, ?>... columns) {
         super.select(columns);
 
         return this;
@@ -290,6 +294,47 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
     @Override
     public LambdaQueryWrapperExt<T> select(Class<T> entityClass, Predicate<TableFieldInfo> predicate) {
         super.select(entityClass, predicate);
+
+        return this;
+    }
+
+    /**
+     * The {@code appendSelect} method in the custom {@link  LambdaQueryWrapper} allows
+     * for multiple invocations without overwriting previously specified fields.
+     * <p>
+     * Each call appends the selected fields to an internal collection,
+     * ensuring that all specified fields are included in the final query.
+     * <p>
+     * This enhances flexibility by allowing users to build their selection incrementally.
+     *
+     * @param columns the list of columns to be selected
+     * @return {@link LambdaQueryWrapperExt<T>}
+     */
+    public LambdaQueryWrapperExt<T> appendSelect(List<SFunction<T, ?>> columns) {
+        if (ObjectUtils.isNotEmpty(columns)) {
+            for (SFunction<T, ?> column : columns) {
+                // Ok ?
+                if (!this.selectedFields.contains(column)) {
+                    this.selectedFields.add(column);
+                }
+            }
+
+            super.select(this.selectedFields);
+        }
+
+        return this;
+    }
+
+    public LambdaQueryWrapperExt<T> appendSelect(SFunction<T, ?>... columns) {
+        this.appendSelect(CollectionUtils.toList(columns));
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public LambdaQueryWrapperExt<T> clean() {
+        this.selectedFields.clear();
 
         return this;
     }

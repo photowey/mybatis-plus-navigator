@@ -24,6 +24,7 @@ import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Emptyable;
 import io.github.photowey.mybatisplus.navigator.annotation.symbol.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -37,6 +38,8 @@ import java.util.function.Consumer;
  * @since 2024/04/17
  */
 public class QueryWrapperExt<T> extends QueryWrapper<T> {
+
+    private final List<String> selectedFields = new ArrayList<>();
 
     public <V> QueryWrapperExt<T> eqIf(String column, @Nullable V value) {
         super.eq(ObjectUtils.isNotEmpty(value), column, value);
@@ -287,6 +290,46 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
     @Override
     public QueryWrapperExt<T> select(List<String> columns) {
         super.select(columns);
+
+        return this;
+    }
+
+    /**
+     * The {@code appendSelect} method in the custom {@link  QueryWrapper} allows
+     * for multiple invocations without overwriting previously specified fields.
+     * <p>
+     * Each call appends the selected fields to an internal collection,
+     * ensuring that all specified fields are included in the final query.
+     * <p>
+     * This enhances flexibility by allowing users to build their selection incrementally.
+     *
+     * @param columns the list of columns to be selected
+     * @return {@link QueryWrapperExt<T>}
+     */
+    public QueryWrapperExt<T> appendSelect(List<String> columns) {
+        if (ObjectUtils.isNotEmpty(columns)) {
+            for (String column : columns) {
+                if (!this.selectedFields.contains(column)) {
+                    this.selectedFields.add(column);
+                }
+            }
+
+            super.select(this.selectedFields);
+        }
+
+        return this;
+    }
+
+    public QueryWrapperExt<T> appendSelect(String... columns) {
+        this.appendSelect(CollectionUtils.toList(columns));
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public QueryWrapperExt<T> clean() {
+        this.selectedFields.clear();
 
         return this;
     }

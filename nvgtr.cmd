@@ -1,5 +1,5 @@
 @echo off
-Setlocal enabledelayedexpansion
+setlocal enableDelayedExpansion
 
 echo command path: !cd!
 cd !cd!

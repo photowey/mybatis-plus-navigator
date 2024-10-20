@@ -36,6 +36,7 @@ public final class CriteriaUtils {
         AssertionErrorThrower.throwz(CriteriaUtils.class);
     }
 
+    @SuppressWarnings("all")
     public static String PascalCase(final @NotNull String target) {
         assert target != null;
         final char[] buf = target.toCharArray();
